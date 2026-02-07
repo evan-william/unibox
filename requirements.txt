@@ -13,5 +13,8 @@ Pillow
 cffi
 cssselect2
 tinycss2
+playwright
 requests-html
 pyppeteer
+lxml_html_clean
+lxml[html_clean]
