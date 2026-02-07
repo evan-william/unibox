@@ -14,7 +14,7 @@ st.markdown("""
     .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #007bff; color: white; }
     .wip-container { text-align: center; padding: 50px; color: #666; }
     </style>
-    """, unsafe_content_type=True)
+    """, unsafe_allow_html=True)
 
 # --- SIDEBAR NAV ---
 st.sidebar.title("📌 Navigation")
