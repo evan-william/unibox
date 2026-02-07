@@ -1,181 +1,195 @@
-# UniBox - Universal File Converter
+<div align="center">
 
-A professional, modular file conversion platform built with Streamlit. Convert documents, media files, and data formats with a clean, intuitive interface.
+<!-- LOGO PLACEHOLDER - Generate logo then replace this -->
+<img src="assets/unibox-logo.png" alt="UniBox Logo" width="600"/>
 
-## Overview
+# UniBox: Ultra-Fast File Converter
 
-UniBox provides a unified platform for common file conversion tasks. Built with modularity and extensibility in mind, it offers both immediate utility through working converters and a framework for expanding functionality.
+**Transform any file format with a professional, lightning-fast interface**
 
-## Features
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-unibox.streamlit.app-FF4B4B?style=for-the-badge)](https://unibox.streamlit.app/)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-### Document Tools
-- **Word to PDF** - Convert Microsoft Word documents (.docx) to PDF with precise formatting preservation
-- **PDF to Word** - Convert PDF files to editable Word documents (.docx)
-- Excel to CSV *(in development)*
-- CSV to Excel *(in development)*
-- Markdown to PDF *(in development)*
-- HTML to PDF *(in development)*
+[**🎯 Try It Now**](https://unibox.streamlit.app/) • [**📖 Documentation**](#features) • [**💬 Report Bug**](https://github.com/yourusername/unibox/issues)
 
-### Media Tools *(in development)*
-- Image format conversion (PNG, JPG, WEBP)
-- Image resizing and optimization
-- Video to GIF conversion
-- Video compression
-- Audio format conversion (MP3, WAV, FLAC)
+</div>
 
-### Developer Tools *(in development)*
-- JSON/CSV bidirectional conversion
-- XML and YAML format conversion
-- Code formatters for multiple languages
-- SQL query formatting
-- Base64 encoding and decoding
-- Hash generation (MD5, SHA-256, etc.)
-- REST API testing interface
+---
 
-## Architecture
+## 🎯 What is UniBox?
 
-```
-unibox/
-├── app.py                      # Application entry point with routing
-├── requirements.txt            # Python package dependencies
-├── packages.txt               # System-level dependencies
-├── converters/                # Conversion engine implementations
-│   ├── pdf_to_word.py        # PDF → Word conversion logic
-│   └── word_to_pdf.py        # Word → PDF conversion logic
-├── document_tools.py          # Document conversion interface
-├── media_tools.py            # Media conversion interface
-├── dev_tools.py              # Developer tools interface
-└── utils/
-    └── styles.py             # Custom CSS styling
-```
+**UniBox** is a professional file conversion platform that handles documents, media, and data formats in one unified interface. Built with Streamlit for speed and simplicity.
 
-## Quick Start
+### ⚡ Key Highlights
 
-### Local Development
+- 🔄 **Multiple Formats** - Documents, images, audio, video, and data files
+- 🚀 **Blazing Fast** - Convert files in seconds with optimized processing
+- 🎨 **Clean Interface** - Professional black & white design
+- 🔒 **Privacy First** - All conversions happen locally, no data stored
+- 💻 **Cross-Platform** - Works on Windows, macOS, and Linux
 
-**Prerequisites:**
-- Python 3.8 or higher
-- LibreOffice (required for Word to PDF conversion on Linux/macOS)
+---
 
-**Installation:**
+## 🛠️ Features
+
+### 📄 Document Tools ✅
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Word → PDF | ✅ Working | Convert .docx to PDF with formatting preservation |
+| PDF → Word | ✅ Working | Convert PDF to editable .docx documents |
+| Excel → CSV | 🚧 Coming Soon | Export Excel sheets to CSV |
+| CSV → Excel | 🚧 Coming Soon | Import CSV to Excel workbooks |
+| Markdown → PDF | 🚧 Coming Soon | Render Markdown as PDF |
+| HTML → PDF | 🚧 Coming Soon | Convert web pages to PDF |
+
+### 🎨 Media Tools 🚧
+| Feature | Status | Description |
+|---------|--------|-------------|
+| PNG ↔ JPG | 🚧 Coming Soon | Convert between image formats |
+| WEBP Conversion | 🚧 Coming Soon | Modern image format support |
+| Image Resizer | 🚧 Coming Soon | Batch resize and optimize |
+| Video → GIF | 🚧 Coming Soon | Create GIFs from videos |
+| Video Compressor | 🚧 Coming Soon | Reduce video file sizes |
+| Audio Converter | 🚧 Coming Soon | MP3, WAV, FLAC conversion |
+
+### ⚙️ Developer Tools 🚧
+| Feature | Status | Description |
+|---------|--------|-------------|
+| JSON ↔ CSV | 🚧 Coming Soon | Bidirectional data conversion |
+| XML/YAML Parser | 🚧 Coming Soon | Convert between markup formats |
+| Code Formatter | 🚧 Coming Soon | Multi-language code beautifier |
+| SQL Formatter | 🚧 Coming Soon | Format and optimize SQL queries |
+| Base64 Encoder | 🚧 Coming Soon | Encode/decode text and files |
+| Hash Generator | 🚧 Coming Soon | MD5, SHA-256, and more |
+| API Tester | 🚧 Coming Soon | REST API testing interface |
+
+---
+
+## 🚀 Quick Start
+
+### Try Online (Recommended)
+
+**👉 [Launch UniBox Web App](https://unibox.streamlit.app/)**
+
+No installation required! Just click and start converting files.
+
+### Local Installation
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/unibox.git
 cd unibox
 
-# Install Python dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# Run the application
+# Run locally
 streamlit run app.py
 ```
 
-The application will be available at `http://localhost:8501`
+**Prerequisites:**
+- Python 3.8+
+- LibreOffice (for Word/PDF conversion on Linux/macOS)
 
-### Deployment to Streamlit Cloud
+---
 
-1. Push your code to a GitHub repository
-2. Visit [share.streamlit.io](https://share.streamlit.io)
-3. Click "New app" and select your repository
-4. Set the main file path to `app.py`
-5. Deploy
+## 📖 Usage
 
-Streamlit Cloud will automatically install dependencies from `requirements.txt` and `packages.txt`.
+1. **Visit** [unibox.streamlit.app](https://unibox.streamlit.app/)
+2. **Select** a conversion category from the sidebar
+3. **Upload** your file using drag-and-drop or file browser
+4. **Click** the convert button
+5. **Download** your converted file instantly
 
-## Usage
+<div align="center">
+  <img src="assets/demo-screenshot.png" alt="UniBox Demo" width="800"/>
+</div>
 
-1. **Select a category** from the sidebar navigation
-2. **Choose a conversion tool** from the dropdown menu
-3. **Upload your file** using the file uploader
-4. **Click convert** to process your file
-5. **Download the result** using the download button
+---
 
-## Technical Implementation
+## 🏗️ Architecture
 
-### Conversion Engines
-
-**PDF to Word:**
-- Uses `pdf2docx` library for accurate text and layout extraction
-- Preserves formatting, tables, and images where possible
-
-**Word to PDF:**
-- Platform-adaptive approach:
-  - **Windows:** Uses `docx2pdf` with MS Word COM automation
-  - **Linux/Cloud:** Uses LibreOffice in headless mode for conversion
-- Maintains document formatting and metadata
-
-### Styling
-
-Custom CSS provides a professional black-and-white interface with:
-- Responsive layout design
-- Consistent visual hierarchy
-- Accessible color contrast ratios
-- Modern, minimal aesthetic
-
-## Configuration
-
-The application uses Streamlit's configuration system through `.streamlit/config.toml`:
-
-```toml
-[theme]
-primaryColor = "#000000"
-backgroundColor = "#ffffff"
-secondaryBackgroundColor = "#f5f5f5"
-textColor = "#000000"
-
-[server]
-headless = true
-enableCORS = false
+```
+unibox/
+├── app.py                    # Main application & routing
+├── document_tools.py         # Document conversion UI
+├── media_tools.py           # Media conversion UI
+├── dev_tools.py             # Developer tools UI
+├── converters/              # Conversion engines
+│   ├── pdf_to_word.py      # PDF → Word logic
+│   └── word_to_pdf.py      # Word → PDF logic
+└── utils/
+    └── styles.py           # Custom CSS styling
 ```
 
-## Roadmap
+---
 
-**Short-term:**
-- Complete media conversion tools implementation
-- Add batch file processing capabilities
-- Implement drag-and-drop file upload
+## 🔧 Technical Stack
 
-**Medium-term:**
-- Developer tools suite completion
-- Conversion quality settings and customization
-- User conversion history and management
+| Category | Technologies |
+|----------|-------------|
+| **Frontend** | Streamlit, HTML/CSS |
+| **Backend** | Python 3.8+ |
+| **Conversion** | pdf2docx, docx2pdf, LibreOffice |
+| **Deployment** | Streamlit Cloud |
 
-**Long-term:**
-- RESTful API for programmatic access
-- Additional file format support
-- Advanced processing pipelines
-- User authentication and storage
+---
 
-## Dependencies
+## 🗺️ Roadmap
 
-**Core:**
-- `streamlit` - Web application framework
-- `pdf2docx` - PDF to Word conversion
-- `docx2pdf` - Word to PDF conversion (Windows)
-- `python-docx` - Word document manipulation
+- [x] Word ↔ PDF conversion
+- [x] Professional UI/UX design
+- [x] Deploy to Streamlit Cloud
+- [ ] Complete media conversion suite
+- [ ] Developer tools implementation
+- [ ] Batch processing support
+- [ ] Drag-and-drop interface
+- [ ] REST API endpoints
+- [ ] User conversion history
 
-**System:**
-- `LibreOffice` - Document conversion engine (Linux/macOS)
+---
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome. Please ensure:
-- Code follows existing style conventions
-- New converters include error handling
-- UI components maintain design consistency
-- Documentation is updated accordingly
+Contributions are welcome! Please follow these steps:
 
-## License
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-MIT License - see [LICENSE](LICENSE) file for details
+---
 
-## Author
+## 📄 License
 
-Built by Evan William
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
-## Acknowledgments
+---
 
-- Streamlit team for the excellent framework
-- pdf2docx contributors for PDF conversion capabilities
-- LibreOffice project for cross-platform document processing
+## 👤 Author
+
+**Evan William**
+
+- GitHub: [@yourusername](https://github.com/yourusername)
+- Website: [evanwilliam.dev](https://evanwilliam.dev)
+
+---
+
+## 🙏 Acknowledgments
+
+- [Streamlit](https://streamlit.io/) - Amazing web framework
+- [pdf2docx](https://github.com/dothinking/pdf2docx) - PDF conversion library
+- [LibreOffice](https://www.libreoffice.org/) - Document processing engine
+
+---
+
+<div align="center">
+
+**⭐ Star this repo if you find it useful!**
+
+Made with ❤️ by Evan William
+
+</div>
