@@ -6,30 +6,29 @@ def render():
     # Page title
     st.markdown("<h2 style='margin-bottom: 2rem; text-align: center;'>Media Converter</h2>", unsafe_allow_html=True)
     
-    # Conversion selector
-    st.markdown("<div style='max-width: 900px; margin: 0 auto;'>", unsafe_allow_html=True)
+    # Conversion selector - centered with padding
+    col_left, col_center, col_right = st.columns([1, 8, 1])
     
-    col1, col2, col3 = st.columns([5, 1, 5])
-    
-    with col1:
-        media_type = st.selectbox(
-            "Media Type",
-            ["Image", "Video", "Audio"],
-            key="media_type"
-        )
-    
-    with col2:
-        st.markdown("<div style='text-align: center; padding-top: 32px;'></div>", unsafe_allow_html=True)
-    
-    with col3:
-        conversion_options = get_media_conversions(media_type)
-        conversion = st.selectbox(
-            "Conversion",
-            conversion_options,
-            key="conversion"
-        )
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    with col_center:
+        col1, col2, col3 = st.columns([5, 1, 5])
+        
+        with col1:
+            media_type = st.selectbox(
+                "Media Type",
+                ["Image", "Video", "Audio"],
+                key="media_type"
+            )
+        
+        with col2:
+            st.markdown("<div style='text-align: center; padding-top: 32px;'></div>", unsafe_allow_html=True)
+        
+        with col3:
+            conversion_options = get_media_conversions(media_type)
+            conversion = st.selectbox(
+                "Conversion",
+                conversion_options,
+                key="conversion"
+            )
     
     st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 3rem 0;'>", unsafe_allow_html=True)
     

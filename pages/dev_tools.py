@@ -6,30 +6,29 @@ def render():
     # Page title
     st.markdown("<h2 style='margin-bottom: 2rem; text-align: center;'>Developer Tools</h2>", unsafe_allow_html=True)
     
-    # Tool selector
-    st.markdown("<div style='max-width: 900px; margin: 0 auto;'>", unsafe_allow_html=True)
+    # Tool selector - centered with padding
+    col_left, col_center, col_right = st.columns([1, 8, 1])
     
-    col1, col2, col3 = st.columns([5, 1, 5])
-    
-    with col1:
-        tool_category = st.selectbox(
-            "Tool Category",
-            ["Data Format", "Code Tools", "Utilities"],
-            key="tool_category"
-        )
-    
-    with col2:
-        st.markdown("<div style='text-align: center; padding-top: 32px;'></div>", unsafe_allow_html=True)
-    
-    with col3:
-        tools = get_dev_tools(tool_category)
-        tool = st.selectbox(
-            "Select Tool",
-            tools,
-            key="dev_tool"
-        )
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    with col_center:
+        col1, col2, col3 = st.columns([5, 1, 5])
+        
+        with col1:
+            tool_category = st.selectbox(
+                "Tool Category",
+                ["Data Format", "Code Tools", "Utilities"],
+                key="tool_category"
+            )
+        
+        with col2:
+            st.markdown("<div style='text-align: center; padding-top: 32px;'></div>", unsafe_allow_html=True)
+        
+        with col3:
+            tools = get_dev_tools(tool_category)
+            tool = st.selectbox(
+                "Select Tool",
+                tools,
+                key="dev_tool"
+            )
     
     st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 3rem 0;'>", unsafe_allow_html=True)
     
