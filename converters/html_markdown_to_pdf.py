@@ -133,37 +133,61 @@ def convert_html_to_pdf(html_file):
 
 def convert_url_to_pdf(url):
     """
-    Convert website URL to PDF
+    Convert website URL to PDF using headless browser
     """
     try:
         # Add https:// if not present
         if not url.startswith(('http://', 'https://')):
             url = 'https://' + url
         
-        st.info(f"Converting: {url}")
+        st.info(f"Loading webpage: {url}")
         
-        # Use PDFShift API (free tier available) or similar service
-        # Or use a local headless browser approach
+        import asyncio
+        from playwright.async_api import async_playwright
         
-        # For now, try using requests-html which has JS rendering
-        from requests_html import HTMLSession
+        async def generate_pdf():
+            async with async_playwright() as p:
+                # Launch browser
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page()
+                
+                # Navigate to URL and wait for page to load
+                st.info("Rendering page with JavaScript...")
+                await page.goto(url, wait_until='networkidle', timeout=60000)
+                
+                # Wait for content to render
+                await page.wait_for_timeout(3000)
+                
+                # Generate PDF
+                st.info("Converting to PDF...")
+                pdf_bytes = await page.pdf(
+                    format='A4',
+                    print_background=True,
+                    margin={
+                        'top': '10mm',
+                        'right': '10mm',
+                        'bottom': '10mm',
+                        'left': '10mm'
+                    }
+                )
+                
+                await browser.close()
+                
+                return pdf_bytes
         
-        session = HTMLSession()
-        response = session.get(url)
+        # Run async function
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
         
-        # Render JavaScript
-        st.info("Rendering JavaScript content...")
-        response.html.render(timeout=20, sleep=2)
-        
-        # Get rendered HTML
-        rendered_html = response.html.html
-        
-        # Convert to PDF
-        from weasyprint import HTML
-        pdf_bytes = HTML(string=rendered_html, base_url=url).write_pdf()
+        pdf_bytes = loop.run_until_complete(generate_pdf())
         
         return pdf_bytes
-        
+            
     except Exception as e:
         st.error(f"Conversion failed: {str(e)}")
+        import traceback
+        st.error(traceback.format_exc())
         return None
