@@ -12,7 +12,7 @@ def apply_custom_styles():
             background-color: #ffffff !important;
         }
         
-        /* ===== SIDEBAR - HITAM BACKGROUND, PUTIH TEXT ===== */
+        /* ===== SIDEBAR - HITAM BACKGROUND, HITAM TEXT ===== */
         [data-testid="stSidebar"] {
             background-color: #1a1a1a !important;
             border-right: 1px solid #e0e0e0;
@@ -23,39 +23,40 @@ def apply_custom_styles():
             display: none !important;
         }
         
-        /* ALL sidebar text PUTIH (white) */
+        /* ===== PAKSA SEMUA TEXT SIDEBAR JADI HITAM ===== */
+        
+        /* Universal selector - SEMUA element di sidebar */
+        [data-testid="stSidebar"] *,
         [data-testid="stSidebar"] h1,
         [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] p,
         [data-testid="stSidebar"] span,
         [data-testid="stSidebar"] label,
-        [data-testid="stSidebar"] div {
-            color: #ffffff !important;
+        [data-testid="stSidebar"] div,
+        [data-testid="stSidebarUserContent"] *,
+        [data-testid="stSidebarUserContent"] h1,
+        [data-testid="stSidebarUserContent"] h3,
+        [data-testid="stSidebarUserContent"] p {
+            color: #000000 !important;
         }
         
-        /* Sidebar markdown containers */
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1 {
-            color: #ffffff !important;
-        }
-        
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 {
-            color: #ffffff !important;
-        }
-        
+        /* Markdown containers di sidebar */
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] *,
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3,
         [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
-            color: #cccccc !important;
+            color: #000000 !important;
         }
         
-        /* Sidebar selectbox */
-        [data-testid="stSidebar"] [data-testid="stSelectbox"] label {
-            color: #ffffff !important;
-        }
-        
+        /* Selectbox label di sidebar */
+        [data-testid="stSidebar"] [data-testid="stSelectbox"] *,
+        [data-testid="stSidebar"] [data-testid="stSelectbox"] label,
         [data-testid="stSidebar"] [data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] p {
-            color: #ffffff !important;
+            color: #000000 !important;
         }
         
+        /* Dropdown selectbox */
         [data-testid="stSidebar"] [data-baseweb="select"] {
             background-color: #2a2a2a !important;
         }
