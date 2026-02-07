@@ -12,31 +12,47 @@ def apply_custom_styles():
             background-color: #ffffff !important;
         }
         
-        /* SIDEBAR - BLACK BACKGROUND WITH WHITE TEXT */
+        /* ===== SIDEBAR - HITAM BACKGROUND, PUTIH TEXT ===== */
         [data-testid="stSidebar"] {
             background-color: #1a1a1a !important;
             border-right: 1px solid #e0e0e0;
         }
         
-        /* All sidebar text WHITE - FIXED */
+        /* HIDE auto-generated navigation links */
+        [data-testid="stSidebarNav"] {
+            display: none !important;
+        }
+        
+        /* ALL sidebar text PUTIH (white) */
         [data-testid="stSidebar"] h1,
         [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] p,
         [data-testid="stSidebar"] span,
         [data-testid="stSidebar"] label,
-        [data-testid="stSidebar"] div,
-        [data-testid="stSidebar"] * {
+        [data-testid="stSidebar"] div {
             color: #ffffff !important;
         }
         
-        /* Sidebar markdown paragraphs */
+        /* Sidebar markdown containers */
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1 {
+            color: #ffffff !important;
+        }
+        
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 {
+            color: #ffffff !important;
+        }
+        
         [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
             color: #cccccc !important;
         }
         
-        /* Sidebar selectbox WHITE TEXT */
+        /* Sidebar selectbox */
         [data-testid="stSidebar"] [data-testid="stSelectbox"] label {
+            color: #ffffff !important;
+        }
+        
+        [data-testid="stSidebar"] [data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] p {
             color: #ffffff !important;
         }
         
@@ -53,7 +69,7 @@ def apply_custom_styles():
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
-        /* MAIN CONTENT TEXT - BLACK */
+        /* MAIN CONTENT TEXT - HITAM (black) */
         .main h1,
         .main h2,
         .main h3,
@@ -81,11 +97,6 @@ def apply_custom_styles():
             font-weight: 600 !important;
             font-size: 20px !important;
             color: #000000 !important;
-        }
-        
-        /* Main content paragraphs */
-        .main [data-testid="stMarkdownContainer"] p {
-            color: #333333 !important;
         }
         
         /* Buttons */
@@ -285,6 +296,11 @@ def apply_custom_styles():
         
         .streamlit-expanderContent * {
             color: #000000 !important;
+        }
+        
+        /* Markdown in main content */
+        .main [data-testid="stMarkdownContainer"] p {
+            color: #666666 !important;
         }
         </style>
     """, unsafe_allow_html=True)
