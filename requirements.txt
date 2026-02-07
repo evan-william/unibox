@@ -1,3 +1,4 @@
 streamlit
 pdf2docx
-pypandoc_binary
+docx2pdf
+python-docx

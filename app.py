@@ -36,17 +36,39 @@ else:
 
 
 
+import subprocess
+import os
+import platform
+
 def word_to_pdf(docx_file):
+    # 1. Simpan file docx dari user ke file sementara
     with open("temp_input.docx", "wb") as f:
         f.write(docx_file.getbuffer())
-    
+
     try:
-        # Konversi menggunakan pypandoc
-        output = pypandoc.convert_file('temp_input.docx', 'pdf', outputfile="temp_input.pdf")
+        # Cek apakah kita di Windows atau Linux (Streamlit Cloud)
+        if platform.system() == "Windows":
+            # Jika di Windows, gunakan docx2pdf (butuh MS Word terinstal)
+            from docx2pdf import convert
+            convert("temp_input.docx", "temp_input.pdf")
+        else:
+            # Jika di Streamlit Cloud (Linux), gunakan LibreOffice
+            # Perintah ini merender Word ke PDF dengan sangat akurat
+            subprocess.run([
+                'lowriter', 
+                '--headless', 
+                '--convert-to', 'pdf', 
+                'temp_input.docx'
+            ], check=True)
+
+        # 2. Baca file PDF yang sudah jadi
         with open("temp_input.pdf", "rb") as f:
-            return f.read()
+            pdf_data = f.read()
+            
+        return pdf_data
+
     except Exception as e:
-        st.error(f"Error: {e}. Pastikan pandoc terinstal.")
+        st.error(f"Detail Error: {e}")
         return None
 
 def pdf_to_word(pdf_file):
