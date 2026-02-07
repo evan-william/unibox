@@ -177,6 +177,17 @@ def apply_custom_styles(dark_mode=False):
             background-color: {download_hover_bg} !important;
             color: {download_hover_text} !important;
         }}
+
+        /* SIDEBAR Buttons */
+        [data-testid="stSidebar"] .stButton > button {{
+            background-color: {'#2a2a2a' if dark_mode else '#2a2a2a'} !important;
+            color: {'#ffffff' if dark_mode else '#ffffff'} !important;
+            border: 1px solid {border_color} !important;
+        }}
+
+        [data-testid="stSidebar"] .stButton > button:hover {{
+            background-color: {'#404040' if dark_mode else '#404040'} !important;
+        }}
         
         /* File Uploader */
         [data-testid="stFileUploader"] {{
