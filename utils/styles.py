@@ -24,10 +24,10 @@ def apply_custom_styles(dark_mode=True):
         main_bg = "#f5f5f5"
         header_bg = "#ffffff"
         main_text = "#1a1a1a"
-        secondary_text = "#666666"
+        secondary_text = "#555555"
         card_bg = "#ffffff"
-        card_hover = "#f8f8f8"
-        border_color = "#e0e0e0"
+        card_hover = "#fafafa"
+        border_color = "#d0d0d0"
         button_primary = "#c94448"
         button_primary_hover = "#d45558"
         button_secondary = "#e0e0e0"
@@ -290,7 +290,7 @@ def apply_custom_styles(dark_mode=True):
             background-color: {select_bg} !important;
             border: 1px solid {border_color} !important;
             border-radius: 6px !important;
-            min-width: 200px !important;
+            min-width: 100% !important;
         }}
         
         [data-testid="stSelectbox"] [data-baseweb="select"]:hover {{
@@ -300,9 +300,9 @@ def apply_custom_styles(dark_mode=True):
         [data-testid="stSelectbox"] [data-baseweb="select"] > div {{
             background-color: {select_bg} !important;
             color: {main_text} !important;
-            font-size: 15px !important;
+            font-size: 16px !important;
             font-weight: 500 !important;
-            padding: 12px 16px !important;
+            padding: 14px 16px !important;
         }}
         
         /* Dropdown menu */
@@ -352,6 +352,32 @@ def apply_custom_styles(dark_mode=True):
             font-weight: 600 !important;
             font-size: 22px !important;
             margin-bottom: 10px !important;
+        }}
+        
+        /* Section titles */
+        [data-testid="stMarkdownContainer"] h3 {{
+            color: {main_text} !important;
+            font-weight: 600 !important;
+            margin-top: 20px !important;
+            margin-bottom: 16px !important;
+        }}
+        
+        /* LIGHT MODE SPECIFIC TEXT FIXES */
+        .hero-title,
+        .hero-subtitle,
+        .feature-card h2,
+        .feature-card h3,
+        .feature-card p,
+        .tool-card h3,
+        .tool-card p {{
+            color: {main_text} !important;
+        }}
+        
+        /* File uploader text in light mode */
+        [data-testid="stFileUploader"] label,
+        [data-testid="stFileUploader"] small,
+        [data-testid="stFileUploader"] p {{
+            color: {main_text} !important;
         }}
         
         /* CARDS & SECTIONS */

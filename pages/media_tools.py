@@ -14,46 +14,25 @@ def render():
         </div>
     """, unsafe_allow_html=True)
     
-    # Converter Selection Box
-    st.markdown("<div class='converter-box'>", unsafe_allow_html=True)
+    # Tool selection
+    st.markdown("### Select Conversion Type")
     
-    # Format selector row
-    col1, col2, col3, col4, col5 = st.columns([1, 2, 0.5, 2, 1])
+    conversion = st.selectbox(
+        "Choose conversion",
+        [
+            "PNG to JPG",
+            "JPG to PNG",
+            "WEBP to PNG",
+            "Image Resizer",
+            "MP4 to GIF",
+            "Video Compressor",
+            "MP3 to WAV",
+            "WAV to MP3"
+        ],
+        label_visibility="collapsed"
+    )
     
-    with col1:
-        st.markdown("<div class='convert-label'>convert</div>", unsafe_allow_html=True)
-    
-    with col2:
-        media_type = st.selectbox(
-            "Media Type",
-            ["Image Formats", "Video Formats", "Audio Formats"],
-            label_visibility="collapsed"
-        )
-    
-    with col3:
-        st.markdown("<div class='to-label'>→</div>", unsafe_allow_html=True)
-    
-    with col4:
-        if media_type == "Image Formats":
-            conversion = st.selectbox(
-                "Conversion",
-                ["PNG to JPG", "JPG to PNG", "WEBP to PNG", "Image Resizer"],
-                label_visibility="collapsed"
-            )
-        elif media_type == "Video Formats":
-            conversion = st.selectbox(
-                "Conversion",
-                ["MP4 to GIF", "Video Compressor", "Format Converter"],
-                label_visibility="collapsed"
-            )
-        else:
-            conversion = st.selectbox(
-                "Conversion",
-                ["MP3 to WAV", "WAV to MP3", "Format Converter"],
-                label_visibility="collapsed"
-            )
-    
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("")
     
     # WIP Message
     st.markdown("""
@@ -67,7 +46,7 @@ def render():
     """, unsafe_allow_html=True)
     
     # Planned features
-    with st.expander("Planned Features"):
+    with st.expander("📋 Planned Features"):
         col1, col2, col3 = st.columns(3)
         
         with col1:
