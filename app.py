@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
 from utils.styles import apply_custom_styles
-from pages import document_tools, media_tools, dev_tools
+from pages import document_tools, media_tools, dev_tools  # ← PENTING: Import langsung, BUKAN dari pages/
 
 # PAGE CONFIG
 st.set_page_config(
@@ -22,7 +22,7 @@ apply_custom_styles()
 # SIDEBAR
 with st.sidebar:
     st.markdown("<h1 style='text-align: center; margin-bottom: 8px; font-size: 28px;'>UniBox</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #999; font-size: 13px; margin-top: 0;'>Universal File Converter</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; font-size: 13px; margin-top: 0;'>Universal File Converter</p>", unsafe_allow_html=True)
     st.markdown("---")
     
     st.markdown("### Categories")
