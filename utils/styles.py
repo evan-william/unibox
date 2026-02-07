@@ -105,20 +105,49 @@ def apply_custom_styles(dark_mode=False):
             color: #ffffff !important;
         }}
         
-        /* SIDEBAR MODE SWITCHER BUTTON */
-        [data-testid="stSidebar"] .stButton > button {{
-            background-color: transparent !important;
-            color: {sidebar_text} !important;
-            border: 1px solid {sidebar_text} !important;
-            font-size: 20px !important;
-            padding: 8px !important;
-            height: 40px !important;
-            min-width: 40px !important;
-            width: 40px !important;
+        /* CUSTOM TOGGLE SWITCH */
+        [data-testid="stSidebar"] [data-testid="stCheckbox"] {{
+            display: flex;
+            justify-content: flex-end;
         }}
         
-        [data-testid="stSidebar"] .stButton > button:hover {{
-            background-color: {'#2a2a2a' if dark_mode else '#f0f0f0'} !important;
+        [data-testid="stSidebar"] input[type="checkbox"] {{
+            appearance: none;
+            -webkit-appearance: none;
+            width: 60px;
+            height: 32px;
+            background: {'#4a5568' if dark_mode else '#cbd5e0'};
+            border-radius: 32px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 0;
+        }}
+
+        [data-testid="stSidebar"] input[type="checkbox"]::before {{
+            content: '{'🌙' if dark_mode else '☀️'}';
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            top: 2px;
+            left: {'30px' if dark_mode else '2px'};
+            background: white;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }}
+
+        [data-testid="stSidebar"] input[type="checkbox"]:checked {{
+            background: #2c3e50;
+        }}
+
+        [data-testid="stSidebar"] input[type="checkbox"]:checked::before {{
+            left: 30px;
+            content: '🌙';
         }}
         
         /* Remove Streamlit branding */
@@ -225,7 +254,6 @@ def apply_custom_styles(dark_mode=False):
         [data-testid="stFileUploaderFileName"] {{
             color: {main_text} !important;
         }}
-        
 
         /* Tooltip/Help icon - Question mark in circle */
         [data-testid="stTooltipIcon"] svg {{
