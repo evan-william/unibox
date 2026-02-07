@@ -17,6 +17,54 @@ def apply_custom_styles():
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
+        /* ===== TOP NAVIGATION ===== */
+        .top-nav {
+            background: #1a1a1a;
+            padding: 1rem 2rem;
+            margin: -3rem -2rem 2rem -2rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .nav-brand span {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        /* Navigation tab buttons */
+        .main > div:first-child .stButton > button {
+            background: transparent !important;
+            color: #aaa !important;
+            border: 1px solid #333 !important;
+            border-radius: 4px !important;
+            padding: 10px 20px !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+        
+        .main > div:first-child .stButton > button:hover {
+            background: #2d2d2d !important;
+            color: #fff !important;
+            border-color: #555 !important;
+        }
+        
+        .main > div:first-child .stButton > button[kind="primary"] {
+            background: #c9302c !important;
+            color: #fff !important;
+            border-color: #c9302c !important;
+        }
+        
+        .main > div:first-child .stButton > button[kind="primary"]:hover {
+            background: #ac2925 !important;
+            border-color: #ac2925 !important;
+        }
+        
         /* ===== MAIN LAYOUT ===== */
         .main, .block-container,
         [data-testid="stAppViewContainer"],

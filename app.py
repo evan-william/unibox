@@ -19,7 +19,44 @@ st.set_page_config(
 # APPLY CUSTOM STYLES
 apply_custom_styles()
 
-# SIDEBAR
+# Initialize session state for category
+if 'selected_category' not in st.session_state:
+    st.session_state.selected_category = "Document Tools"
+
+# HORIZONTAL NAVIGATION BAR (MAIN CONTENT)
+st.markdown("""
+    <div class='top-nav'>
+        <div class='nav-brand'>
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="4" fill="#c9302c"/>
+                <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" stroke="white" stroke-width="2" fill="none"/>
+            </svg>
+            <span>UniBox</span>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
+
+# Category Navigation Tabs
+col1, col2, col3, col4 = st.columns([2, 2, 2, 6])
+
+with col1:
+    if st.button("📄 Documents", use_container_width=True, type="primary" if st.session_state.selected_category == "Document Tools" else "secondary"):
+        st.session_state.selected_category = "Document Tools"
+        st.rerun()
+
+with col2:
+    if st.button("🎬 Media", use_container_width=True, type="primary" if st.session_state.selected_category == "Media Tools" else "secondary"):
+        st.session_state.selected_category = "Media Tools"
+        st.rerun()
+
+with col3:
+    if st.button("💻 Developer", use_container_width=True, type="primary" if st.session_state.selected_category == "Developer Tools" else "secondary"):
+        st.session_state.selected_category = "Developer Tools"
+        st.rerun()
+
+st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+
+# SIDEBAR (OPTIONAL)
 with st.sidebar:
     st.markdown("""
         <div class="sidebar-header">
@@ -39,9 +76,6 @@ with st.sidebar:
     st.markdown("<div class='sidebar-divider'></div>", unsafe_allow_html=True)
     
     st.markdown("<h3 class='sidebar-title'>Categories</h3>", unsafe_allow_html=True)
-    
-    if 'selected_category' not in st.session_state:
-        st.session_state.selected_category = "Document Tools"
     
     categories = ["Document Tools", "Media Tools", "Developer Tools"]
     
