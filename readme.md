@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- LOGO PLACEHOLDER - Generate logo then replace this -->
-<img src="assets/unibox-logo.jpg" alt="UniBox Logo" width="600"/>
+<img src="assets/unibox-logo.png" alt="UniBox Logo" width="600"/>
 
 # UniBox: Ultra-Fast File Converter
 
@@ -174,7 +174,7 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 **Evan William**
 
 - GitHub: [@yourusername](https://github.com/yourusername)
-- Website: [evanwilliam.dev](https://evanwilliam.dev)
+- LinkedIn: [Evan William](https://www.linkedin.com/in/evanwilliam03/)
 
 ---
 
