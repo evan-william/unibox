@@ -237,16 +237,18 @@ def apply_custom_styles(dark_mode=False):
 
         [data-testid="stTooltipIcon"] path {{
             fill: {main_text} !important;
-            stroke: none !important;
         }}
 
-        /* Tooltip popup - ALWAYS dark background with white text */
-        div[role="tooltip"],
-        div[role="tooltip"] *,
-        [data-testid="stTooltipContent"],
-        [data-testid="stTooltipContent"] * {{
+        /* Tooltip popup - FORCE white text on dark background */
+        div[role="tooltip"] {{
             background-color: #2d3748 !important;
+        }}
+
+        div[role="tooltip"] *,
+        div[role="tooltip"] span,
+        div[role="tooltip"] div {{
             color: #ffffff !important;
+            background-color: transparent !important;
         }}
 
         /* Selectbox in MAIN */
