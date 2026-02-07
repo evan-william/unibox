@@ -100,34 +100,19 @@ def get_media_conversions(media_type):
 def render_wip(tool_name, media_type):
     """Render Work In Progress page for media tools"""
     
-    # Icon based on media type
-    icon_svg = {
-        "Image": """
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-            </svg>
-        """,
-        "Video": """
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
-                <polygon points="23 7 16 12 23 17 23 7"/>
-                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-            </svg>
-        """,
-        "Audio": """
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
-                <path d="M9 18V5l12-2v13"/>
-                <circle cx="6" cy="18" r="3"/>
-                <circle cx="18" cy="16" r="3"/>
-            </svg>
-        """
+    # Simple icons
+    icon_map = {
+        "Image": "🖼️",
+        "Video": "🎬",
+        "Audio": "🎵"
     }
+    
+    icon = icon_map.get(media_type, "⚙️")
     
     st.markdown(f"""
         <div class='wip-container'>
-            <div class='wip-icon'>
-                {icon_svg.get(media_type, '')}
+            <div class='wip-icon' style='font-size: 48px;'>
+                {icon}
             </div>
             <h2>{tool_name}</h2>
             <h3>Coming Soon</h3>
