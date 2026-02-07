@@ -4,7 +4,7 @@ def apply_custom_styles():
     """Apply professional black and white styling with proper visibility"""
     st.markdown("""
         <style>
-        /* FORCE WHITE BACKGROUND EVERYWHERE */
+        /* MAIN CONTENT - WHITE BACKGROUND */
         .main, .block-container, 
         [data-testid="stAppViewContainer"],
         [data-testid="stAppViewContainer"] > section,
@@ -12,13 +12,33 @@ def apply_custom_styles():
             background-color: #ffffff !important;
         }
         
-        /* Sidebar Styling */
+        /* SIDEBAR - BLACK BACKGROUND WITH WHITE TEXT */
         [data-testid="stSidebar"] {
             background-color: #1a1a1a !important;
             border-right: 1px solid #e0e0e0;
         }
         
-        [data-testid="stSidebar"] * {
+        /* All sidebar text WHITE */
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3,
+        [data-testid="stSidebar"] p,
+        [data-testid="stSidebar"] span,
+        [data-testid="stSidebar"] label,
+        [data-testid="stSidebar"] div {
+            color: #ffffff !important;
+        }
+        
+        /* Sidebar selectbox WHITE TEXT */
+        [data-testid="stSidebar"] [data-testid="stSelectbox"] label {
+            color: #ffffff !important;
+        }
+        
+        [data-testid="stSidebar"] [data-baseweb="select"] {
+            background-color: #2a2a2a !important;
+        }
+        
+        [data-testid="stSidebar"] [data-baseweb="select"] * {
             color: #ffffff !important;
         }
         
@@ -27,25 +47,34 @@ def apply_custom_styles():
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
-        /* ALL TEXT BLACK ON WHITE */
-        body, p, h1, h2, h3, h4, h5, h6, span, div, label, li {
+        /* MAIN CONTENT TEXT - BLACK */
+        .main h1,
+        .main h2,
+        .main h3,
+        .main p,
+        .main span,
+        .main div,
+        .main label {
             color: #000000 !important;
         }
         
-        /* Headers */
+        /* Headers in main content */
         h1 {
             font-weight: 700 !important;
             font-size: 32px !important;
+            color: #000000 !important;
         }
         
         h2 {
             font-weight: 600 !important;
             font-size: 24px !important;
+            color: #000000 !important;
         }
         
         h3 {
             font-weight: 600 !important;
             font-size: 20px !important;
+            color: #000000 !important;
         }
         
         /* Buttons */
@@ -85,34 +114,54 @@ def apply_custom_styles():
             color: #ffffff !important;
         }
         
-        /* File Uploader */
+        /* File Uploader - WHITE BACKGROUND */
         [data-testid="stFileUploader"] {
-            background-color: #f5f5f5 !important;
+            background-color: #ffffff !important;
             border: 2px dashed #cccccc !important;
             border-radius: 4px;
             padding: 30px;
-        }
-        
-        [data-testid="stFileUploader"] * {
-            color: #000000 !important;
         }
         
         [data-testid="stFileUploader"]:hover {
             border-color: #000000 !important;
         }
         
-        /* Selectbox */
-        [data-testid="stSelectbox"] {
+        [data-testid="stFileUploader"] label {
+            color: #000000 !important;
+            font-weight: 500;
+        }
+        
+        [data-testid="stFileUploader"] section {
+            background-color: #ffffff !important;
+            border: none !important;
+        }
+        
+        [data-testid="stFileUploader"] section * {
             color: #000000 !important;
         }
         
-        [data-testid="stSelectbox"] * {
+        [data-testid="stFileUploader"] button {
             color: #000000 !important;
+            background-color: #f5f5f5 !important;
+        }
+        
+        /* Selectbox in MAIN content - WHITE BACKGROUND with BLACK TEXT */
+        .main [data-testid="stSelectbox"] {
             background-color: #ffffff !important;
         }
         
-        [data-testid="stSelectbox"] label {
-            font-weight: 500 !important;
+        .main [data-testid="stSelectbox"] label {
+            color: #000000 !important;
+            font-weight: 500;
+        }
+        
+        .main [data-testid="stSelectbox"] [data-baseweb="select"] {
+            background-color: #ffffff !important;
+            border: 1px solid #d0d0d0 !important;
+        }
+        
+        .main [data-testid="stSelectbox"] [data-baseweb="select"] * {
+            color: #000000 !important;
         }
         
         /* Tool Card */
@@ -145,10 +194,6 @@ def apply_custom_styles():
             border-radius: 4px;
         }
         
-        .info-box * {
-            color: #000000 !important;
-        }
-        
         .info-box ul {
             list-style: none;
             padding: 0;
@@ -156,6 +201,7 @@ def apply_custom_styles():
         }
         
         .info-box li {
+            color: #000000 !important;
             margin: 8px 0;
             font-size: 14px;
         }
@@ -170,17 +216,15 @@ def apply_custom_styles():
             margin: 40px 0;
         }
         
-        .wip-container * {
-            color: #000000 !important;
-        }
-        
         .wip-container h2 {
+            color: #000000 !important;
             font-weight: 600;
             margin-bottom: 16px;
             font-size: 24px;
         }
         
         .wip-container h3 {
+            color: #333333 !important;
             font-weight: 400;
             margin-bottom: 12px;
             font-size: 18px;
@@ -208,10 +252,9 @@ def apply_custom_styles():
             margin: 24px 0;
         }
         
-        /* Streamlit default messages */
+        /* Streamlit messages */
         .stSuccess, .stInfo, .stWarning, .stError {
             background-color: #f5f5f5 !important;
-            color: #000000 !important;
             border-left: 3px solid #000000 !important;
         }
         
@@ -225,16 +268,17 @@ def apply_custom_styles():
             color: #000000 !important;
         }
         
-        .streamlit-expanderHeader * {
-            color: #000000 !important;
-        }
-        
         .streamlit-expanderContent {
             background-color: #ffffff !important;
         }
         
         .streamlit-expanderContent * {
             color: #000000 !important;
+        }
+        
+        /* Markdown in main content */
+        .main [data-testid="stMarkdownContainer"] p {
+            color: #666666 !important;
         }
         </style>
     """, unsafe_allow_html=True)
