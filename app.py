@@ -40,13 +40,13 @@ with col1:
 with col2:
     nav_col1, nav_col2, nav_col3 = st.columns(3)
     with nav_col1:
-        if st.button("📄 Documents", key="nav_doc", use_container_width=True):
+        if st.button("Documents", key="nav_doc", use_container_width=True):
             st.session_state.category = "Document Tools"
     with nav_col2:
-        if st.button("🎨 Media", key="nav_media", use_container_width=True):
+        if st.button("Media", key="nav_media", use_container_width=True):
             st.session_state.category = "Media Tools"
     with nav_col3:
-        if st.button("💻 Developer", key="nav_dev", use_container_width=True):
+        if st.button("Developer", key="nav_dev", use_container_width=True):
             st.session_state.category = "Developer Tools"
 
 with col3:
