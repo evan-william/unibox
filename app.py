@@ -2,6 +2,7 @@ import streamlit as st
 from pdf2docx import Converter
 import os
 import subprocess
+import pypandoc
 
 # HALAMAN CONFIGURE
 st.set_page_config(page_title="UniBox", page_icon="🔄", layout="wide")
@@ -33,23 +34,19 @@ else:
 
 # --- LOGIC HANDLING ---
 
+
+
 def word_to_pdf(docx_file):
-    # Simpan file DOCX sementara
     with open("temp_input.docx", "wb") as f:
         f.write(docx_file.getbuffer())
     
-    # Menggunakan LibreOffice untuk konversi (mendukung tabel, gambar, layout)
-    # Ini cara standar industri untuk konversi di server Linux
     try:
-        subprocess.run([
-            'lowriter', '--headless', '--convert-to', 'pdf', 'temp_input.docx'
-        ], check=True)
-        
+        # Konversi menggunakan pypandoc
+        output = pypandoc.convert_file('temp_input.docx', 'pdf', outputfile="temp_input.pdf")
         with open("temp_input.pdf", "rb") as f:
-            pdf_data = f.read()
-        return pdf_data
+            return f.read()
     except Exception as e:
-        st.error(f"Error Konversi: {e}")
+        st.error(f"Error: {e}. Pastikan pandoc terinstal.")
         return None
 
 def pdf_to_word(pdf_file):
