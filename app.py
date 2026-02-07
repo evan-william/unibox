@@ -40,17 +40,17 @@ st.markdown("""
 col1, col2, col3, col4 = st.columns([2, 2, 2, 6])
 
 with col1:
-    if st.button("📄 Documents", use_container_width=True, type="primary" if st.session_state.selected_category == "Document Tools" else "secondary"):
+    if st.button("Documents", use_container_width=True, type="primary" if st.session_state.selected_category == "Document Tools" else "secondary"):
         st.session_state.selected_category = "Document Tools"
         st.rerun()
 
 with col2:
-    if st.button("🎬 Media", use_container_width=True, type="primary" if st.session_state.selected_category == "Media Tools" else "secondary"):
+    if st.button("Media", use_container_width=True, type="primary" if st.session_state.selected_category == "Media Tools" else "secondary"):
         st.session_state.selected_category = "Media Tools"
         st.rerun()
 
 with col3:
-    if st.button("💻 Developer", use_container_width=True, type="primary" if st.session_state.selected_category == "Developer Tools" else "secondary"):
+    if st.button("Developer", use_container_width=True, type="primary" if st.session_state.selected_category == "Developer Tools" else "secondary"):
         st.session_state.selected_category = "Developer Tools"
         st.rerun()
 
