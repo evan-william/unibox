@@ -9,3 +9,7 @@ markdown2
 pdfkit
 weasyprint
 requests
+Pillow
+cffi
+cssselect2
+tinycss2
