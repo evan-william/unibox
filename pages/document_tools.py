@@ -11,8 +11,6 @@ def render():
     st.markdown("<h2 style='margin-bottom: 1rem;'>Document Converter</h2>", unsafe_allow_html=True)
     
     # Conversion selector
-    st.markdown("<div class='converter-box'>", unsafe_allow_html=True)
-    
     col1, col2, col3 = st.columns([5, 1, 5])
     
     with col1:
@@ -23,7 +21,7 @@ def render():
         )
     
     with col2:
-        st.markdown("<div style='text-align: center; padding-top: 32px; font-size: 24px;'>→</div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; padding-top: 32px; font-size: 24px; color: #666;'>→</div>", unsafe_allow_html=True)
     
     with col3:
         # Dynamic "to" options based on "from" selection
@@ -34,7 +32,7 @@ def render():
             key="to_format"
         )
     
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 2rem 0;'>", unsafe_allow_html=True)
     
     # Render conversion interface
     conversion_key = f"{from_format}_{to_format}"
