@@ -25,23 +25,24 @@ apply_custom_styles(st.session_state.dark_mode)
 
 # SIDEBAR
 with st.sidebar:
-    # Header
-    st.markdown("<h1 style='text-align: left; margin-bottom: 8px; font-size: 28px;'>UniBox</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: left; font-size: 13px; margin-top: 0;'>Universal File Converter</p>", unsafe_allow_html=True)
-    
-    # Toggle switch
+    # Header and Mode Switcher in same row
     col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        st.markdown("<h1 style='text-align: left; margin-bottom: 8px; font-size: 28px;'>UniBox</h1>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: left; font-size: 13px; margin-top: 0;'>Universal File Converter</p>", unsafe_allow_html=True)
+    
     with col2:
-        dark_mode_new = st.checkbox(
-            "",
-            value=st.session_state.dark_mode,
-            key="dark_mode_toggle",
-            label_visibility="collapsed"
-        )
+        st.markdown("<div style='margin-top: 8px;'></div>", unsafe_allow_html=True)
+        # Use on_click to preserve state
+        def toggle_mode():
+            st.session_state.dark_mode = not st.session_state.dark_mode
         
-        if dark_mode_new != st.session_state.dark_mode:
-            st.session_state.dark_mode = dark_mode_new
-            st.rerun()
+        st.button(
+            "🌙" if not st.session_state.dark_mode else "☀️", 
+            key="mode_toggle",
+            on_click=toggle_mode
+        )
     
     st.markdown("---")
     
@@ -64,7 +65,7 @@ else:
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center; color: #999; font-size: 13px;'>"
-    "UniBox © 2024 - Built by Evan William"
+    "UniBox © 2026 - Built by Evan William"
     "</div>",
     unsafe_allow_html=True
 )
