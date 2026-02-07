@@ -1,2 +1,2 @@
-LibreOffice
-wkhtmltopdfpython
+libreoffice
+wkhtmltopdf
