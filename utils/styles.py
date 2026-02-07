@@ -363,8 +363,13 @@ def apply_custom_styles(dark_mode=True):
         }}
         
         /* LIGHT MODE SPECIFIC TEXT FIXES */
-        .hero-title,
-        .hero-subtitle,
+        .hero-title {{
+            color: {main_text} !important;
+        }}
+
+        .hero-subtitle {{
+            color: {secondary_text} !important;
+        }}
         .feature-card h2,
         .feature-card h3,
         .feature-card p,
@@ -591,5 +596,15 @@ def apply_custom_styles(dark_mode=True):
                 padding: 24px !important;
             }}
         }}
+
+        /* NUCLEAR FIX - Override semua white text di light mode */
+        .main [class*="st-"] {{
+            color: {main_text} !important;
+        }}
+
+        .main [class*="st-"] * {{
+            color: {main_text} !important;
+        }}
+
         </style>
     """, unsafe_allow_html=True)
