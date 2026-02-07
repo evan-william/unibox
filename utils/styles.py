@@ -239,16 +239,17 @@ def apply_custom_styles(dark_mode=False):
             fill: {main_text} !important;
         }}
 
-        /* Tooltip popup - FORCE white text on dark background */
-        div[role="tooltip"] {{
-            background-color: #2d3748 !important;
-        }}
-
-        div[role="tooltip"] *,
+        /* Tooltip popup - Nuclear option to force white text */
+        div[role="tooltip"],
+        div[role="tooltip"] > div,
         div[role="tooltip"] span,
-        div[role="tooltip"] div {{
+        div[role="tooltip"] p,
+        [data-baseweb="tooltip"],
+        [data-baseweb="tooltip"] *,
+        .st-emotion-cache-ue6h4q,
+        .st-emotion-cache-ue6h4q * {{
+            background-color: #2d3748 !important;
             color: #ffffff !important;
-            background-color: transparent !important;
         }}
 
         /* Selectbox in MAIN */
