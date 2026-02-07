@@ -71,6 +71,7 @@ def apply_custom_styles():
         header {visibility: hidden;}
         
         /* MAIN CONTENT TEXT - HITAM (black) */
+        .main *,
         .main h1,
         .main h2,
         .main h3,
@@ -299,9 +300,11 @@ def apply_custom_styles():
             color: #000000 !important;
         }
         
-        /* Markdown in main content */
-        .main [data-testid="stMarkdownContainer"] p {
-            color: #666666 !important;
+        /* Markdown in main content - PAKSA HITAM */
+        .main [data-testid="stMarkdownContainer"] p,
+        .main [data-testid="stMarkdown"] p,
+        [data-testid="stMarkdownContainer"] p {
+            color: #000000 !important;
         }
         </style>
     """, unsafe_allow_html=True)
