@@ -241,19 +241,48 @@ def apply_custom_styles(dark_mode=False):
         }}
         
         /* Tooltip/Help icon - Question mark in circle */
-        .main [data-testid="stTooltipIcon"] svg,
         [data-testid="stTooltipIcon"] svg {{
             color: {main_text} !important;
         }}
-        
-        .main [data-testid="stTooltipIcon"] svg circle {{
+
+        [data-testid="stTooltipIcon"] circle {{
             stroke: {main_text} !important;
             fill: none !important;
         }}
-        
-        .main [data-testid="stTooltipIcon"] svg path {{
+
+        [data-testid="stTooltipIcon"] path {{
             fill: {main_text} !important;
             stroke: none !important;
+        }}
+
+        /* Tooltip popup - keep dark background with white text in both modes */
+        [data-testid="stTooltipContent"],
+        [data-testid="stTooltipContent"] * {{
+            background-color: #2d3748 !important;
+            color: #ffffff !important;
+        }}
+
+        div[role="tooltip"] {{
+            background-color: #2d3748 !important;
+        }}
+
+        div[role="tooltip"] * {{
+            color: #ffffff !important;
+        }}
+
+        /* Tooltip text styling */
+        .st-emotion-cache-ue6h4q {{
+            background-color: {card_bg} !important;
+            color: {main_text} !important;
+        }}
+
+        div[role="tooltip"] {{
+            background-color: {card_bg} !important;
+            color: {main_text} !important;
+        }}
+
+        div[role="tooltip"] * {{
+            color: {main_text} !important;
         }}
         
         /* Selectbox in MAIN */
