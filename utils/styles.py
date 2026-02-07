@@ -1,655 +1,569 @@
 import streamlit as st
 
-def apply_custom_styles(dark_mode=True):
-    """Apply CloudConvert-inspired professional styling"""
+def apply_custom_styles():
+    """Apply professional CloudConvert-inspired styling"""
     
-    # Color scheme based on mode
-    if dark_mode:
-        # DARK MODE COLORS (CloudConvert style)
-        main_bg = "#2b2b2b"
-        header_bg = "#3a3a3a"
-        main_text = "#ffffff"
-        secondary_text = "#b0b0b0"
-        card_bg = "#3a3a3a"
-        card_hover = "#454545"
-        border_color = "#4a4a4a"
-        button_primary = "#c94448"
-        button_primary_hover = "#d45558"
-        button_secondary = "#4a4a4a"
-        button_secondary_hover = "#555555"
-        input_bg = "#323232"
-        select_bg = "#323232"
-    else:
-        # LIGHT MODE COLORS
-        main_bg = "#f5f5f5"
-        header_bg = "#ffffff"
-        main_text = "#1a1a1a"
-        secondary_text = "#555555"
-        card_bg = "#ffffff"
-        card_hover = "#fafafa"
-        border_color = "#d0d0d0"
-        button_primary = "#c94448"
-        button_primary_hover = "#d45558"
-        button_secondary = "#e0e0e0"
-        button_secondary_hover = "#d0d0d0"
-        input_bg = "#ffffff"
-        select_bg = "#ffffff"
-    
-    st.markdown(f"""
+    st.markdown("""
         <style>
-        /* RESET & BASE */
-        * {{
+        /* ===== GLOBAL RESET ===== */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }}
+        }
         
-        /* HIDE STREAMLIT ELEMENTS */
-        #MainMenu {{visibility: hidden;}}
-        footer {{visibility: hidden;}}
-        header {{visibility: hidden;}}
-        [data-testid="stSidebar"] {{display: none;}}
+        /* ===== REMOVE STREAMLIT BRANDING ===== */
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
         
-        /* MAIN CONTAINER */
-        .main, .block-container, 
+        /* ===== MAIN LAYOUT ===== */
+        .main, .block-container,
         [data-testid="stAppViewContainer"],
-        [data-testid="stAppViewContainer"] > section,
-        [data-testid="stAppViewContainer"] > section > div {{
-            background-color: {main_bg} !important;
-            max-width: 100% !important;
+        [data-testid="stAppViewContainer"] > section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
             padding: 0 !important;
-        }}
+        }
         
-        .block-container {{
-            padding: 2rem 4rem !important;
-            max-width: 1400px !important;
-            margin: 0 auto !important;
-        }}
+        .block-container {
+            padding: 3rem 2rem 2rem 2rem !important;
+            max-width: 1200px !important;
+        }
         
-        /* NAVBAR */
-        .navbar-brand {{
+        /* ===== SIDEBAR ===== */
+        [data-testid="stSidebar"] {
+            background: #1a1a2e !important;
+            border-right: none !important;
+            box-shadow: 4px 0 12px rgba(0,0,0,0.1);
+        }
+        
+        [data-testid="stSidebar"] > div:first-child {
+            padding: 2rem 1.5rem !important;
+        }
+        
+        /* Hide default navigation */
+        [data-testid="stSidebarNav"] {
+            display: none !important;
+        }
+        
+        /* ===== SIDEBAR HEADER ===== */
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+        
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 24px;
-            color: {main_text};
-        }}
+            gap: 12px;
+        }
         
-        .brand-icon {{
-            font-size: 32px;
-        }}
-        
-        .brand-text {{
-            font-weight: 300;
-            letter-spacing: -0.5px;
-        }}
-        
-        .brand-text strong {{
-            font-weight: 700;
-        }}
-        
-        .navbar-divider {{
-            height: 1px;
-            background: {border_color};
-            margin: 1.5rem 0 2rem 0;
-        }}
-        
-        /* NAVIGATION BUTTONS */
-        [data-testid="column"]:has(.navbar-brand) + [data-testid="column"] button,
-        button[key="nav_doc"],
-        button[key="nav_media"],  
-        button[key="nav_dev"] {{
-            background-color: transparent !important;
-            color: {secondary_text} !important;
-            border: none !important;
-            font-size: 15px !important;
-            font-weight: 500 !important;
-            padding: 8px 16px !important;
-            transition: all 0.2s ease !important;
-            border-radius: 6px !important;
-        }}
-        
-        [data-testid="column"]:has(.navbar-brand) + [data-testid="column"] button:hover,
-        button[key="nav_doc"]:hover,
-        button[key="nav_media"]:hover,
-        button[key="nav_dev"]:hover {{
-            background-color: {button_secondary} !important;
-            color: {main_text} !important;
-        }}
-        
-        /* MODE TOGGLE */
-        button[key="mode_toggle"] {{
-            background-color: transparent !important;
-            border: 1px solid {border_color} !important;
-            color: {main_text} !important;
-            font-size: 18px !important;
-            padding: 8px !important;
-            width: 44px !important;
-            height: 44px !important;
-            min-width: 44px !important;
-            border-radius: 8px !important;
-            transition: all 0.2s ease !important;
-        }}
-        
-        button[key="mode_toggle"]:hover {{
-            background-color: {button_secondary} !important;
-        }}
-        
-        /* HERO SECTION */
-        .hero-section {{
-            text-align: center;
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: 0 auto 40px auto;
-        }}
-        
-        .hero-title {{
-            font-size: 48px;
-            font-weight: 700;
-            color: {main_text};
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }}
-        
-        .hero-subtitle {{
-            font-size: 18px;
-            color: {secondary_text};
-            line-height: 1.6;
-            max-width: 700px;
-            margin: 0 auto;
-        }}
-        
-        /* CONVERTER SELECTOR */
-        .converter-box {{
-            background: {card_bg};
-            border: 1px solid {border_color};
-            border-radius: 12px;
-            padding: 40px;
-            margin: 40px auto;
-            max-width: 800px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }}
-        
-        .converter-row {{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }}
-        
-        .convert-label {{
-            font-size: 16px;
-            color: {secondary_text};
-            font-weight: 500;
-        }}
-        
-        .to-label {{
-            font-size: 16px;
-            color: {secondary_text};
-            font-weight: 500;
-        }}
-        
-        /* FILE UPLOAD AREA */
-        .upload-area {{
-            background: {input_bg};
-            border: 2px dashed {border_color};
-            border-radius: 8px;
-            padding: 60px 40px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }}
-        
-        .upload-area:hover {{
-            border-color: {button_primary};
-            background: {card_hover};
-        }}
-        
-        [data-testid="stFileUploader"] {{
-            background-color: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-        }}
-        
-        [data-testid="stFileUploader"] section {{
-            background-color: {input_bg} !important;
-            border: 2px dashed {border_color} !important;
-            border-radius: 8px !important;
-            padding: 60px 40px !important;
-            transition: all 0.3s ease !important;
-        }}
-        
-        [data-testid="stFileUploader"] section:hover {{
-            border-color: {button_primary} !important;
-            background-color: {card_hover} !important;
-        }}
-        
-        [data-testid="stFileUploader"] label {{
-            color: {main_text} !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-        }}
-        
-        [data-testid="stFileUploader"] small {{
-            color: {secondary_text} !important;
-        }}
-        
-        [data-testid="stFileUploader"] button {{
-            background-color: {button_primary} !important;
-            color: white !important;
-            border: none !important;
-            padding: 12px 32px !important;
-            border-radius: 6px !important;
-            font-weight: 500 !important;
-            font-size: 15px !important;
-            transition: all 0.2s ease !important;
-        }}
-        
-        /* Browse files button - fix text color */
-        [data-testid="stFileUploader"] button[kind="secondary"],
-        [data-testid="stBaseButton-secondary"] {{
-            background-color: {button_primary} !important;
-            color: white !important;
-        }}
-        
-        [data-testid="stFileUploader"] button[kind="secondary"] p,
-        [data-testid="stBaseButton-secondary"] p {{
-            color: white !important;
-        }}
-        
-        [data-testid="stFileUploader"] button:hover {{
-            background-color: {button_primary_hover} !important;
-        }}
-        
-        /* PRIMARY BUTTON (Convert) */
-        .stButton > button,
-        button[kind="primary"],
-        button[kind="secondary"] {{
-            background-color: {button_primary} !important;
-            color: white !important;
-            border: none !important;
-            padding: 14px 40px !important;
-            border-radius: 6px !important;
-            font-weight: 600 !important;
-            font-size: 16px !important;
-            transition: all 0.2s ease !important;
-            width: 100% !important;
-            height: auto !important;
-        }}
-        
-        .stButton > button:hover,
-        button[kind="primary"]:hover,
-        button[kind="secondary"]:hover {{
-            background-color: {button_primary_hover} !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(201, 68, 72, 0.3) !important;
-        }}
-        
-        /* SELECTBOX */
-        [data-testid="stSelectbox"] {{
-            margin: 0 !important;
-        }}
-        
-        [data-testid="stSelectbox"] label {{
-            color: {main_text} !important;
-            font-weight: 500 !important;
-            font-size: 14px !important;
-            margin-bottom: 8px !important;
-        }}
-        
-        [data-testid="stSelectbox"] [data-baseweb="select"] {{
-            background-color: {select_bg} !important;
-            border: 1px solid {border_color} !important;
-            border-radius: 6px !important;
-            min-width: 100% !important;
-        }}
-        
-        [data-testid="stSelectbox"] [data-baseweb="select"]:hover {{
-            border-color: {button_primary} !important;
-        }}
-        
-        [data-testid="stSelectbox"] [data-baseweb="select"] > div {{
-            background-color: {select_bg} !important;
-            color: {main_text} !important;
-            font-size: 16px !important;
-            font-weight: 500 !important;
-            padding: 14px 16px !important;
-        }}
-        
-        /* Dropdown menu */
-        [data-baseweb="popover"] {{
-            background-color: {card_bg} !important;
-            border: 1px solid {border_color} !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-        }}
-        
-        [role="option"] {{
-            background-color: {card_bg} !important;
-            color: {main_text} !important;
-            padding: 12px 16px !important;
-            font-size: 15px !important;
-        }}
-        
-        [role="option"]:hover {{
-            background-color: {card_hover} !important;
-        }}
-        
-        /* TEXT & TYPOGRAPHY */
-        .main *, 
-        .main h1,
-        .main h2,
-        .main h3,
-        .main p,
-        .main span,
-        .main div,
-        .main label {{
-            color: {main_text} !important;
-        }}
-        
-        /* Force h2 elements to use correct color */
-        h2,
-        h2 *,
-        h2 span,
-        [id*="document-tools"],
-        [id*="media-tools"],
-        [id*="developer-tools"] {{
-            color: {main_text} !important;
-        }}
-        
-        /* Markdown container paragraphs */
-        [data-testid="stMarkdownContainer"] p,
-        [class*="st-emotion-cache-"] p,
-        .st-emotion-cache-2fgyt4 p {{
-            color: {main_text} !important;
-        }}
-        
-        h1 {{
+        .logo-text h1 {
+            font-size: 24px !important;
             font-weight: 700 !important;
-            font-size: 36px !important;
-            margin-bottom: 16px !important;
-        }}
+            color: #ffffff !important;
+            margin: 0 !important;
+            line-height: 1.2 !important;
+        }
         
-        h2 {{
+        .logo-text p {
+            font-size: 12px !important;
+            color: #888 !important;
+            margin: 0 !important;
+            letter-spacing: 0.5px;
+        }
+        
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 1.5rem 0;
+        }
+        
+        .sidebar-title {
+            font-size: 11px !important;
             font-weight: 600 !important;
-            font-size: 28px !important;
-            margin-bottom: 12px !important;
-        }}
+            color: #888 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem !important;
+        }
         
-        h3 {{
-            font-weight: 600 !important;
-            font-size: 22px !important;
-            margin-bottom: 10px !important;
-        }}
-        
-        /* Section titles */
-        [data-testid="stMarkdownContainer"] h3 {{
-            color: {main_text} !important;
-            font-weight: 600 !important;
-            margin-top: 20px !important;
-            margin-bottom: 16px !important;
-        }}
-        
-        /* LIGHT MODE SPECIFIC TEXT FIXES */
-        .hero-title,
-        .hero-subtitle,
-        .feature-card h2,
-        .feature-card h3,
-        .feature-card p,
-        .tool-card h3,
-        .tool-card p {{
-            color: {main_text} !important;
-        }}
-        
-        /* FILE UPLOADER - COMPREHENSIVE FIX */
-        [data-testid="stFileUploader"],
-        [data-testid="stFileUploader"] *,
-        [data-testid="stFileUploader"] label,
-        [data-testid="stFileUploader"] small,
-        [data-testid="stFileUploader"] p,
-        [data-testid="stFileUploader"] span,
-        [data-testid="stFileUploader"] div,
-        [data-testid="stFileUploader"] section,
-        [data-testid="stFileUploader"] section *,
-        [data-testid="stFileUploader"] section div,
-        [data-testid="stFileUploader"] section span {{
-            color: {main_text} !important;
-        }}
-        
-        /* FORCE ALL MARKDOWN TO USE CORRECT COLOR */
-        [data-testid="stMarkdownContainer"],
-        [data-testid="stMarkdownContainer"] *,
-        [data-testid="stMarkdown"],
-        [data-testid="stMarkdown] * {{
-            color: {main_text} !important;
-        }}
-        
-        /* CARDS & SECTIONS */
-        .feature-card {{
-            background: {card_bg};
-            border: 1px solid {border_color};
-            border-radius: 10px;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }}
-        
-        .feature-card:hover {{
-            background: {card_hover};
-            border-color: {button_primary};
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }}
-        
-        .feature-card h3 {{
-            color: {main_text} !important;
-            font-size: 18px !important;
-            font-weight: 600 !important;
-            margin-bottom: 8px !important;
-        }}
-        
-        .feature-card p {{
-            color: {secondary_text} !important;
+        /* ===== SIDEBAR BUTTONS ===== */
+        [data-testid="stSidebar"] .stButton > button {
+            background: transparent !important;
+            color: #ccc !important;
+            border: 1px solid transparent !important;
+            border-radius: 8px !important;
+            padding: 12px 16px !important;
             font-size: 14px !important;
-            line-height: 1.5 !important;
-        }}
+            font-weight: 500 !important;
+            text-align: left !important;
+            transition: all 0.2s ease !important;
+            margin-bottom: 8px !important;
+            width: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+        }
         
-        /* SUCCESS/INFO MESSAGES */
-        .success-msg {{
-            background-color: {card_bg} !important;
-            color: {main_text} !important;
-            border-left: 4px solid #10b981 !important;
-            padding: 16px 20px !important;
-            border-radius: 6px !important;
-            margin: 16px 0 !important;
-        }}
+        [data-testid="stSidebar"] .stButton > button:hover {
+            background: rgba(255,255,255,0.05) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
         
-        .info-box {{
-            background-color: {card_bg} !important;
-            color: {main_text} !important;
-            border-left: 4px solid {button_primary} !important;
-            padding: 16px 20px !important;
-            border-radius: 6px !important;
-        }}
+        [data-testid="stSidebar"] .stButton > button[kind="primary"] {
+            background: rgba(74,144,226,0.2) !important;
+            color: #4A90E2 !important;
+            border-color: rgba(74,144,226,0.3) !important;
+        }
         
-        /* OPTIONS SECTION */
-        .options-section {{
-            background: {card_bg};
-            border: 1px solid {border_color};
-            border-radius: 10px;
-            padding: 24px;
-            margin: 30px 0;
-        }}
+        [data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {
+            background: rgba(74,144,226,0.3) !important;
+        }
         
-        .options-title {{
+        /* ===== SIDEBAR FOOTER ===== */
+        .sidebar-spacer {
+            flex: 1;
+            min-height: 100px;
+        }
+        
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .info-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            color: {main_text};
-            margin-bottom: 20px;
-        }}
+            margin: 12px 0;
+            color: #888;
+            font-size: 13px;
+        }
         
-        /* FORMAT INFO CARDS */
-        .format-info {{
-            background: {card_bg};
-            border: 1px solid {border_color};
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }}
+        .info-item svg {
+            opacity: 0.6;
+        }
         
-        .format-info h4 {{
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: white;
+            border-radius: 16px;
+            padding: 4rem 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 48px !important;
+            font-weight: 700 !important;
+            color: #1a1a2e !important;
+            margin-bottom: 1rem !important;
+            line-height: 1.2 !important;
+        }
+        
+        .hero-section p {
+            font-size: 18px !important;
+            color: #666 !important;
+            max-width: 700px;
+            margin: 0 auto 2rem auto !important;
+            line-height: 1.6 !important;
+        }
+        
+        /* ===== CONVERTER BOX ===== */
+        .converter-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .converter-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: {main_text} !important;
-            font-size: 16px !important;
-            font-weight: 600 !important;
-            margin-bottom: 8px !important;
-        }}
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
         
-        .format-info p {{
-            color: {secondary_text} !important;
-            font-size: 14px !important;
-            line-height: 1.5 !important;
-        }}
-        
-        .format-link {{
-            color: {button_primary} !important;
-            text-decoration: none !important;
-            font-weight: 500 !important;
-        }}
-        
-        .format-link:hover {{
-            text-decoration: underline !important;
-        }}
-        
-        /* FOOTER */
-        .footer-space {{
-            height: 80px;
-        }}
-        
-        .footer {{
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: {header_bg};
-            border-top: 1px solid {border_color};
-            padding: 20px;
+        .converter-item {
+            flex: 1;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
-            color: {secondary_text};
-            font-size: 14px;
-        }}
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
         
-        /* LOADING SPINNER */
-        .stSpinner > div {{
-            border-color: {button_primary} !important;
-        }}
+        .converter-item:hover {
+            border-color: #4A90E2;
+            background: #f0f7ff;
+        }
         
-        /* TABS */
-        .stTabs [data-baseweb="tab-list"] {{
-            gap: 8px;
-            background-color: transparent;
-        }}
+        .converter-arrow {
+            color: #666;
+            font-size: 24px;
+            font-weight: 300;
+        }
         
-        .stTabs [data-baseweb="tab"] {{
-            background-color: {button_secondary} !important;
-            color: {main_text} !important;
-            border-radius: 6px !important;
-            padding: 10px 20px !important;
-            font-weight: 500 !important;
-        }}
+        /* ===== SELECT BOXES ===== */
+        .main [data-testid="stSelectbox"] {
+            margin-bottom: 1.5rem;
+        }
         
-        .stTabs [aria-selected="true"] {{
-            background-color: {button_primary} !important;
-            color: white !important;
-        }}
+        .main [data-testid="stSelectbox"] label {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            color: #1a1a2e !important;
+            margin-bottom: 8px !important;
+        }
         
-        /* EXPANDER */
-        .streamlit-expanderHeader {{
-            background-color: {card_bg} !important;
-            color: {main_text} !important;
-            border: 1px solid {border_color} !important;
-            border-radius: 6px !important;
-            font-weight: 500 !important;
-        }}
+        .main [data-testid="stSelectbox"] [data-baseweb="select"] {
+            background: white !important;
+            border: 2px solid #e9ecef !important;
+            border-radius: 8px !important;
+            padding: 4px !important;
+        }
         
-        .streamlit-expanderHeader:hover {{
-            background-color: {card_hover} !important;
-        }}
+        .main [data-testid="stSelectbox"] [data-baseweb="select"]:hover {
+            border-color: #4A90E2 !important;
+        }
         
-        .streamlit-expanderContent {{
-            background-color: {card_bg} !important;
-            border: 1px solid {border_color} !important;
-            border-top: none !important;
-            border-radius: 0 0 6px 6px !important;
-        }}
+        /* ===== FILE UPLOADER ===== */
+        [data-testid="stFileUploader"] {
+            background: white !important;
+            border: 2px dashed #dee2e6 !important;
+            border-radius: 12px !important;
+            padding: 3rem 2rem !important;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
         
-        /* INPUT FIELDS */
-        input, textarea {{
-            background-color: {input_bg} !important;
-            color: {main_text} !important;
-            border: 1px solid {border_color} !important;
-            border-radius: 6px !important;
-            padding: 12px 16px !important;
-            font-size: 15px !important;
-        }}
+        [data-testid="stFileUploader"]:hover {
+            border-color: #4A90E2 !important;
+            background: #f0f7ff !important;
+        }
         
-        input:focus, textarea:focus {{
-            border-color: {button_primary} !important;
-            outline: none !important;
-        }}
+        [data-testid="stFileUploader"] section {
+            border: none !important;
+            background: transparent !important;
+        }
         
-        /* DOWNLOAD BUTTON */
-        .stDownloadButton > button {{
-            background-color: {button_primary} !important;
+        [data-testid="stFileUploader"] button {
+            background: #4A90E2 !important;
             color: white !important;
             border: none !important;
-            padding: 14px 40px !important;
-            border-radius: 6px !important;
+            border-radius: 8px !important;
+            padding: 12px 32px !important;
+            font-weight: 600 !important;
+            font-size: 15px !important;
+            transition: all 0.2s ease !important;
+        }
+        
+        [data-testid="stFileUploader"] button:hover {
+            background: #357ABD !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74,144,226,0.3);
+        }
+        
+        /* ===== BUTTONS ===== */
+        .main .stButton > button {
+            background: #4A90E2 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 14px 32px !important;
             font-weight: 600 !important;
             font-size: 16px !important;
             transition: all 0.2s ease !important;
-            width: 100% !important;
-        }}
+            box-shadow: 0 2px 8px rgba(74,144,226,0.2);
+        }
         
-        .stDownloadButton > button:hover {{
-            background-color: {button_primary_hover} !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(201, 68, 72, 0.3) !important;
-        }}
+        .main .stButton > button:hover {
+            background: #357ABD !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(74,144,226,0.4);
+        }
         
-        /* RESPONSIVE */
-        @media (max-width: 768px) {{
-            .block-container {{
-                padding: 1rem 2rem !important;
-            }}
-            
-            .hero-title {{
-                font-size: 32px !important;
-            }}
-            
-            .converter-box {{
-                padding: 24px !important;
-            }}
-        }}
+        .main .stButton > button:active {
+            transform: translateY(0);
+        }
         
-        /* NUCLEAR FIX - Force override all Streamlit default text colors */
-        .main [class*="st-"],
-        .main [class*="st-"] *,
-        .main [data-testid*="st"],
-        .main [data-testid*="st"] * {{
-            color: {main_text} !important;
-        }}
-        
-        /* Exception: Keep button text white */
-        .stButton > button,
-        .stDownloadButton > button,
-        [data-testid="stFileUploader"] button {{
+        /* ===== DOWNLOAD BUTTON ===== */
+        .main .stDownloadButton > button {
+            background: #28a745 !important;
             color: white !important;
-        }}
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 14px 32px !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            transition: all 0.2s ease !important;
+        }
+        
+        .main .stDownloadButton > button:hover {
+            background: #218838 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(40,167,69,0.4);
+        }
+        
+        /* ===== TOOL CARD ===== */
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .tool-card h3 {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #1a1a2e !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .tool-card p {
+            font-size: 16px !important;
+            color: #666 !important;
+            line-height: 1.6 !important;
+        }
+        
+        /* ===== INFO BOX ===== */
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #4A90E2;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .info-box h4 {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: #1a1a2e !important;
+            margin-bottom: 1rem !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .info-box li {
+            color: #666 !important;
+            margin: 8px 0;
+            font-size: 14px !important;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .info-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4A90E2;
+            font-weight: bold;
+        }
+        
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid #28a745;
+            border-radius: 8px;
+            font-weight: 500;
+            margin: 1rem 0;
+        }
+        
+        /* ===== FEATURE GRID ===== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-card h4 {
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            color: #1a1a2e !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .feature-card p {
+            font-size: 14px !important;
+            color: #666 !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* ===== WIP CONTAINER ===== */
+        .wip-container {
+            background: white;
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .wip-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem auto;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .wip-container h2 {
+            font-size: 32px !important;
+            font-weight: 700 !important;
+            color: #1a1a2e !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .wip-container h3 {
+            font-size: 20px !important;
+            font-weight: 400 !important;
+            color: #888 !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .wip-container p {
+            font-size: 16px !important;
+            color: #666 !important;
+        }
+        
+        /* ===== TABS ===== */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 8px;
+            background: transparent;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            background: transparent;
+            border: none;
+            color: #666;
+            padding: 12px 24px;
+            font-weight: 600;
+        }
+        
+        .stTabs [aria-selected="true"] {
+            background: transparent;
+            color: #4A90E2;
+            border-bottom: 2px solid #4A90E2;
+        }
+        
+        /* ===== EXPANDER ===== */
+        .streamlit-expanderHeader {
+            background: #f8f9fa !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            color: #1a1a2e !important;
+        }
+        
+        .streamlit-expanderHeader:hover {
+            background: #e9ecef !important;
+        }
+        
+        /* ===== MESSAGES ===== */
+        .stSuccess, .stInfo, .stWarning, .stError {
+            border-radius: 8px !important;
+            padding: 1rem 1.5rem !important;
+        }
+        
+        /* ===== FOOTER ===== */
+        .main-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        
+        .footer-right {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-right a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-right a:hover {
+            color: white;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .block-container {
+                padding: 2rem 1rem !important;
+            }
+            
+            .hero-section {
+                padding: 3rem 2rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 32px !important;
+            }
+            
+            .converter-row {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
         </style>
     """, unsafe_allow_html=True)

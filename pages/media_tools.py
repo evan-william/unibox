@@ -1,80 +1,173 @@
 import streamlit as st
 
 def render():
-    """Render Media Tools page"""
+    """Render Media Tools page with modern UI"""
     
     # Hero Section
     st.markdown("""
         <div class='hero-section'>
-            <h1 class='hero-title'>Media Converter</h1>
-            <p class='hero-subtitle'>
-                Convert images, videos, and audio files between popular formats.
-                High-quality conversion with advanced optimization options.
+            <h1>Media Converter</h1>
+            <p>
+                Transform your images, videos, and audio files with professional-grade conversion tools.
+                Fast, reliable, and high-quality results every time.
             </p>
         </div>
     """, unsafe_allow_html=True)
     
-    # Tool selection
-    st.markdown("### Select Conversion Type")
+    # Conversion selector
+    st.markdown("<div class='converter-box'>", unsafe_allow_html=True)
     
-    conversion = st.selectbox(
-        "Choose conversion",
-        [
+    col1, col2, col3 = st.columns([5, 1, 5])
+    
+    with col1:
+        media_type = st.selectbox(
+            "Media Type",
+            ["Image", "Video", "Audio"],
+            key="media_type"
+        )
+    
+    with col2:
+        st.markdown("<div style='text-align: center; padding-top: 32px;'></div>", unsafe_allow_html=True)
+    
+    with col3:
+        conversion_options = get_media_conversions(media_type)
+        conversion = st.selectbox(
+            "Conversion",
+            conversion_options,
+            key="conversion"
+        )
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Render WIP for all media tools
+    render_wip(conversion, media_type)
+    
+    # Features section
+    st.markdown("""
+        <div class='feature-grid'>
+            <div class='feature-card'>
+                <div class='feature-icon'>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                </div>
+                <h4>Image Processing</h4>
+                <p>Convert between PNG, JPG, WEBP and other formats with quality control</p>
+            </div>
+            <div class='feature-card'>
+                <div class='feature-icon'>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    </svg>
+                </div>
+                <h4>Video Conversion</h4>
+                <p>Transform video formats with custom resolution and compression settings</p>
+            </div>
+            <div class='feature-card'>
+                <div class='feature-icon'>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <h4>Audio Tools</h4>
+                <p>Convert audio files between formats with bitrate optimization</p>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+def get_media_conversions(media_type):
+    """Get conversion options based on media type"""
+    conversions = {
+        "Image": [
             "PNG to JPG",
             "JPG to PNG",
             "WEBP to PNG",
-            "Image Resizer",
-            "MP4 to GIF",
-            "Video Compressor",
-            "MP3 to WAV",
-            "WAV to MP3"
+            "WEBP to JPG",
+            "Image Resize",
+            "Image Compress"
         ],
-        label_visibility="collapsed"
-    )
+        "Video": [
+            "MP4 to GIF",
+            "Video Compress",
+            "AVI to MP4",
+            "MOV to MP4",
+            "Video Resize"
+        ],
+        "Audio": [
+            "MP3 to WAV",
+            "WAV to MP3",
+            "M4A to MP3",
+            "Audio Compress"
+        ]
+    }
+    return conversions.get(media_type, [])
+
+def render_wip(tool_name, media_type):
+    """Render Work In Progress page for media tools"""
     
-    st.markdown("")
+    # Icon based on media type
+    icon_svg = {
+        "Image": """
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+            </svg>
+        """,
+        "Video": """
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <polygon points="23 7 16 12 23 17 23 7"/>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            </svg>
+        """,
+        "Audio": """
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+            </svg>
+        """
+    }
     
-    # WIP Message
-    st.markdown("""
-        <div class='feature-card' style='text-align: center; padding: 60px 40px; margin-top: 40px;'>
-            <h2 style='font-size: 32px; margin-bottom: 16px;'>🚧 Coming Soon</h2>
-            <p style='font-size: 18px; color: #b0b0b0;'>
-                Media conversion tools are currently in development.
-                <br>Check back soon for image, video, and audio conversion features!
-            </p>
+    st.markdown(f"""
+        <div class='wip-container'>
+            <div class='wip-icon'>
+                {icon_svg.get(media_type, '')}
+            </div>
+            <h2>{tool_name}</h2>
+            <h3>Coming Soon</h3>
+            <p>This media conversion tool is currently under development and will be available soon.</p>
         </div>
     """, unsafe_allow_html=True)
     
-    # Planned features
+    # Planned features in expander
     with st.expander("📋 Planned Features"):
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
+        if "Image" in media_type:
             st.markdown("""
-            **Image Tools:**
-            - PNG ↔ JPG conversion
-            - WEBP support
-            - Batch processing
-            - Quality adjustment
-            - Resize & crop
+            - **Batch Conversion**: Process multiple images at once
+            - **Quality Control**: Adjust compression and quality settings
+            - **Format Optimization**: Smart format recommendations
+            - **Resize & Crop**: Custom dimensions and aspect ratios
+            - **Metadata Preservation**: Keep EXIF data when needed
             """)
-        
-        with col2:
+        elif "Video" in media_type:
             st.markdown("""
-            **Video Tools:**
-            - MP4, AVI, MOV support
-            - GIF creation
-            - Compression
-            - Resolution scaling
-            - Format conversion
+            - **Multiple Formats**: Support for MP4, AVI, MOV, MKV, and more
+            - **Quality Selection**: Choose resolution and bitrate
+            - **Compression**: Reduce file size without quality loss
+            - **Trimming**: Cut and trim video segments
+            - **Frame Rate Control**: Adjust FPS for smooth playback
             """)
-        
-        with col3:
+        elif "Audio" in media_type:
             st.markdown("""
-            **Audio Tools:**
-            - MP3, WAV, FLAC support
-            - Bitrate adjustment
-            - Format conversion
-            - Audio extraction
-            - Batch processing
+            - **High-Quality Conversion**: Lossless and lossy formats
+            - **Bitrate Selection**: Control audio quality and file size
+            - **Format Compatibility**: MP3, WAV, FLAC, AAC, and more
+            - **Batch Processing**: Convert multiple files simultaneously
+            - **Metadata Editing**: Edit artist, album, and track info
             """)
