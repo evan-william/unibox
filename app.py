@@ -25,18 +25,20 @@ apply_custom_styles(st.session_state.dark_mode)
 
 # SIDEBAR
 with st.sidebar:
-    st.markdown("<h1 style='text-align: center; margin-bottom: 8px; font-size: 28px;'>UniBox</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; font-size: 13px; margin-top: 0;'>Universal File Converter</p>", unsafe_allow_html=True)
-    st.markdown("---")
+    # Header and Mode Switcher in same row
+    col1, col2 = st.columns([3, 1])
     
-    # Dark Mode Toggle
-    col1, col2, col3 = st.columns([1, 2, 1])
+    with col1:
+        st.markdown("<h1 style='text-align: left; margin-bottom: 8px; font-size: 28px;'>UniBox</h1>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: left; font-size: 13px; margin-top: 0;'>Universal File Converter</p>", unsafe_allow_html=True)
+    
     with col2:
-        if st.button("🌙 Dark Mode" if not st.session_state.dark_mode else "☀️ Light Mode", use_container_width=True):
+        st.markdown("<div style='margin-top: 8px;'></div>", unsafe_allow_html=True)
+        if st.button("🌙" if not st.session_state.dark_mode else "☀️", key="mode_toggle"):
             st.session_state.dark_mode = not st.session_state.dark_mode
             st.rerun()
     
-    st.markdown("")
+    st.markdown("---")
     
     st.markdown("### Categories")
     category = st.selectbox(

@@ -8,8 +8,8 @@ def apply_custom_styles(dark_mode=False):
         # DARK MODE COLORS
         main_bg = "#1a1a1a"
         main_text = "#ffffff"
-        sidebar_bg = "#ffffff"
-        sidebar_text = "#000000"
+        sidebar_bg = "#1a1a1a"
+        sidebar_text = "#ffffff"
         card_bg = "#2a2a2a"
         card_text = "#ffffff"
         border_color = "#404040"
@@ -25,10 +25,10 @@ def apply_custom_styles(dark_mode=False):
         selectbox_bg = "#1a1a1a"
         selectbox_text = "#ffffff"
     else:
-        # LIGHT MODE COLORS (original)
+        # LIGHT MODE COLORS
         main_bg = "#ffffff"
         main_text = "#000000"
-        sidebar_bg = "#1a1a1a"
+        sidebar_bg = "#ffffff"
         sidebar_text = "#000000"
         card_bg = "#f8f8f8"
         card_text = "#000000"
@@ -66,19 +66,19 @@ def apply_custom_styles(dark_mode=False):
             display: none !important;
         }}
         
-        /* SIDEBAR TEXT */
+        /* SIDEBAR TEXT - Base styles */
         [data-testid="stSidebar"] *,
-        [data-testid="stSidebar"] h1,
-        [data-testid="stSidebar"] h2,
-        [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] p,
         [data-testid="stSidebar"] span,
         [data-testid="stSidebar"] label,
-        [data-testid="stSidebar"] div,
-        [data-testid="stSidebarUserContent"] *,
-        [data-testid="stSidebarUserContent"] h1,
-        [data-testid="stSidebarUserContent"] h3,
-        [data-testid="stSidebarUserContent"] p {{
+        [data-testid="stSidebar"] div {{
+            color: {sidebar_text} !important;
+        }}
+        
+        /* SIDEBAR HEADERS */
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3 {{
             color: {sidebar_text} !important;
         }}
         
@@ -98,11 +98,27 @@ def apply_custom_styles(dark_mode=False):
         }}
         
         [data-testid="stSidebar"] [data-baseweb="select"] {{
-            background-color: {'#2a2a2a' if dark_mode else '#2a2a2a'} !important;
+            background-color: #2a2a2a !important;
         }}
         
         [data-testid="stSidebar"] [data-baseweb="select"] * {{
-            color: {'#ffffff' if dark_mode else '#ffffff'} !important;
+            color: #ffffff !important;
+        }}
+        
+        /* SIDEBAR MODE SWITCHER BUTTON */
+        [data-testid="stSidebar"] .stButton > button {{
+            background-color: transparent !important;
+            color: {sidebar_text} !important;
+            border: 1px solid {sidebar_text} !important;
+            font-size: 20px !important;
+            padding: 8px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+            width: 40px !important;
+        }}
+        
+        [data-testid="stSidebar"] .stButton > button:hover {{
+            background-color: {'#2a2a2a' if dark_mode else '#f0f0f0'} !important;
         }}
         
         /* Remove Streamlit branding */
@@ -177,17 +193,6 @@ def apply_custom_styles(dark_mode=False):
             background-color: {download_hover_bg} !important;
             color: {download_hover_text} !important;
         }}
-
-        /* SIDEBAR Buttons */
-        [data-testid="stSidebar"] .stButton > button {{
-            background-color: {'#2a2a2a' if dark_mode else '#2a2a2a'} !important;
-            color: {'#ffffff' if dark_mode else '#ffffff'} !important;
-            border: 1px solid {border_color} !important;
-        }}
-
-        [data-testid="stSidebar"] .stButton > button:hover {{
-            background-color: {'#404040' if dark_mode else '#404040'} !important;
-        }}
         
         /* File Uploader */
         [data-testid="stFileUploader"] {{
@@ -218,6 +223,17 @@ def apply_custom_styles(dark_mode=False):
         [data-testid="stFileUploader"] button {{
             color: {main_text} !important;
             background-color: {card_bg} !important;
+        }}
+        
+        /* Help icon (question mark) */
+        [data-testid="stFileUploader"] svg circle,
+        .main svg circle {{
+            stroke: {main_text} !important;
+        }}
+        
+        [data-testid="stFileUploader"] svg path,
+        .main svg path {{
+            fill: {main_text} !important;
         }}
         
         /* Selectbox in MAIN */
