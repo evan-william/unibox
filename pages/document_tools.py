@@ -2,7 +2,7 @@ import streamlit as st
 from converters.word_to_pdf import convert_word_to_pdf
 from converters.pdf_to_word import convert_pdf_to_word
 from converters.excel_csv import convert_excel_to_csv, convert_csv_to_excel
-from converters.html_markdown_to_pdf import convert_markdown_to_pdf, convert_html_to_pdf
+from converters.html_markdown_to_pdf import convert_markdown_to_pdf, convert_html_to_pdf, convert_url_to_pdf
 
 def render():
     """Render Document Tools page"""
@@ -322,7 +322,7 @@ def render_markdown_to_pdf():
                         )
 
 def render_html_to_pdf():
-    """HTML to PDF conversion interface"""
+    """HTML/URL to PDF conversion interface"""
     
     col1, col2 = st.columns([3, 1])
     
@@ -331,8 +331,8 @@ def render_html_to_pdf():
             <div class='tool-card'>
                 <h3>HTML to PDF</h3>
                 <p>
-                    Convert HTML web pages to PDF documents 
-                    with layout preservation.
+                    Convert HTML files or websites to PDF documents 
+                    with CSS and layout preservation.
                 </p>
             </div>
         """, unsafe_allow_html=True)
@@ -348,34 +348,73 @@ def render_html_to_pdf():
             </div>
         """, unsafe_allow_html=True)
     
-    uploaded_file = st.file_uploader(
-        "Upload HTML File",
-        type=["html", "htm"],
-        help="Supported: .html, .htm"
-    )
+    # Tab for URL or File upload
+    tab1, tab2 = st.tabs(["📄 Upload HTML File", "🌐 Website URL"])
     
-    if uploaded_file:
-        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
-        st.markdown("")
+    with tab1:
+        uploaded_file = st.file_uploader(
+            "Upload HTML File",
+            type=["html", "htm"],
+            help="Supported: .html, .htm",
+            key="html_file"
+        )
         
-        col1, col2, col3 = st.columns([1, 2, 1])
-        
-        with col2:
-            if st.button("Convert to PDF", use_container_width=True):
-                with st.spinner("Converting..."):
-                    pdf_bytes = convert_html_to_pdf(uploaded_file)
-                    
-                    if pdf_bytes:
-                        st.success("Conversion completed")
+        if uploaded_file:
+            st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+            st.markdown("")
+            
+            col1, col2, col3 = st.columns([1, 2, 1])
+            
+            with col2:
+                if st.button("Convert to PDF", use_container_width=True, key="convert_html"):
+                    with st.spinner("Converting..."):
+                        pdf_bytes = convert_html_to_pdf(uploaded_file)
                         
-                        output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
-                        st.download_button(
-                            label="Download PDF",
-                            data=pdf_bytes,
-                            file_name=output_filename,
-                            mime="application/pdf",
-                            use_container_width=True
-                        )
+                        if pdf_bytes:
+                            st.success("Conversion completed")
+                            
+                            output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
+                            st.download_button(
+                                label="Download PDF",
+                                data=pdf_bytes,
+                                file_name=output_filename,
+                                mime="application/pdf",
+                                use_container_width=True
+                            )
+    
+    with tab2:
+        url_input = st.text_input(
+            "Website URL",
+            placeholder="Example: https://ilovepdf.com",
+            help="Enter the website URL to convert to PDF"
+        )
+        
+        if url_input:
+            st.markdown(f"<div class='success-msg'>URL ready: {url_input}</div>", unsafe_allow_html=True)
+            st.markdown("")
+            
+            col1, col2, col3 = st.columns([1, 2, 1])
+            
+            with col2:
+                if st.button("Convert to PDF", use_container_width=True, key="convert_url"):
+                    with st.spinner("Converting website to PDF..."):
+                        pdf_bytes = convert_url_to_pdf(url_input)
+                        
+                        if pdf_bytes:
+                            st.success("Conversion completed")
+                            
+                            # Extract domain name for filename
+                            from urllib.parse import urlparse
+                            domain = urlparse(url_input).netloc or "website"
+                            output_filename = f"{domain}.pdf"
+                            
+                            st.download_button(
+                                label="Download PDF",
+                                data=pdf_bytes,
+                                file_name=output_filename,
+                                mime="application/pdf",
+                                use_container_width=True
+                            )
 
 def render_wip(tool_name):
     """Render Work In Progress page"""

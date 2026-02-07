@@ -2,6 +2,7 @@ import pdfkit
 import markdown2
 import os
 import streamlit as st
+import requests
 from io import BytesIO
 
 def convert_markdown_to_pdf(md_file):
@@ -57,7 +58,6 @@ def convert_markdown_to_pdf(md_file):
             pdfkit.from_file("temp_md.html", "temp_md.pdf")
         except:
             # Fallback for systems without wkhtmltopdf
-            st.error("wkhtmltopdf not installed. Using alternative method...")
             from weasyprint import HTML
             HTML(string=html_with_style).write_pdf("temp_md.pdf")
         
@@ -88,7 +88,7 @@ def convert_markdown_to_pdf(md_file):
 
 def convert_html_to_pdf(html_file):
     """
-    Convert HTML to PDF
+    Convert HTML file to PDF
     """
     try:
         # Read HTML content
@@ -127,6 +127,60 @@ def convert_html_to_pdf(html_file):
                 os.remove("temp.html")
             if os.path.exists("temp.pdf"):
                 os.remove("temp.pdf")
+        except:
+            pass
+        return None
+
+def convert_url_to_pdf(url):
+    """
+    Convert website URL to PDF
+    """
+    try:
+        # Add https:// if not present
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+        
+        # Configure pdfkit options for better rendering
+        options = {
+            'enable-local-file-access': None,
+            'enable-javascript': None,
+            'javascript-delay': 1000,
+            'no-stop-slow-scripts': None,
+            'load-error-handling': 'ignore',
+            'load-media-error-handling': 'ignore',
+            'encoding': 'UTF-8',
+        }
+        
+        # Convert URL to PDF using wkhtmltopdf
+        try:
+            pdfkit.from_url(url, "temp_url.pdf", options=options)
+        except:
+            # Fallback: fetch HTML and use weasyprint
+            st.info("Using alternative rendering method...")
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+            
+            from weasyprint import HTML
+            HTML(string=response.text, base_url=url).write_pdf("temp_url.pdf")
+        
+        # Read PDF
+        with open("temp_url.pdf", "rb") as f:
+            pdf_data = f.read()
+        
+        # Cleanup
+        try:
+            os.remove("temp_url.pdf")
+        except:
+            pass
+        
+        return pdf_data
+        
+    except Exception as e:
+        st.error(f"Conversion failed: {str(e)}")
+        # Cleanup on error
+        try:
+            if os.path.exists("temp_url.pdf"):
+                os.remove("temp_url.pdf")
         except:
             pass
         return None

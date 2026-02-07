@@ -8,3 +8,4 @@ xlrd
 markdown2
 pdfkit
 weasyprint
+requests
