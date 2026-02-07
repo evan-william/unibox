@@ -236,7 +236,13 @@ def apply_custom_styles(dark_mode=False):
         }}
 
         [data-testid="stTooltipIcon"] path {{
-            fill: {main_text} !important;
+            fill: none !important;
+            stroke: {main_text} !important;
+        }}
+
+        [data-testid="stTooltipIcon"] line {{
+            stroke: {main_text} !important;
+            stroke-width: 2 !important;
         }}
 
         /* Tooltip popup - Nuclear option to force white text */
