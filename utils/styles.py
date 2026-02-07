@@ -225,15 +225,29 @@ def apply_custom_styles(dark_mode=False):
             background-color: {card_bg} !important;
         }}
         
-        /* Help icon (question mark) */
-        [data-testid="stFileUploader"] svg circle,
-        .main svg circle {{
-            stroke: {main_text} !important;
+        /* File Uploader SVG Icons - Keep them visible */
+        [data-testid="stFileUploader"] svg {{
+            fill: {main_text} !important;
         }}
         
-        [data-testid="stFileUploader"] svg path,
-        .main svg path {{
+        [data-testid="stFileUploader"] svg path {{
             fill: {main_text} !important;
+        }}
+        
+        /* Tooltip/Help icon - Question mark in circle */
+        .main [data-testid="stTooltipIcon"] svg,
+        [data-testid="stTooltipIcon"] svg {{
+            color: {main_text} !important;
+        }}
+        
+        .main [data-testid="stTooltipIcon"] svg circle {{
+            stroke: {main_text} !important;
+            fill: none !important;
+        }}
+        
+        .main [data-testid="stTooltipIcon"] svg path {{
+            fill: {main_text} !important;
+            stroke: none !important;
         }}
         
         /* Selectbox in MAIN */
