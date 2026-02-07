@@ -140,68 +140,30 @@ def convert_url_to_pdf(url):
         if not url.startswith(('http://', 'https://')):
             url = 'https://' + url
         
-        st.info(f"Fetching content from: {url}")
+        st.info(f"Converting: {url}")
         
-        # Fetch the webpage
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        response = requests.get(url, headers=headers, timeout=30)
-        response.raise_for_status()
+        # Use PDFShift API (free tier available) or similar service
+        # Or use a local headless browser approach
         
-        st.info("Content fetched, converting to PDF...")
+        # For now, try using requests-html which has JS rendering
+        from requests_html import HTMLSession
         
-        # Try weasyprint first (more reliable)
-        try:
-            from weasyprint import HTML, CSS
-            
-            # Create PDF with proper base URL for loading external resources
-            html = HTML(string=response.text, base_url=url)
-            pdf_bytes = html.write_pdf()
-            
-            return pdf_bytes
-            
-        except Exception as e:
-            st.warning(f"WeasyPrint failed: {str(e)}, trying alternative method...")
-            
-            # Fallback to pdfkit
-            try:
-                # Save HTML temporarily
-                with open("temp_url.html", "w", encoding='utf-8') as f:
-                    f.write(response.text)
-                
-                # Configure pdfkit options
-                options = {
-                    'enable-local-file-access': None,
-                    'enable-javascript': None,
-                    'no-stop-slow-scripts': None,
-                    'load-error-handling': 'ignore',
-                    'encoding': 'UTF-8',
-                    'quiet': ''
-                }
-                
-                pdfkit.from_file("temp_url.html", "temp_url.pdf", options=options)
-                
-                # Read PDF
-                with open("temp_url.pdf", "rb") as f:
-                    pdf_data = f.read()
-                
-                # Cleanup
-                try:
-                    os.remove("temp_url.html")
-                    os.remove("temp_url.pdf")
-                except:
-                    pass
-                
-                return pdf_data
-                
-            except Exception as e2:
-                st.error(f"All conversion methods failed: {str(e2)}")
-                return None
+        session = HTMLSession()
+        response = session.get(url)
         
-    except requests.exceptions.RequestException as e:
-        st.error(f"Failed to fetch URL: {str(e)}")
-        return None
+        # Render JavaScript
+        st.info("Rendering JavaScript content...")
+        response.html.render(timeout=20, sleep=2)
+        
+        # Get rendered HTML
+        rendered_html = response.html.html
+        
+        # Convert to PDF
+        from weasyprint import HTML
+        pdf_bytes = HTML(string=rendered_html, base_url=url).write_pdf()
+        
+        return pdf_bytes
+        
     except Exception as e:
         st.error(f"Conversion failed: {str(e)}")
         return None

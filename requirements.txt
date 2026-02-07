@@ -13,3 +13,5 @@ Pillow
 cffi
 cssselect2
 tinycss2
+requests-html
+pyppeteer
