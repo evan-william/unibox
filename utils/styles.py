@@ -246,6 +246,18 @@ def apply_custom_styles(dark_mode=True):
             transition: all 0.2s ease !important;
         }}
         
+        /* Browse files button - fix text color */
+        [data-testid="stFileUploader"] button[kind="secondary"],
+        [data-testid="stBaseButton-secondary"] {{
+            background-color: {button_primary} !important;
+            color: white !important;
+        }}
+        
+        [data-testid="stFileUploader"] button[kind="secondary"] p,
+        [data-testid="stBaseButton-secondary"] p {{
+            color: white !important;
+        }}
+        
         [data-testid="stFileUploader"] button:hover {{
             background-color: {button_primary_hover} !important;
         }}
@@ -333,6 +345,23 @@ def apply_custom_styles(dark_mode=True):
         .main span,
         .main div,
         .main label {{
+            color: {main_text} !important;
+        }}
+        
+        /* Force h2 elements to use correct color */
+        h2,
+        h2 *,
+        h2 span,
+        [id*="document-tools"],
+        [id*="media-tools"],
+        [id*="developer-tools"] {{
+            color: {main_text} !important;
+        }}
+        
+        /* Markdown container paragraphs */
+        [data-testid="stMarkdownContainer"] p,
+        [class*="st-emotion-cache-"] p,
+        .st-emotion-cache-2fgyt4 p {{
             color: {main_text} !important;
         }}
         
