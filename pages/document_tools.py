@@ -8,9 +8,11 @@ def render():
     """Render Document Tools page with modern UI"""
     
     # Page title
-    st.markdown("<h2 style='margin-bottom: 2rem;'>Document Converter</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom: 2rem; text-align: center;'>Document Converter</h2>", unsafe_allow_html=True)
     
     # Conversion selector
+    st.markdown("<div style='max-width: 900px; margin: 0 auto;'>", unsafe_allow_html=True)
+    
     col1, col2, col3 = st.columns([5, 1, 5])
     
     with col1:
@@ -31,6 +33,8 @@ def render():
             to_options,
             key="to_format"
         )
+    
+    st.markdown("</div>", unsafe_allow_html=True)
     
     st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 3rem 0;'>", unsafe_allow_html=True)
     
