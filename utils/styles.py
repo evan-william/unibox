@@ -191,30 +191,41 @@ def apply_custom_styles(dark_mode=False):
             border-radius: 4px;
             padding: 30px;
         }}
-        
+
         [data-testid="stFileUploader"]:hover {{
             border-color: {main_text} !important;
         }}
-        
+
         [data-testid="stFileUploader"] label {{
             color: {main_text} !important;
             font-weight: 500;
         }}
-        
+
         [data-testid="stFileUploader"] section {{
             background-color: {main_bg} !important;
             border: none !important;
         }}
-        
+
         [data-testid="stFileUploader"] section * {{
             color: {main_text} !important;
         }}
-        
+
         [data-testid="stFileUploader"] button {{
             color: {main_text} !important;
             background-color: {card_bg} !important;
+            transition: all 0.2s ease;
         }}
-        
+
+        [data-testid="stFileUploader"] button:hover {{
+            background-color: {button_bg} !important;
+            color: {button_text} !important;
+        }}
+
+        /* File Uploader - Uploaded filename */
+        [data-testid="stFileUploaderFileName"] {{
+            color: {main_text} !important;
+        }}
+
         /* Tooltip/Help icon - Question mark in circle */
         [data-testid="stTooltipIcon"] svg {{
             color: {main_text} !important;
