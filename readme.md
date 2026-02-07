@@ -39,10 +39,10 @@
 |---------|--------|-------------|
 | Word → PDF | ✅ Working | Convert .docx to PDF with formatting preservation |
 | PDF → Word | ✅ Working | Convert PDF to editable .docx documents |
-| Excel → CSV | 🚧 Coming Soon | Export Excel sheets to CSV |
-| CSV → Excel | 🚧 Coming Soon | Import CSV to Excel workbooks |
-| Markdown → PDF | 🚧 Coming Soon | Render Markdown as PDF |
-| HTML → PDF | 🚧 Coming Soon | Convert web pages to PDF |
+| Excel → CSV | ✅ Working | Export Excel sheets to CSV |
+| CSV → Excel | ✅ Working | Import CSV to Excel workbooks |
+| Markdown → PDF | ✅ Working | Render Markdown as PDF |
+| HTML → PDF | ✅ Working | Convert web pages to PDF |
 
 ### 🎨 Media Tools 🚧
 | Feature | Status | Description |
