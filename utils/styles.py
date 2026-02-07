@@ -158,7 +158,8 @@ def apply_custom_styles(dark_mode=False):
         }}
         
         /* Buttons */
-        .stButton > button {{
+        .stButton > button,
+        button[kind="secondary"] {{
             width: 100%;
             border-radius: 4px;
             height: 48px;
@@ -170,30 +171,19 @@ def apply_custom_styles(dark_mode=False):
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
         }}
-        
-        .stButton > button:hover {{
+
+        .stButton > button:hover,
+        button[kind="secondary"]:hover {{
             background-color: {button_hover} !important;
         }}
-        
-        /* Download Button */
-        .stDownloadButton > button {{
-            width: 100%;
-            border-radius: 4px;
-            height: 48px;
-            background-color: {download_bg} !important;
-            color: {download_text} !important;
-            border: 2px solid {download_border} !important;
-            font-weight: 500;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
+
+        /* Secondary button text */
+        button[kind="secondary"] p,
+        button[kind="secondary"] span,
+        button[kind="secondary"] div {{
+            color: {button_text} !important;
         }}
-        
-        .stDownloadButton > button:hover {{
-            background-color: {download_hover_bg} !important;
-            color: {download_hover_text} !important;
-        }}
-        
+                
         /* File Uploader */
         [data-testid="stFileUploader"] {{
             background-color: {main_bg} !important;
