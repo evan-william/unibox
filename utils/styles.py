@@ -225,12 +225,18 @@ def apply_custom_styles(dark_mode=False):
             background-color: {card_bg} !important;
         }}
         
-        /* File Uploader SVG Icons - Keep them visible */
-        [data-testid="stFileUploader"] svg {{
-            fill: {main_text} !important;
+        /* Tooltip/Help icon - Question mark in circle */
+        [data-testid="stTooltipIcon"] svg {{
+            color: {main_text} !important;
+            fill: none !important;
         }}
-        
-        [data-testid="stFileUploader"] svg path {{
+
+        [data-testid="stTooltipIcon"] circle {{
+            stroke: {main_text} !important;
+            fill: none !important;
+        }}
+
+        [data-testid="stTooltipIcon"] path {{
             fill: {main_text} !important;
         }}
         
