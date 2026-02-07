@@ -78,37 +78,46 @@ def apply_custom_styles():
         }
         
         .sidebar-title {
-            font-size: 11px !important;
-            font-weight: 600 !important;
-            color: #888 !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            color: #fff !important;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 1rem !important;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
         }
         
         /* ===== SIDEBAR BUTTONS ===== */
         [data-testid="stSidebar"] .stButton > button {
             background: transparent !important;
-            color: #ccc !important;
-            border: 1px solid transparent !important;
+            color: #aaa !important;
+            border: 1px solid #333 !important;
             border-radius: 4px !important;
-            padding: 10px 14px !important;
+            padding: 12px 16px !important;
             font-size: 14px !important;
-            font-weight: 400 !important;
-            text-align: left !important;
+            font-weight: 500 !important;
+            text-align: center !important;
             transition: all 0.2s ease !important;
-            margin-bottom: 4px !important;
+            margin-bottom: 8px !important;
             width: 100% !important;
         }
         
         [data-testid="stSidebar"] .stButton > button:hover {
             background: #2d2d2d !important;
             color: #fff !important;
+            border-color: #555 !important;
         }
         
         [data-testid="stSidebar"] .stButton > button[kind="primary"] {
-            background: #2d2d2d !important;
+            background: #c9302c !important;
             color: #fff !important;
+            border-color: #c9302c !important;
+        }
+        
+        [data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {
+            background: #ac2925 !important;
+            border-color: #ac2925 !important;
         }
         
         /* ===== SIDEBAR FOOTER ===== */
