@@ -25,9 +25,8 @@ with st.sidebar:
         <div class="sidebar-header">
             <div class="logo-container">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="6" fill="#4A90E2"/>
+                    <rect width="32" height="32" rx="4" fill="#c9302c"/>
                     <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" stroke="white" stroke-width="2" fill="none"/>
-                    <circle cx="16" cy="16" r="3" fill="white"/>
                 </svg>
                 <div class="logo-text">
                     <h1>UniBox</h1>
@@ -41,33 +40,12 @@ with st.sidebar:
     
     st.markdown("<h3 class='sidebar-title'>Categories</h3>", unsafe_allow_html=True)
     
-    # Custom category selector
-    categories = {
-        "Document Tools": """
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-                <polyline points="10 9 9 9 8 9"/>
-            </svg>
-        """,
-        "Media Tools": """
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-            </svg>
-        """,
-        "Developer Tools": """
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-            </svg>
-        """
-    }
-    
     if 'selected_category' not in st.session_state:
         st.session_state.selected_category = "Document Tools"
     
-    for cat_name, icon in categories.items():
+    categories = ["Document Tools", "Media Tools", "Developer Tools"]
+    
+    for cat_name in categories:
         is_active = st.session_state.selected_category == cat_name
         if st.button(
             cat_name,
