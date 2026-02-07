@@ -1,6 +1,8 @@
 import streamlit as st
 from converters.word_to_pdf import convert_word_to_pdf
 from converters.pdf_to_word import convert_pdf_to_word
+from converters.excel_csv import convert_excel_to_csv, convert_csv_to_excel
+from converters.html_markdown_to_pdf import convert_markdown_to_pdf, convert_html_to_pdf
 
 def render():
     """Render Document Tools page"""
@@ -29,8 +31,14 @@ def render():
         render_word_to_pdf()
     elif tool == "PDF to Word":
         render_pdf_to_word()
-    else:
-        render_wip(tool)
+    elif tool == "Excel to CSV":
+        render_excel_to_csv()
+    elif tool == "CSV to Excel":
+        render_csv_to_excel()
+    elif tool == "Markdown to PDF":
+        render_markdown_to_pdf()
+    elif tool == "HTML to PDF":
+        render_html_to_pdf()
 
 def render_word_to_pdf():
     """Word to PDF conversion interface"""
@@ -143,6 +151,229 @@ def render_pdf_to_word():
                             data=docx_bytes,
                             file_name=output_filename,
                             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            use_container_width=True
+                        )
+def render_excel_to_csv():
+    """Excel to CSV conversion interface"""
+    
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        st.markdown("""
+            <div class='tool-card'>
+                <h3>Excel to CSV</h3>
+                <p>
+                    Convert Excel spreadsheets (.xlsx, .xls) to CSV format 
+                    for universal compatibility.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+            <div class='info-box'>
+                <ul>
+                    <li>Simple conversion</li>
+                    <li>Data preserved</li>
+                    <li>Universal format</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    uploaded_file = st.file_uploader(
+        "Upload Excel File",
+        type=["xlsx", "xls"],
+        help="Supported: .xlsx, .xls"
+    )
+    
+    if uploaded_file:
+        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown("")
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        
+        with col2:
+            if st.button("Convert to CSV", use_container_width=True):
+                with st.spinner("Converting..."):
+                    csv_bytes = convert_excel_to_csv(uploaded_file)
+                    
+                    if csv_bytes:
+                        st.success("Conversion completed")
+                        
+                        output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.csv"
+                        st.download_button(
+                            label="Download CSV",
+                            data=csv_bytes,
+                            file_name=output_filename,
+                            mime="text/csv",
+                            use_container_width=True
+                        )
+
+def render_csv_to_excel():
+    """CSV to Excel conversion interface"""
+    
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        st.markdown("""
+            <div class='tool-card'>
+                <h3>CSV to Excel</h3>
+                <p>
+                    Convert CSV files to Excel spreadsheet format 
+                    with proper formatting.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+            <div class='info-box'>
+                <ul>
+                    <li>Excel format</li>
+                    <li>Data preserved</li>
+                    <li>Easy to edit</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    uploaded_file = st.file_uploader(
+        "Upload CSV File",
+        type=["csv"],
+        help="Supported: .csv"
+    )
+    
+    if uploaded_file:
+        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown("")
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        
+        with col2:
+            if st.button("Convert to Excel", use_container_width=True):
+                with st.spinner("Converting..."):
+                    excel_bytes = convert_csv_to_excel(uploaded_file)
+                    
+                    if excel_bytes:
+                        st.success("Conversion completed")
+                        
+                        output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.xlsx"
+                        st.download_button(
+                            label="Download Excel",
+                            data=excel_bytes,
+                            file_name=output_filename,
+                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.document",
+                            use_container_width=True
+                        )
+
+def render_markdown_to_pdf():
+    """Markdown to PDF conversion interface"""
+    
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        st.markdown("""
+            <div class='tool-card'>
+                <h3>Markdown to PDF</h3>
+                <p>
+                    Convert Markdown files to professionally formatted 
+                    PDF documents.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+            <div class='info-box'>
+                <ul>
+                    <li>Styled output</li>
+                    <li>Professional look</li>
+                    <li>Ready to share</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    uploaded_file = st.file_uploader(
+        "Upload Markdown File",
+        type=["md", "markdown"],
+        help="Supported: .md, .markdown"
+    )
+    
+    if uploaded_file:
+        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown("")
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        
+        with col2:
+            if st.button("Convert to PDF", use_container_width=True):
+                with st.spinner("Converting..."):
+                    pdf_bytes = convert_markdown_to_pdf(uploaded_file)
+                    
+                    if pdf_bytes:
+                        st.success("Conversion completed")
+                        
+                        output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
+                        st.download_button(
+                            label="Download PDF",
+                            data=pdf_bytes,
+                            file_name=output_filename,
+                            mime="application/pdf",
+                            use_container_width=True
+                        )
+
+def render_html_to_pdf():
+    """HTML to PDF conversion interface"""
+    
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        st.markdown("""
+            <div class='tool-card'>
+                <h3>HTML to PDF</h3>
+                <p>
+                    Convert HTML web pages to PDF documents 
+                    with layout preservation.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+            <div class='info-box'>
+                <ul>
+                    <li>Layout preserved</li>
+                    <li>CSS supported</li>
+                    <li>Web to PDF</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    uploaded_file = st.file_uploader(
+        "Upload HTML File",
+        type=["html", "htm"],
+        help="Supported: .html, .htm"
+    )
+    
+    if uploaded_file:
+        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown("")
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        
+        with col2:
+            if st.button("Convert to PDF", use_container_width=True):
+                with st.spinner("Converting..."):
+                    pdf_bytes = convert_html_to_pdf(uploaded_file)
+                    
+                    if pdf_bytes:
+                        st.success("Conversion completed")
+                        
+                        output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
+                        st.download_button(
+                            label="Download PDF",
+                            data=pdf_bytes,
+                            file_name=output_filename,
+                            mime="application/pdf",
                             use_container_width=True
                         )
 

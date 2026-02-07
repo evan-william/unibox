@@ -59,7 +59,7 @@ else:
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center; color: #999; font-size: 13px;'>"
-    "UniBox © 2024 - Built by Evan William"
+    "UniBox © 2026 - Built by Evan William"
     "</div>",
     unsafe_allow_html=True
 )

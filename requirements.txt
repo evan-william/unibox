@@ -2,3 +2,9 @@ streamlit
 pdf2docx
 docx2pdf
 python-docx
+pandas
+openpyxl
+xlrd
+markdown2
+pdfkit
+weasyprint
