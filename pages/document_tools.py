@@ -14,6 +14,8 @@ def render():
     col_left, col_center, col_right = st.columns([1, 8, 1])
     
     with col_center:
+        st.markdown("<div style='padding: 0 3rem;'>", unsafe_allow_html=True)
+        
         col1, col2, col3 = st.columns([5, 1, 5])
         
         with col1:
@@ -34,6 +36,8 @@ def render():
                 to_options,
                 key="to_format"
             )
+        
+        st.markdown("</div>", unsafe_allow_html=True)
     
     st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 3rem 0;'>", unsafe_allow_html=True)
     
