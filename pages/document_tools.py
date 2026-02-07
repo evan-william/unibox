@@ -409,7 +409,7 @@ def render_html_to_pdf():
             </div>
         """, unsafe_allow_html=True)
     
-    tab1, tab2 = st.tabs(["📄 Upload HTML File", "🌐 Website URL"])
+    tab1, tab2 = st.tabs(["Upload HTML File", "Website URL"])
     
     with tab1:
         uploaded_file = st.file_uploader(

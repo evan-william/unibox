@@ -121,7 +121,7 @@ def render_wip(tool_name, media_type):
     """, unsafe_allow_html=True)
     
     # Planned features in expander
-    with st.expander("📋 Planned Features"):
+    with st.expander("Planned Features"):
         if "Image" in media_type:
             st.markdown("""
             - **Batch Conversion**: Process multiple images at once

@@ -120,7 +120,7 @@ def render_wip(tool_name, category):
     """, unsafe_allow_html=True)
     
     # Planned features in expander
-    with st.expander("📋 Planned Features"):
+    with st.expander("Planned Features"):
         if "Data Format" in category:
             st.markdown("""
             - **Fast Conversion**: Lightning-fast processing of data files
