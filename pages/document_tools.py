@@ -7,16 +7,8 @@ from converters.html_markdown_to_pdf import convert_markdown_to_pdf, convert_htm
 def render():
     """Render Document Tools page with modern UI"""
     
-    # Hero Section
-    st.markdown("""
-        <div class='hero-section'>
-            <h1>Document Converter</h1>
-            <p>
-                Convert your documents to different formats instantly. 
-                We support Word, PDF, Excel, CSV, Markdown, and HTML with high-quality conversion.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
+    # Page title
+    st.markdown("<h2 style='margin-bottom: 1rem;'>Document Converter</h2>", unsafe_allow_html=True)
     
     # Conversion selector
     st.markdown("<div class='converter-box'>", unsafe_allow_html=True)

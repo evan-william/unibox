@@ -3,16 +3,8 @@ import streamlit as st
 def render():
     """Render Media Tools page with modern UI"""
     
-    # Hero Section
-    st.markdown("""
-        <div class='hero-section'>
-            <h1>Media Converter</h1>
-            <p>
-                Transform your images, videos, and audio files with professional-grade conversion tools.
-                Fast, reliable, and high-quality results every time.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
+    # Page title
+    st.markdown("<h2 style='margin-bottom: 1rem;'>Media Converter</h2>", unsafe_allow_html=True)
     
     # Conversion selector
     st.markdown("<div class='converter-box'>", unsafe_allow_html=True)

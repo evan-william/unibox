@@ -3,16 +3,8 @@ import streamlit as st
 def render():
     """Render Developer Tools page with modern UI"""
     
-    # Hero Section
-    st.markdown("""
-        <div class='hero-section'>
-            <h1>Developer Tools</h1>
-            <p>
-                Professional tools for developers and data analysts. Convert, format, and process 
-                your code and data with precision and speed.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
+    # Page title
+    st.markdown("<h2 style='margin-bottom: 1rem;'>Developer Tools</h2>", unsafe_allow_html=True)
     
     # Tool selector
     st.markdown("<div class='converter-box'>", unsafe_allow_html=True)
