@@ -20,8 +20,8 @@ def apply_custom_styles():
         /* ===== TOP NAVIGATION ===== */
         .top-nav {
             background: #1a1a1a;
-            padding: 1rem 2rem;
-            margin: -3rem -2rem 2rem -2rem;
+            padding: 1.5rem 3rem;
+            margin: 0;
             border-bottom: 1px solid #333;
         }
         
@@ -29,12 +29,21 @@ def apply_custom_styles():
             display: flex;
             align-items: center;
             gap: 12px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .nav-brand span {
             font-size: 24px;
             font-weight: 700;
             color: #fff;
+        }
+        
+        /* Content container */
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
         }
         
         /* Navigation tab buttons */
@@ -74,8 +83,8 @@ def apply_custom_styles():
         }
         
         .block-container {
-            padding: 3rem 2rem 2rem 2rem !important;
-            max-width: 1200px !important;
+            padding: 0 !important;
+            max-width: 100% !important;
         }
         
         /* ===== SIDEBAR ===== */
@@ -494,16 +503,17 @@ def apply_custom_styles():
         
         /* ===== FOOTER ===== */
         .main-footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
+            margin-top: 0;
+            padding: 2rem 3rem;
             border-top: 1px solid #4d4d4d;
+            background: #1a1a1a;
         }
         
         .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             color: #888;
             font-size: 14px;
