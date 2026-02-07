@@ -18,15 +18,21 @@ def apply_custom_styles():
             border-right: 1px solid #e0e0e0;
         }
         
-        /* All sidebar text WHITE */
+        /* All sidebar text WHITE - FIXED */
         [data-testid="stSidebar"] h1,
         [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3,
         [data-testid="stSidebar"] p,
         [data-testid="stSidebar"] span,
         [data-testid="stSidebar"] label,
-        [data-testid="stSidebar"] div {
+        [data-testid="stSidebar"] div,
+        [data-testid="stSidebar"] * {
             color: #ffffff !important;
+        }
+        
+        /* Sidebar markdown paragraphs */
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+            color: #cccccc !important;
         }
         
         /* Sidebar selectbox WHITE TEXT */
@@ -75,6 +81,11 @@ def apply_custom_styles():
             font-weight: 600 !important;
             font-size: 20px !important;
             color: #000000 !important;
+        }
+        
+        /* Main content paragraphs */
+        .main [data-testid="stMarkdownContainer"] p {
+            color: #333333 !important;
         }
         
         /* Buttons */
@@ -274,11 +285,6 @@ def apply_custom_styles():
         
         .streamlit-expanderContent * {
             color: #000000 !important;
-        }
-        
-        /* Markdown in main content */
-        .main [data-testid="stMarkdownContainer"] p {
-            color: #666666 !important;
         }
         </style>
     """, unsafe_allow_html=True)
