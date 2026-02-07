@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- LOGO PLACEHOLDER - Generate logo then replace this -->
-<img src="assets/unibox-logo.png" alt="UniBox Logo" width="600"/>
+<img src="assets/unibox-logo.jpg" alt="UniBox Logo" width="600"/>
 
 # UniBox: Ultra-Fast File Converter
 
@@ -12,7 +12,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[**🎯 Try It Now**](https://unibox.streamlit.app/) • [**📖 Documentation**](#features) • [**💬 Report Bug**](https://github.com/yourusername/unibox/issues)
+[**🎯 Try It Now**](https://unibox.streamlit.app/) • [**📖 Documentation**](#features) • [**💬 Report Bug**](https://github.com/evan-william/unibox/issues)
 
 </div>
 
@@ -173,7 +173,7 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 **Evan William**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@evan-william](https://github.com/evan-william)
 - LinkedIn: [Evan William](https://www.linkedin.com/in/evanwilliam03/)
 
 ---
@@ -190,6 +190,6 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 **⭐ Star this repo if you find it useful!**
 
-Made with ❤️ by Evan William
+Made with Streamlit by Evan William
 
 </div>
