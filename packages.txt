@@ -1,2 +1,4 @@
 libreoffice
 wkhtmltopdf
+chromium
+chromium-driver

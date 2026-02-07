@@ -131,9 +131,86 @@ def convert_html_to_pdf(html_file):
             pass
         return None
 
+import markdown2
+import os
+import streamlit as st
+import requests
+from io import BytesIO
+import base64
+
+def convert_markdown_to_pdf(md_file):
+    """
+    Convert Markdown to PDF
+    """
+    try:
+        # Read markdown content
+        md_content = md_file.read().decode('utf-8')
+        
+        # Convert markdown to HTML
+        html_content = markdown2.markdown(md_content)
+        
+        # Add basic CSS styling
+        html_with_style = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    max-width: 800px;
+                    margin: 40px auto;
+                    padding: 20px;
+                }}
+                h1, h2, h3 {{ color: #333; }}
+                code {{
+                    background-color: #f4f4f4;
+                    padding: 2px 6px;
+                    border-radius: 3px;
+                }}
+                pre {{
+                    background-color: #f4f4f4;
+                    padding: 10px;
+                    border-radius: 5px;
+                }}
+            </style>
+        </head>
+        <body>
+            {html_content}
+        </body>
+        </html>
+        """
+        
+        from weasyprint import HTML
+        pdf_bytes = HTML(string=html_with_style).write_pdf()
+        
+        return pdf_bytes
+        
+    except Exception as e:
+        st.error(f"Conversion failed: {str(e)}")
+        return None
+
+def convert_html_to_pdf(html_file):
+    """
+    Convert HTML file to PDF
+    """
+    try:
+        # Read HTML content
+        html_content = html_file.read().decode('utf-8')
+        
+        from weasyprint import HTML
+        pdf_bytes = HTML(string=html_content).write_pdf()
+        
+        return pdf_bytes
+        
+    except Exception as e:
+        st.error(f"Conversion failed: {str(e)}")
+        return None
+
 def convert_url_to_pdf(url):
     """
-    Convert website URL to PDF using headless browser
+    Convert website URL to PDF using Selenium
     """
     try:
         # Add https:// if not present
@@ -142,47 +219,48 @@ def convert_url_to_pdf(url):
         
         st.info(f"Loading webpage: {url}")
         
-        import asyncio
-        from playwright.async_api import async_playwright
+        from selenium import webdriver
+        from selenium.webdriver.chrome.options import Options
+        from selenium.webdriver.chrome.service import Service
+        from selenium.webdriver.support.ui import WebDriverWait
+        import time
         
-        async def generate_pdf():
-            async with async_playwright() as p:
-                # Launch browser
-                browser = await p.chromium.launch(headless=True)
-                page = await browser.new_page()
-                
-                # Navigate to URL and wait for page to load
-                st.info("Rendering page with JavaScript...")
-                await page.goto(url, wait_until='networkidle', timeout=60000)
-                
-                # Wait for content to render
-                await page.wait_for_timeout(3000)
-                
-                # Generate PDF
-                st.info("Converting to PDF...")
-                pdf_bytes = await page.pdf(
-                    format='A4',
-                    print_background=True,
-                    margin={
-                        'top': '10mm',
-                        'right': '10mm',
-                        'bottom': '10mm',
-                        'left': '10mm'
-                    }
-                )
-                
-                await browser.close()
-                
-                return pdf_bytes
+        # Setup Chrome options
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--window-size=1920,1080')
         
-        # Run async function
-        try:
-            loop = asyncio.get_event_loop()
-        except RuntimeError:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
+        # Initialize driver
+        st.info("Starting browser...")
+        driver = webdriver.Chrome(options=chrome_options)
         
-        pdf_bytes = loop.run_until_complete(generate_pdf())
+        # Load the page
+        st.info("Rendering page with JavaScript...")
+        driver.get(url)
+        
+        # Wait for page to load
+        time.sleep(5)  # Wait for JavaScript to execute
+        
+        # Execute print to PDF
+        st.info("Converting to PDF...")
+        pdf_data = driver.execute_cdp_cmd("Page.printToPDF", {
+            "printBackground": True,
+            "landscape": False,
+            "paperWidth": 8.27,  # A4 width in inches
+            "paperHeight": 11.69,  # A4 height in inches
+            "marginTop": 0.4,
+            "marginBottom": 0.4,
+            "marginLeft": 0.4,
+            "marginRight": 0.4,
+        })
+        
+        driver.quit()
+        
+        # Decode base64 PDF
+        pdf_bytes = base64.b64decode(pdf_data['data'])
         
         return pdf_bytes
             
