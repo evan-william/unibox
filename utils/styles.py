@@ -363,13 +363,8 @@ def apply_custom_styles(dark_mode=True):
         }}
         
         /* LIGHT MODE SPECIFIC TEXT FIXES */
-        .hero-title {{
-            color: {main_text} !important;
-        }}
-
-        .hero-subtitle {{
-            color: {secondary_text} !important;
-        }}
+        .hero-title,
+        .hero-subtitle,
         .feature-card h2,
         .feature-card h3,
         .feature-card p,
@@ -378,10 +373,26 @@ def apply_custom_styles(dark_mode=True):
             color: {main_text} !important;
         }}
         
-        /* File uploader text in light mode */
+        /* FILE UPLOADER - COMPREHENSIVE FIX */
+        [data-testid="stFileUploader"],
+        [data-testid="stFileUploader"] *,
         [data-testid="stFileUploader"] label,
         [data-testid="stFileUploader"] small,
-        [data-testid="stFileUploader"] p {{
+        [data-testid="stFileUploader"] p,
+        [data-testid="stFileUploader"] span,
+        [data-testid="stFileUploader"] div,
+        [data-testid="stFileUploader"] section,
+        [data-testid="stFileUploader"] section *,
+        [data-testid="stFileUploader"] section div,
+        [data-testid="stFileUploader"] section span {{
+            color: {main_text} !important;
+        }}
+        
+        /* FORCE ALL MARKDOWN TO USE CORRECT COLOR */
+        [data-testid="stMarkdownContainer"],
+        [data-testid="stMarkdownContainer"] *,
+        [data-testid="stMarkdown"],
+        [data-testid="stMarkdown] * {{
             color: {main_text} !important;
         }}
         
@@ -596,15 +607,20 @@ def apply_custom_styles(dark_mode=True):
                 padding: 24px !important;
             }}
         }}
-
-        /* NUCLEAR FIX - Override semua white text di light mode */
-        .main [class*="st-"] {{
+        
+        /* NUCLEAR FIX - Force override all Streamlit default text colors */
+        .main [class*="st-"],
+        .main [class*="st-"] *,
+        .main [data-testid*="st"],
+        .main [data-testid*="st"] * {{
             color: {main_text} !important;
         }}
-
-        .main [class*="st-"] * {{
-            color: {main_text} !important;
+        
+        /* Exception: Keep button text white */
+        .stButton > button,
+        .stDownloadButton > button,
+        [data-testid="stFileUploader"] button {{
+            color: white !important;
         }}
-
         </style>
     """, unsafe_allow_html=True)
