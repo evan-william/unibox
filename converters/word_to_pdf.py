@@ -41,7 +41,7 @@ def convert_word_to_pdf(docx_file):
         return pdf_data
 
     except Exception as e:
-        st.error(f"❌ Conversion failed: {str(e)}")
+        st.error(f"Conversion failed: {str(e)}")
         # Cleanup on error
         try:
             os.remove("temp_input.docx")

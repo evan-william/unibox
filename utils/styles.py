@@ -1,146 +1,209 @@
 import streamlit as st
 
 def apply_custom_styles():
-    """Apply custom CSS styles to the Streamlit app"""
+    """Apply professional black and white styling"""
     st.markdown("""
         <style>
         /* Main Container */
         .main {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            background-color: #ffffff;
         }
         
         /* Sidebar Styling */
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #1e3a5f 0%, #2d5580 100%);
+            background-color: #1a1a1a;
+            border-right: 1px solid #e0e0e0;
         }
         
         [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
         [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
         [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2,
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 {
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3,
+        [data-testid="stSidebar"] label {
             color: #ffffff !important;
         }
         
-        /* Remove default Streamlit branding */
+        /* Remove Streamlit branding */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
+        header {visibility: hidden;}
         
         /* Button Styling */
         .stButton > button {
             width: 100%;
-            border-radius: 8px;
-            height: 3em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            border-radius: 4px;
+            height: 48px;
+            background-color: #000000;
+            color: #ffffff;
             border: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
         }
         
         .stButton > button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: #2a2a2a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         /* Download Button */
         .stDownloadButton > button {
             width: 100%;
-            border-radius: 8px;
-            height: 3em;
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            border: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            height: 48px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
         }
         
         .stDownloadButton > button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: #000000;
+            color: #ffffff;
         }
         
         /* File Uploader */
         [data-testid="stFileUploader"] {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        
-        /* Cards/Containers */
-        .tool-card {
-            background: white;
+            background-color: #fafafa;
+            border: 2px dashed #d0d0d0;
+            border-radius: 4px;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
         }
         
-        .tool-card:hover {
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        [data-testid="stFileUploader"]:hover {
+            border-color: #000000;
+        }
+        
+        /* Tool Card */
+        .tool-card {
+            background-color: #fafafa;
+            padding: 32px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+        }
+        
+        .tool-card h3 {
+            color: #000000;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+        
+        .tool-card p {
+            color: #666666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-left: 3px solid #000000;
+            border-radius: 4px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .info-box li {
+            color: #333333;
+            margin: 8px 0;
+            font-size: 14px;
         }
         
         /* WIP Container */
         .wip-container {
             text-align: center;
             padding: 80px 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
             margin: 40px 0;
         }
         
         .wip-container h2 {
-            color: #666;
+            color: #000000;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        
+        .wip-container h3 {
+            color: #666666;
+            font-weight: 400;
+            margin-bottom: 12px;
+            font-size: 18px;
         }
         
         .wip-container p {
-            color: #888;
-            font-size: 1.1em;
-        }
-        
-        /* Info boxes */
-        .stAlert {
-            border-radius: 8px;
+            color: #999999;
+            font-size: 15px;
         }
         
         /* Headers */
         h1 {
-            color: #1e3a5f;
+            color: #000000;
             font-weight: 700;
+            font-size: 32px;
         }
         
-        h2, h3 {
-            color: #2d5580;
+        h2 {
+            color: #000000;
+            font-weight: 600;
+            font-size: 24px;
+        }
+        
+        h3 {
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        /* Divider */
+        hr {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 24px 0;
+        }
+        
+        /* Success Message */
+        .success-msg {
+            background-color: #f0f0f0;
+            color: #000000;
+            padding: 16px;
+            border-left: 3px solid #000000;
+            border-radius: 4px;
+            font-weight: 500;
         }
         
         /* Selectbox */
-        [data-testid="stSelectbox"] {
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 8px;
+        [data-testid="stSelectbox"] > div > div {
+            background-color: #fafafa;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
         }
         
-        /* Success/Error Messages */
-        .stSuccess {
-            background-color: #d4edda;
-            border-left: 4px solid #28a745;
-            border-radius: 8px;
+        /* Text styling */
+        p {
+            color: #333333;
+            font-size: 15px;
+            line-height: 1.6;
         }
         
-        .stError {
-            background-color: #f8d7da;
-            border-left: 4px solid #dc3545;
-            border-radius: 8px;
-        }
-        
-        /* Spinner */
-        .stSpinner > div {
-            border-top-color: #667eea !important;
+        /* Remove colorful alerts */
+        .stSuccess, .stInfo, .stWarning, .stError {
+            background-color: #f5f5f5 !important;
+            color: #000000 !important;
+            border-left: 3px solid #000000 !important;
+            border-radius: 4px !important;
         }
         </style>
     """, unsafe_allow_html=True)

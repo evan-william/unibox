@@ -31,7 +31,7 @@ def convert_pdf_to_word(pdf_file):
         return docx_data
         
     except Exception as e:
-        st.error(f"❌ Conversion failed: {str(e)}")
+        st.error(f"Conversion failed: {str(e)}")
         # Cleanup on error
         try:
             if os.path.exists("temp.pdf"):
