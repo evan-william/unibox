@@ -4,7 +4,7 @@ def render():
     """Render Developer Tools page with modern UI"""
     
     # Page title
-    st.markdown("<h2 style='margin-bottom: 1rem;'>Developer Tools</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom: 2rem;'>Developer Tools</h2>", unsafe_allow_html=True)
     
     # Tool selector
     col1, col2, col3 = st.columns([5, 1, 5])
@@ -27,7 +27,7 @@ def render():
             key="dev_tool"
         )
     
-    st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 2rem 0;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 3rem 0;'>", unsafe_allow_html=True)
     
     # Render WIP for all dev tools
     render_wip(tool, tool_category)

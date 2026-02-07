@@ -43,7 +43,7 @@ def apply_custom_styles():
         .content-wrapper {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem 3rem;
+            padding: 3rem 4rem;
         }
         
         /* Navigation tab buttons */
@@ -204,7 +204,7 @@ def apply_custom_styles():
         
         /* ===== SELECT BOXES ===== */
         .main [data-testid="stSelectbox"] {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .main [data-testid="stSelectbox"] label {
@@ -304,7 +304,7 @@ def apply_custom_styles():
             background: #3d3d3d;
             border-radius: 4px;
             padding: 2.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             border: 1px solid #4d4d4d;
         }
         
@@ -540,6 +540,10 @@ def apply_custom_styles():
         
         .main h1, .main h2, .main h3 {
             color: #ffffff !important;
+        }
+        
+        .main h2 {
+            margin-bottom: 2rem !important;
         }
         
         /* ===== RESPONSIVE ===== */

@@ -56,7 +56,7 @@ with col3:
         st.session_state.selected_category = "Developer Tools"
         st.rerun()
 
-st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='margin-bottom: 3rem;'></div>", unsafe_allow_html=True)
 
 # SIDEBAR (OPTIONAL)
 with st.sidebar:

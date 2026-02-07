@@ -8,7 +8,7 @@ def render():
     """Render Document Tools page with modern UI"""
     
     # Page title
-    st.markdown("<h2 style='margin-bottom: 1rem;'>Document Converter</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom: 2rem;'>Document Converter</h2>", unsafe_allow_html=True)
     
     # Conversion selector
     col1, col2, col3 = st.columns([5, 1, 5])
@@ -32,7 +32,7 @@ def render():
             key="to_format"
         )
     
-    st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 2rem 0;'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border: none; border-top: 1px solid #4d4d4d; margin: 3rem 0;'>", unsafe_allow_html=True)
     
     # Render conversion interface
     conversion_key = f"{from_format}_{to_format}"
@@ -409,7 +409,7 @@ def render_html_to_pdf():
             </div>
         """, unsafe_allow_html=True)
     
-    tab1, tab2 = st.tabs(["Upload HTML File", "Website URL"])
+    tab1, tab2 = st.tabs(["📄 Upload HTML File", "🌐 Website URL"])
     
     with tab1:
         uploaded_file = st.file_uploader(
