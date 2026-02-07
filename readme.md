@@ -12,7 +12,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[**🎯 Try It Now**](https://unibox.streamlit.app/) • [**📖 Documentation**](#features) • [**💬 Report Bug**](https://github.com/evan-william/unibox/issues)
+[**Try It Now**](https://unibox.streamlit.app/) • [**Documentation**](#features) • [**Report Bug**](https://github.com/evan-william/unibox/issues)
 
 </div>
 
@@ -24,17 +24,17 @@
 
 ### ⚡ Key Highlights
 
-- 🔄 **Multiple Formats** - Documents, images, audio, video, and data files
-- 🚀 **Blazing Fast** - Convert files in seconds with optimized processing
-- 🎨 **Clean Interface** - Professional black & white design
-- 🔒 **Privacy First** - All conversions happen locally, no data stored
-- 💻 **Cross-Platform** - Works on Windows, macOS, and Linux
+- **Multiple Formats** - Documents, images, audio, video, and data files
+- **Blazing Fast** - Convert files in seconds with optimized processing
+- **Clean Interface** - Professional black & white design
+- **Privacy First** - All conversions happen locally, no data stored
+- **Cross-Platform** - Works on Windows, macOS, and Linux
 
 ---
 
 ## 🛠️ Features
 
-### 📄 Document Tools ✅
+### Document Tools ✅
 | Feature | Status | Description |
 |---------|--------|-------------|
 | Word → PDF | ✅ Working | Convert .docx to PDF with formatting preservation |
@@ -44,7 +44,7 @@
 | Markdown → PDF | ✅ Working | Render Markdown as PDF |
 | HTML → PDF | ✅ Working | Convert web pages to PDF |
 
-### 🎨 Media Tools 🚧
+### Media Tools 🚧
 | Feature | Status | Description |
 |---------|--------|-------------|
 | PNG ↔ JPG | 🚧 Coming Soon | Convert between image formats |
@@ -54,7 +54,7 @@
 | Video Compressor | 🚧 Coming Soon | Reduce video file sizes |
 | Audio Converter | 🚧 Coming Soon | MP3, WAV, FLAC conversion |
 
-### ⚙️ Developer Tools 🚧
+### Developer Tools 🚧
 | Feature | Status | Description |
 |---------|--------|-------------|
 | JSON ↔ CSV | 🚧 Coming Soon | Bidirectional data conversion |
@@ -79,7 +79,7 @@ No installation required! Just click and start converting files.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/unibox.git
+git clone https://github.com/evan-wiliam/unibox.git
 cd unibox
 
 # Install dependencies

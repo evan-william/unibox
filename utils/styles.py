@@ -1,133 +1,331 @@
 import streamlit as st
 
-def apply_custom_styles(dark_mode=False):
-    """Apply professional styling with dark mode support"""
+def apply_custom_styles(dark_mode=True):
+    """Apply CloudConvert-inspired professional styling"""
     
     # Color scheme based on mode
     if dark_mode:
-        # DARK MODE COLORS
-        main_bg = "#1a1a1a"
+        # DARK MODE COLORS (CloudConvert style)
+        main_bg = "#2b2b2b"
+        header_bg = "#3a3a3a"
         main_text = "#ffffff"
-        sidebar_bg = "#1a1a1a"
-        sidebar_text = "#ffffff"
-        card_bg = "#2a2a2a"
-        card_text = "#ffffff"
-        border_color = "#404040"
-        button_bg = "#ffffff"
-        button_text = "#000000"
-        button_hover = "#cccccc"
-        download_bg = "#1a1a1a"
-        download_text = "#ffffff"
-        download_border = "#ffffff"
-        download_hover_bg = "#ffffff"
-        download_hover_text = "#000000"
-        info_bg = "#2a2a2a"
-        selectbox_bg = "#1a1a1a"
-        selectbox_text = "#ffffff"
+        secondary_text = "#b0b0b0"
+        card_bg = "#3a3a3a"
+        card_hover = "#454545"
+        border_color = "#4a4a4a"
+        button_primary = "#c94448"
+        button_primary_hover = "#d45558"
+        button_secondary = "#4a4a4a"
+        button_secondary_hover = "#555555"
+        input_bg = "#323232"
+        select_bg = "#323232"
     else:
         # LIGHT MODE COLORS
-        main_bg = "#ffffff"
-        main_text = "#000000"
-        sidebar_bg = "#ffffff"
-        sidebar_text = "#000000"
-        card_bg = "#f8f8f8"
-        card_text = "#000000"
+        main_bg = "#f5f5f5"
+        header_bg = "#ffffff"
+        main_text = "#1a1a1a"
+        secondary_text = "#666666"
+        card_bg = "#ffffff"
+        card_hover = "#f8f8f8"
         border_color = "#e0e0e0"
-        button_bg = "#000000"
-        button_text = "#ffffff"
-        button_hover = "#333333"
-        download_bg = "#ffffff"
-        download_text = "#000000"
-        download_border = "#000000"
-        download_hover_bg = "#000000"
-        download_hover_text = "#ffffff"
-        info_bg = "#f5f5f5"
-        selectbox_bg = "#ffffff"
-        selectbox_text = "#000000"
+        button_primary = "#c94448"
+        button_primary_hover = "#d45558"
+        button_secondary = "#e0e0e0"
+        button_secondary_hover = "#d0d0d0"
+        input_bg = "#ffffff"
+        select_bg = "#ffffff"
     
     st.markdown(f"""
         <style>
-        /* MAIN CONTENT */
+        /* RESET & BASE */
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        /* HIDE STREAMLIT ELEMENTS */
+        #MainMenu {{visibility: hidden;}}
+        footer {{visibility: hidden;}}
+        header {{visibility: hidden;}}
+        [data-testid="stSidebar"] {{display: none;}}
+        
+        /* MAIN CONTAINER */
         .main, .block-container, 
         [data-testid="stAppViewContainer"],
         [data-testid="stAppViewContainer"] > section,
         [data-testid="stAppViewContainer"] > section > div {{
             background-color: {main_bg} !important;
+            max-width: 100% !important;
+            padding: 0 !important;
         }}
         
-        /* SIDEBAR */
-        [data-testid="stSidebar"] {{
-            background-color: {sidebar_bg} !important;
-            border-right: 1px solid {border_color};
+        .block-container {{
+            padding: 2rem 4rem !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
         }}
         
-        /* HIDE auto-generated navigation links */
-        [data-testid="stSidebarNav"] {{
-            display: none !important;
+        /* NAVBAR */
+        .navbar-brand {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            color: {main_text};
         }}
         
-        /* SIDEBAR TEXT - Base styles */
-        [data-testid="stSidebar"] *,
-        [data-testid="stSidebar"] p,
-        [data-testid="stSidebar"] span,
-        [data-testid="stSidebar"] label,
-        [data-testid="stSidebar"] div {{
-            color: {sidebar_text} !important;
+        .brand-icon {{
+            font-size: 32px;
         }}
         
-        /* SIDEBAR HEADERS */
-        [data-testid="stSidebar"] h1,
-        [data-testid="stSidebar"] h2,
-        [data-testid="stSidebar"] h3 {{
-            color: {sidebar_text} !important;
+        .brand-text {{
+            font-weight: 300;
+            letter-spacing: -0.5px;
         }}
         
-        /* Sidebar markdown */
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] *,
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3,
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {{
-            color: {sidebar_text} !important;
+        .brand-text strong {{
+            font-weight: 700;
         }}
         
-        /* Sidebar selectbox */
-        [data-testid="stSidebar"] [data-testid="stSelectbox"] *,
-        [data-testid="stSidebar"] [data-testid="stSelectbox"] label,
-        [data-testid="stSidebar"] [data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] p {{
-            color: {sidebar_text} !important;
+        .navbar-divider {{
+            height: 1px;
+            background: {border_color};
+            margin: 1.5rem 0 2rem 0;
         }}
         
-        [data-testid="stSidebar"] [data-baseweb="select"] {{
-            background-color: #2a2a2a !important;
-        }}
-        
-        [data-testid="stSidebar"] [data-baseweb="select"] * {{
-            color: #ffffff !important;
-        }}
-        
-        /* SIDEBAR MODE SWITCHER BUTTON */
-        [data-testid="stSidebar"] .stButton > button {{
+        /* NAVIGATION BUTTONS */
+        [data-testid="column"]:has(.navbar-brand) + [data-testid="column"] button,
+        button[key="nav_doc"],
+        button[key="nav_media"],  
+        button[key="nav_dev"] {{
             background-color: transparent !important;
-            color: {sidebar_text} !important;
-            border: 1px solid {sidebar_text} !important;
-            font-size: 20px !important;
+            color: {secondary_text} !important;
+            border: none !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            padding: 8px 16px !important;
+            transition: all 0.2s ease !important;
+            border-radius: 6px !important;
+        }}
+        
+        [data-testid="column"]:has(.navbar-brand) + [data-testid="column"] button:hover,
+        button[key="nav_doc"]:hover,
+        button[key="nav_media"]:hover,
+        button[key="nav_dev"]:hover {{
+            background-color: {button_secondary} !important;
+            color: {main_text} !important;
+        }}
+        
+        /* MODE TOGGLE */
+        button[key="mode_toggle"] {{
+            background-color: transparent !important;
+            border: 1px solid {border_color} !important;
+            color: {main_text} !important;
+            font-size: 18px !important;
             padding: 8px !important;
-            height: 40px !important;
-            min-width: 40px !important;
-            width: 40px !important;
+            width: 44px !important;
+            height: 44px !important;
+            min-width: 44px !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease !important;
         }}
         
-        [data-testid="stSidebar"] .stButton > button:hover {{
-            background-color: {'#2a2a2a' if dark_mode else '#f0f0f0'} !important;
+        button[key="mode_toggle"]:hover {{
+            background-color: {button_secondary} !important;
         }}
         
-        /* Remove Streamlit branding */
-        #MainMenu {{visibility: hidden;}}
-        footer {{visibility: hidden;}}
-        header {{visibility: hidden;}}
+        /* HERO SECTION */
+        .hero-section {{
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+        }}
         
-        /* MAIN CONTENT TEXT */
-        .main *,
+        .hero-title {{
+            font-size: 48px;
+            font-weight: 700;
+            color: {main_text};
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }}
+        
+        .hero-subtitle {{
+            font-size: 18px;
+            color: {secondary_text};
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }}
+        
+        /* CONVERTER SELECTOR */
+        .converter-box {{
+            background: {card_bg};
+            border: 1px solid {border_color};
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }}
+        
+        .converter-row {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }}
+        
+        .convert-label {{
+            font-size: 16px;
+            color: {secondary_text};
+            font-weight: 500;
+        }}
+        
+        .to-label {{
+            font-size: 16px;
+            color: {secondary_text};
+            font-weight: 500;
+        }}
+        
+        /* FILE UPLOAD AREA */
+        .upload-area {{
+            background: {input_bg};
+            border: 2px dashed {border_color};
+            border-radius: 8px;
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }}
+        
+        .upload-area:hover {{
+            border-color: {button_primary};
+            background: {card_hover};
+        }}
+        
+        [data-testid="stFileUploader"] {{
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }}
+        
+        [data-testid="stFileUploader"] section {{
+            background-color: {input_bg} !important;
+            border: 2px dashed {border_color} !important;
+            border-radius: 8px !important;
+            padding: 60px 40px !important;
+            transition: all 0.3s ease !important;
+        }}
+        
+        [data-testid="stFileUploader"] section:hover {{
+            border-color: {button_primary} !important;
+            background-color: {card_hover} !important;
+        }}
+        
+        [data-testid="stFileUploader"] label {{
+            color: {main_text} !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+        }}
+        
+        [data-testid="stFileUploader"] small {{
+            color: {secondary_text} !important;
+        }}
+        
+        [data-testid="stFileUploader"] button {{
+            background-color: {button_primary} !important;
+            color: white !important;
+            border: none !important;
+            padding: 12px 32px !important;
+            border-radius: 6px !important;
+            font-weight: 500 !important;
+            font-size: 15px !important;
+            transition: all 0.2s ease !important;
+        }}
+        
+        [data-testid="stFileUploader"] button:hover {{
+            background-color: {button_primary_hover} !important;
+        }}
+        
+        /* PRIMARY BUTTON (Convert) */
+        .stButton > button,
+        button[kind="primary"],
+        button[kind="secondary"] {{
+            background-color: {button_primary} !important;
+            color: white !important;
+            border: none !important;
+            padding: 14px 40px !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            transition: all 0.2s ease !important;
+            width: 100% !important;
+            height: auto !important;
+        }}
+        
+        .stButton > button:hover,
+        button[kind="primary"]:hover,
+        button[kind="secondary"]:hover {{
+            background-color: {button_primary_hover} !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(201, 68, 72, 0.3) !important;
+        }}
+        
+        /* SELECTBOX */
+        [data-testid="stSelectbox"] {{
+            margin: 0 !important;
+        }}
+        
+        [data-testid="stSelectbox"] label {{
+            color: {main_text} !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            margin-bottom: 8px !important;
+        }}
+        
+        [data-testid="stSelectbox"] [data-baseweb="select"] {{
+            background-color: {select_bg} !important;
+            border: 1px solid {border_color} !important;
+            border-radius: 6px !important;
+            min-width: 200px !important;
+        }}
+        
+        [data-testid="stSelectbox"] [data-baseweb="select"]:hover {{
+            border-color: {button_primary} !important;
+        }}
+        
+        [data-testid="stSelectbox"] [data-baseweb="select"] > div {{
+            background-color: {select_bg} !important;
+            color: {main_text} !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            padding: 12px 16px !important;
+        }}
+        
+        /* Dropdown menu */
+        [data-baseweb="popover"] {{
+            background-color: {card_bg} !important;
+            border: 1px solid {border_color} !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }}
+        
+        [role="option"] {{
+            background-color: {card_bg} !important;
+            color: {main_text} !important;
+            padding: 12px 16px !important;
+            font-size: 15px !important;
+        }}
+        
+        [role="option"]:hover {{
+            background-color: {card_hover} !important;
+        }}
+        
+        /* TEXT & TYPOGRAPHY */
+        .main *, 
         .main h1,
         .main h2,
         .main h3,
@@ -138,263 +336,234 @@ def apply_custom_styles(dark_mode=False):
             color: {main_text} !important;
         }}
         
-        /* Headers */
         h1 {{
             font-weight: 700 !important;
-            font-size: 32px !important;
-            color: {main_text} !important;
+            font-size: 36px !important;
+            margin-bottom: 16px !important;
         }}
         
         h2 {{
             font-weight: 600 !important;
-            font-size: 24px !important;
-            color: {main_text} !important;
+            font-size: 28px !important;
+            margin-bottom: 12px !important;
         }}
         
         h3 {{
             font-weight: 600 !important;
-            font-size: 20px !important;
-            color: {main_text} !important;
+            font-size: 22px !important;
+            margin-bottom: 10px !important;
         }}
         
-        /* Buttons */
-        .stButton > button,
-        button[kind="secondary"] {{
-            width: 100%;
-            border-radius: 4px;
-            height: 48px;
-            background-color: {button_bg} !important;
-            color: {button_text} !important;
-            border: none;
-            font-weight: 500;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-        }}
-
-        .stButton > button:hover,
-        button[kind="secondary"]:hover {{
-            background-color: {button_hover} !important;
-        }}
-
-        /* Secondary button text */
-        button[kind="secondary"] p,
-        button[kind="secondary"] span,
-        button[kind="secondary"] div {{
-            color: {button_text} !important;
-        }}
-                
-        /* File Uploader */
-        [data-testid="stFileUploader"] {{
-            background-color: {main_bg} !important;
-            border: 2px dashed {border_color} !important;
-            border-radius: 4px;
-            padding: 30px;
-        }}
-
-        [data-testid="stFileUploader"]:hover {{
-            border-color: {main_text} !important;
-        }}
-
-        [data-testid="stFileUploader"] label {{
-            color: {main_text} !important;
-            font-weight: 500;
-        }}
-
-        [data-testid="stFileUploader"] section {{
-            background-color: {main_bg} !important;
-            border: none !important;
-        }}
-
-        [data-testid="stFileUploader"] section * {{
-            color: {main_text} !important;
-        }}
-
-        [data-testid="stFileUploader"] button {{
-            color: {main_text} !important;
-            background-color: {card_bg} !important;
-            transition: all 0.2s ease;
-        }}
-
-        [data-testid="stFileUploader"] button:hover {{
-            background-color: {button_bg} !important;
-            color: {button_text} !important;
-        }}
-
-        /* File Uploader - Uploaded filename */
-        [data-testid="stFileUploaderFileName"] {{
-            color: {main_text} !important;
-        }}
-
-        /* Tooltip/Help icon - Question mark in circle */
-        [data-testid="stTooltipIcon"] svg {{
-            color: {main_text} !important;
-        }}
-
-        [data-testid="stTooltipIcon"] circle {{
-            stroke: {main_text} !important;
-            fill: none !important;
-        }}
-
-        [data-testid="stTooltipIcon"] path {{
-            fill: none !important;
-            stroke: {main_text} !important;
-        }}
-
-        [data-testid="stTooltipIcon"] line {{
-            stroke: {main_text} !important;
-            stroke-width: 2 !important;
-        }}
-
-        /* Tooltip popup - Nuclear option to force white text */
-        div[role="tooltip"],
-        div[role="tooltip"] > div,
-        div[role="tooltip"] span,
-        div[role="tooltip"] p,
-        [data-baseweb="tooltip"],
-        [data-baseweb="tooltip"] *,
-        .st-emotion-cache-ue6h4q,
-        .st-emotion-cache-ue6h4q * {{
-            background-color: #2d3748 !important;
-            color: #ffffff !important;
-        }}
-
-        /* Selectbox in MAIN */
-        .main [data-testid="stSelectbox"] {{
-            background-color: {selectbox_bg} !important;
-        }}
-        
-        .main [data-testid="stSelectbox"] label {{
-            color: {main_text} !important;
-            font-weight: 500;
-        }}
-        
-        .main [data-testid="stSelectbox"] [data-baseweb="select"] {{
-            background-color: {selectbox_bg} !important;
-            border: 1px solid {border_color} !important;
-        }}
-        
-        .main [data-testid="stSelectbox"] [data-baseweb="select"] * {{
-            color: {selectbox_text} !important;
-        }}
-        
-        /* Tool Card */
-        .tool-card {{
-            background-color: {card_bg} !important;
-            padding: 32px;
-            border-radius: 4px;
+        /* CARDS & SECTIONS */
+        .feature-card {{
+            background: {card_bg};
             border: 1px solid {border_color};
-            margin-bottom: 24px;
+            border-radius: 10px;
+            padding: 24px;
+            transition: all 0.3s ease;
         }}
         
-        .tool-card h3 {{
-            color: {card_text} !important;
-            font-weight: 600;
-            margin-bottom: 12px;
-            font-size: 20px;
+        .feature-card:hover {{
+            background: {card_hover};
+            border-color: {button_primary};
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         }}
         
-        .tool-card p {{
-            color: {card_text} !important;
-            font-size: 15px;
-            line-height: 1.6;
-        }}
-        
-        /* Info Box */
-        .info-box {{
-            background-color: {info_bg} !important;
-            padding: 20px;
-            border-left: 3px solid {main_text};
-            border-radius: 4px;
-        }}
-        
-        .info-box ul {{
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }}
-        
-        .info-box li {{
+        .feature-card h3 {{
             color: {main_text} !important;
-            margin: 8px 0;
-            font-size: 14px;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            margin-bottom: 8px !important;
         }}
         
-        /* WIP Container */
-        .wip-container {{
-            text-align: center;
-            padding: 80px 40px;
-            background-color: {card_bg} !important;
-            border: 1px solid {border_color};
-            border-radius: 4px;
-            margin: 40px 0;
+        .feature-card p {{
+            color: {secondary_text} !important;
+            font-size: 14px !important;
+            line-height: 1.5 !important;
         }}
         
-        .wip-container h2 {{
-            color: {main_text} !important;
-            font-weight: 600;
-            margin-bottom: 16px;
-            font-size: 24px;
-        }}
-        
-        .wip-container h3 {{
-            color: {main_text} !important;
-            font-weight: 400;
-            margin-bottom: 12px;
-            font-size: 18px;
-        }}
-        
-        .wip-container p {{
-            color: {main_text} !important;
-            font-size: 15px;
-        }}
-        
-        /* Success Message */
+        /* SUCCESS/INFO MESSAGES */
         .success-msg {{
             background-color: {card_bg} !important;
             color: {main_text} !important;
-            padding: 16px;
-            border-left: 3px solid {main_text};
-            border-radius: 4px;
-            font-weight: 500;
+            border-left: 4px solid #10b981 !important;
+            padding: 16px 20px !important;
+            border-radius: 6px !important;
+            margin: 16px 0 !important;
         }}
         
-        /* Divider */
-        hr {{
-            border: none;
-            border-top: 1px solid {border_color};
-            margin: 24px 0;
-        }}
-        
-        /* Streamlit messages */
-        .stSuccess, .stInfo, .stWarning, .stError {{
+        .info-box {{
             background-color: {card_bg} !important;
-            border-left: 3px solid {main_text} !important;
-        }}
-        
-        .stSuccess *, .stInfo *, .stWarning *, .stError * {{
             color: {main_text} !important;
+            border-left: 4px solid {button_primary} !important;
+            padding: 16px 20px !important;
+            border-radius: 6px !important;
         }}
         
-        /* Expander */
+        /* OPTIONS SECTION */
+        .options-section {{
+            background: {card_bg};
+            border: 1px solid {border_color};
+            border-radius: 10px;
+            padding: 24px;
+            margin: 30px 0;
+        }}
+        
+        .options-title {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: {main_text};
+            margin-bottom: 20px;
+        }}
+        
+        /* FORMAT INFO CARDS */
+        .format-info {{
+            background: {card_bg};
+            border: 1px solid {border_color};
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }}
+        
+        .format-info h4 {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: {main_text} !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            margin-bottom: 8px !important;
+        }}
+        
+        .format-info p {{
+            color: {secondary_text} !important;
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+        }}
+        
+        .format-link {{
+            color: {button_primary} !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }}
+        
+        .format-link:hover {{
+            text-decoration: underline !important;
+        }}
+        
+        /* FOOTER */
+        .footer-space {{
+            height: 80px;
+        }}
+        
+        .footer {{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: {header_bg};
+            border-top: 1px solid {border_color};
+            padding: 20px;
+            text-align: center;
+            color: {secondary_text};
+            font-size: 14px;
+        }}
+        
+        /* LOADING SPINNER */
+        .stSpinner > div {{
+            border-color: {button_primary} !important;
+        }}
+        
+        /* TABS */
+        .stTabs [data-baseweb="tab-list"] {{
+            gap: 8px;
+            background-color: transparent;
+        }}
+        
+        .stTabs [data-baseweb="tab"] {{
+            background-color: {button_secondary} !important;
+            color: {main_text} !important;
+            border-radius: 6px !important;
+            padding: 10px 20px !important;
+            font-weight: 500 !important;
+        }}
+        
+        .stTabs [aria-selected="true"] {{
+            background-color: {button_primary} !important;
+            color: white !important;
+        }}
+        
+        /* EXPANDER */
         .streamlit-expanderHeader {{
             background-color: {card_bg} !important;
             color: {main_text} !important;
+            border: 1px solid {border_color} !important;
+            border-radius: 6px !important;
+            font-weight: 500 !important;
+        }}
+        
+        .streamlit-expanderHeader:hover {{
+            background-color: {card_hover} !important;
         }}
         
         .streamlit-expanderContent {{
-            background-color: {main_bg} !important;
+            background-color: {card_bg} !important;
+            border: 1px solid {border_color} !important;
+            border-top: none !important;
+            border-radius: 0 0 6px 6px !important;
         }}
         
-        .streamlit-expanderContent * {{
+        /* INPUT FIELDS */
+        input, textarea {{
+            background-color: {input_bg} !important;
             color: {main_text} !important;
+            border: 1px solid {border_color} !important;
+            border-radius: 6px !important;
+            padding: 12px 16px !important;
+            font-size: 15px !important;
         }}
         
-        /* Markdown in main content */
-        .main [data-testid="stMarkdownContainer"] p,
-        .main [data-testid="stMarkdown"] p,
-        [data-testid="stMarkdownContainer"] p {{
-            color: {main_text} !important;
+        input:focus, textarea:focus {{
+            border-color: {button_primary} !important;
+            outline: none !important;
+        }}
+        
+        /* DOWNLOAD BUTTON */
+        .stDownloadButton > button {{
+            background-color: {button_primary} !important;
+            color: white !important;
+            border: none !important;
+            padding: 14px 40px !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            transition: all 0.2s ease !important;
+            width: 100% !important;
+        }}
+        
+        .stDownloadButton > button:hover {{
+            background-color: {button_primary_hover} !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(201, 68, 72, 0.3) !important;
+        }}
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {{
+            .block-container {{
+                padding: 1rem 2rem !important;
+            }}
+            
+            .hero-title {{
+                font-size: 32px !important;
+            }}
+            
+            .converter-box {{
+                padding: 24px !important;
+            }}
         }}
         </style>
     """, unsafe_allow_html=True)

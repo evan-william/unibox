@@ -1,72 +1,100 @@
 import streamlit as st
 
 def render():
-    """Render Dev & Data Tools page"""
+    """Render Developer Tools page"""
     
-    st.markdown("## Developer Tools")
-    st.markdown("Professional tools for developers and data analysts")
-    st.markdown("---")
-    
-    # Tool selection
-    tool = st.selectbox(
-        "Select Tool",
-        [
-            "JSON to CSV",
-            "CSV to JSON",
-            "XML to JSON",
-            "YAML to JSON",
-            "Code Formatter",
-            "SQL Formatter",
-            "Base64 Encoder/Decoder",
-            "Hash Generator",
-            "API Tester"
-        ]
-    )
-    
-    st.markdown("")
-    
-    # All tools are WIP for now
-    render_wip(tool)
-
-def render_wip(tool_name):
-    """Render Work In Progress page for dev tools"""
-    
-    st.markdown(f"""
-        <div class='wip-container'>
-            <h2>{tool_name}</h2>
-            <h3>In Development</h3>
-            <p>This developer tool is currently being developed.</p>
+    # Hero Section
+    st.markdown("""
+        <div class='hero-section'>
+            <h1 class='hero-title'>Developer Tools</h1>
+            <p class='hero-subtitle'>
+                Professional tools for developers and data analysts.
+                Convert between data formats, format code, and test APIs.
+            </p>
         </div>
     """, unsafe_allow_html=True)
     
-    # Show planned features
+    # Tool Selection Box
+    st.markdown("<div class='converter-box'>", unsafe_allow_html=True)
+    
+    col1, col2, col3, col4, col5 = st.columns([1, 2, 0.5, 2, 1])
+    
+    with col1:
+        st.markdown("<div class='convert-label'>tool</div>", unsafe_allow_html=True)
+    
+    with col2:
+        tool_category = st.selectbox(
+            "Category",
+            ["Data Converters", "Code Formatters", "Utilities"],
+            label_visibility="collapsed"
+        )
+    
+    with col3:
+        st.markdown("<div class='to-label'>→</div>", unsafe_allow_html=True)
+    
+    with col4:
+        if tool_category == "Data Converters":
+            tool = st.selectbox(
+                "Tool",
+                ["JSON to CSV", "CSV to JSON", "XML to JSON", "YAML to JSON"],
+                label_visibility="collapsed"
+            )
+        elif tool_category == "Code Formatters":
+            tool = st.selectbox(
+                "Tool",
+                ["Code Formatter", "SQL Formatter", "JSON Formatter"],
+                label_visibility="collapsed"
+            )
+        else:
+            tool = st.selectbox(
+                "Tool",
+                ["Base64 Encoder/Decoder", "Hash Generator", "API Tester"],
+                label_visibility="collapsed"
+            )
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # WIP Message
+    st.markdown("""
+        <div class='feature-card' style='text-align: center; padding: 60px 40px; margin-top: 40px;'>
+            <h2 style='font-size: 32px; margin-bottom: 16px;'> Coming Soon</h2>
+            <p style='font-size: 18px; color: #b0b0b0;'>
+                Developer tools are currently in development.
+                <br>Check back soon for powerful data and code conversion utilities!
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Planned features
     with st.expander("Planned Features"):
-        if "JSON" in tool_name or "XML" in tool_name or "YAML" in tool_name or "CSV" in tool_name:
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
             st.markdown("""
-            - Fast conversion
+            **Data Tools:**
+            - JSON ↔ CSV
+            - XML ↔ JSON
+            - YAML ↔ JSON
             - Data validation
-            - Pretty formatting
-            - Error handling
-            - Batch processing
+            - Schema generation
             """)
-        elif "Formatter" in tool_name:
+        
+        with col2:
             st.markdown("""
-            - Multiple language support
-            - Custom formatting rules
+            **Code Tools:**
+            - Multi-language formatting
             - Syntax highlighting
-            - Minify/Beautify options
+            - Minify/Beautify
+            - Code validation
+            - Custom rules
             """)
-        elif "Hash" in tool_name or "Encoder" in tool_name or "Base64" in tool_name:
+        
+        with col3:
             st.markdown("""
-            - Multiple algorithms
-            - Encode/Decode support
-            - File hashing
-            - Secure processing
-            """)
-        elif "API" in tool_name:
-            st.markdown("""
-            - REST API testing
-            - Request builder
-            - Response viewer
-            - Authentication support
+            **Utilities:**
+            - Base64 encode/decode
+            - Hash generation (MD5, SHA)
+            - API testing
+            - URL encoder
+            - Regex tester
             """)

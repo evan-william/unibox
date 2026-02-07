@@ -5,377 +5,301 @@ from converters.excel_csv import convert_excel_to_csv, convert_csv_to_excel
 from converters.html_markdown_to_pdf import convert_markdown_to_pdf, convert_html_to_pdf, convert_url_to_pdf
 
 def render():
-    """Render Document Tools page"""
+    """Render Document Tools page with CloudConvert-style UI"""
     
-    st.markdown("## Document Tools")
-    st.markdown("Professional document format conversion")
-    st.markdown("---")
+    # Hero Section
+    st.markdown("""
+        <div class='hero-section'>
+            <h1 class='hero-title'>Document Converter</h1>
+            <p class='hero-subtitle'>
+                Convert between popular document formats with precision.
+                Support for PDF, Word, Excel, CSV, Markdown and HTML files
+                with advanced conversion technology.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
     
-    # Tool selection
-    tool = st.selectbox(
-        "Select Conversion Type",
-        [
-            "Word to PDF",
-            "PDF to Word",
-            "Excel to CSV",
-            "CSV to Excel",
-            "Markdown to PDF",
-            "HTML to PDF"
-        ]
-    )
+    # Converter Selection Box
+    st.markdown("<div class='converter-box'>", unsafe_allow_html=True)
     
-    st.markdown("")
+    # Format selector row
+    col1, col2, col3, col4, col5 = st.columns([1, 2, 0.5, 2, 1])
     
-    # Render selected tool
-    if tool == "Word to PDF":
+    with col1:
+        st.markdown("<div class='convert-label'>convert</div>", unsafe_allow_html=True)
+    
+    with col2:
+        from_format = st.selectbox(
+            "From Format",
+            ["Word (DOCX)", "PDF", "Excel (XLSX)", "CSV", "Markdown (MD)", "HTML"],
+            label_visibility="collapsed",
+            key="from_format"
+        )
+    
+    with col3:
+        st.markdown("<div class='to-label'>to</div>", unsafe_allow_html=True)
+    
+    with col4:
+        # Dynamic "to" format based on "from" selection
+        to_options = get_conversion_options(from_format)
+        to_format = st.selectbox(
+            "To Format",
+            to_options,
+            label_visibility="collapsed",
+            key="to_format"
+        )
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Render appropriate converter
+    conversion_key = f"{from_format}_{to_format}"
+    
+    if from_format == "Word (DOCX)" and to_format == "PDF":
         render_word_to_pdf()
-    elif tool == "PDF to Word":
+    elif from_format == "PDF" and to_format == "Word (DOCX)":
         render_pdf_to_word()
-    elif tool == "Excel to CSV":
+    elif from_format == "Excel (XLSX)" and to_format == "CSV":
         render_excel_to_csv()
-    elif tool == "CSV to Excel":
+    elif from_format == "CSV" and to_format == "Excel (XLSX)":
         render_csv_to_excel()
-    elif tool == "Markdown to PDF":
+    elif from_format == "Markdown (MD)" and to_format == "PDF":
         render_markdown_to_pdf()
-    elif tool == "HTML to PDF":
+    elif from_format == "HTML" and to_format == "PDF":
         render_html_to_pdf()
+
+def get_conversion_options(from_format):
+    """Get available conversion formats based on source format"""
+    conversions = {
+        "Word (DOCX)": ["PDF"],
+        "PDF": ["Word (DOCX)"],
+        "Excel (XLSX)": ["CSV"],
+        "CSV": ["Excel (XLSX)"],
+        "Markdown (MD)": ["PDF"],
+        "HTML": ["PDF"]
+    }
+    return conversions.get(from_format, ["PDF"])
 
 def render_word_to_pdf():
     """Word to PDF conversion interface"""
     
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("""
-            <div class='tool-card'>
-                <h3>Word to PDF</h3>
-                <p>
-                    Convert Microsoft Word documents (.docx) to PDF format 
-                    with precise formatting preservation.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-            <div class='info-box'>
-                <ul>
-                    <li>Preserves formatting</li>
-                    <li>High quality output</li>
-                    <li>Fast processing</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    # File upload
     uploaded_file = st.file_uploader(
-        "Upload Word Document",
+        "📄 Select Word Document",
         type=["docx"],
-        help="Supported: .docx"
+        help="Upload a .docx file to convert to PDF"
     )
     
     if uploaded_file:
-        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='success-msg'>✓ File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        
+        # Options section
+        with st.expander("⚙️ Conversion Options"):
+            st.info("Word to PDF conversion preserves all formatting, fonts, and layout.")
+        
         st.markdown("")
         
+        # Convert button
         col1, col2, col3 = st.columns([1, 2, 1])
-        
         with col2:
-            if st.button("Convert to PDF", use_container_width=True):
-                with st.spinner("Converting..."):
+            if st.button("🔄 Convert to PDF", use_container_width=True, type="primary"):
+                with st.spinner("Converting document..."):
                     pdf_bytes = convert_word_to_pdf(uploaded_file)
                     
                     if pdf_bytes:
-                        st.success("Conversion completed")
+                        st.success("✓ Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
                         st.download_button(
-                            label="Download PDF",
+                            label="📥 Download PDF",
                             data=pdf_bytes,
                             file_name=output_filename,
                             mime="application/pdf",
                             use_container_width=True
                         )
+    
+    # Format info
+    render_format_info("Word (DOCX)", "PDF")
 
 def render_pdf_to_word():
     """PDF to Word conversion interface"""
     
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("""
-            <div class='tool-card'>
-                <h3>PDF to Word</h3>
-                <p>
-                    Convert PDF files to editable Microsoft Word documents 
-                    while maintaining layout structure.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-            <div class='info-box'>
-                <ul>
-                    <li>Editable output</li>
-                    <li>Layout preserved</li>
-                    <li>Text extraction</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    # File upload
     uploaded_file = st.file_uploader(
-        "Upload PDF File",
+        "📄 Select PDF Document",
         type=["pdf"],
-        help="Supported: .pdf"
+        help="Upload a .pdf file to convert to Word"
     )
     
     if uploaded_file:
-        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='success-msg'>✓ File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        
+        with st.expander("⚙️ Conversion Options"):
+            st.info("PDF to Word conversion extracts text and preserves layout structure.")
+        
         st.markdown("")
         
         col1, col2, col3 = st.columns([1, 2, 1])
-        
         with col2:
-            if st.button("Convert to Word", use_container_width=True):
-                with st.spinner("Processing..."):
+            if st.button("🔄 Convert to Word", use_container_width=True, type="primary"):
+                with st.spinner("Processing document..."):
                     docx_bytes = convert_pdf_to_word(uploaded_file)
                     
                     if docx_bytes:
-                        st.success("Conversion completed")
+                        st.success("✓ Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.docx"
                         st.download_button(
-                            label="Download Word Document",
+                            label="📥 Download Word Document",
                             data=docx_bytes,
                             file_name=output_filename,
                             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                             use_container_width=True
                         )
+    
+    render_format_info("PDF", "Word (DOCX)")
+
 def render_excel_to_csv():
     """Excel to CSV conversion interface"""
     
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("""
-            <div class='tool-card'>
-                <h3>Excel to CSV</h3>
-                <p>
-                    Convert Excel spreadsheets (.xlsx, .xls) to CSV format 
-                    for universal compatibility.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-            <div class='info-box'>
-                <ul>
-                    <li>Simple conversion</li>
-                    <li>Data preserved</li>
-                    <li>Universal format</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-    
     uploaded_file = st.file_uploader(
-        "Upload Excel File",
+        "📊 Select Excel File",
         type=["xlsx", "xls"],
-        help="Supported: .xlsx, .xls"
+        help="Upload an Excel file to convert to CSV"
     )
     
     if uploaded_file:
-        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='success-msg'>✓ File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        
+        with st.expander("⚙️ Conversion Options"):
+            st.info("Excel to CSV conversion extracts data from the first sheet by default.")
+        
         st.markdown("")
         
         col1, col2, col3 = st.columns([1, 2, 1])
-        
         with col2:
-            if st.button("Convert to CSV", use_container_width=True):
-                with st.spinner("Converting..."):
+            if st.button("🔄 Convert to CSV", use_container_width=True, type="primary"):
+                with st.spinner("Converting spreadsheet..."):
                     csv_bytes = convert_excel_to_csv(uploaded_file)
                     
                     if csv_bytes:
-                        st.success("Conversion completed")
+                        st.success("✓ Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.csv"
                         st.download_button(
-                            label="Download CSV",
+                            label="📥 Download CSV",
                             data=csv_bytes,
                             file_name=output_filename,
                             mime="text/csv",
                             use_container_width=True
                         )
+    
+    render_format_info("Excel (XLSX)", "CSV")
 
 def render_csv_to_excel():
     """CSV to Excel conversion interface"""
     
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("""
-            <div class='tool-card'>
-                <h3>CSV to Excel</h3>
-                <p>
-                    Convert CSV files to Excel spreadsheet format 
-                    with proper formatting.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-            <div class='info-box'>
-                <ul>
-                    <li>Excel format</li>
-                    <li>Data preserved</li>
-                    <li>Easy to edit</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-    
     uploaded_file = st.file_uploader(
-        "Upload CSV File",
+        "📊 Select CSV File",
         type=["csv"],
-        help="Supported: .csv"
+        help="Upload a CSV file to convert to Excel"
     )
     
     if uploaded_file:
-        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='success-msg'>✓ File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        
+        with st.expander("⚙️ Conversion Options"):
+            st.info("CSV to Excel conversion creates a formatted spreadsheet with proper data types.")
+        
         st.markdown("")
         
         col1, col2, col3 = st.columns([1, 2, 1])
-        
         with col2:
-            if st.button("Convert to Excel", use_container_width=True):
-                with st.spinner("Converting..."):
+            if st.button("🔄 Convert to Excel", use_container_width=True, type="primary"):
+                with st.spinner("Creating spreadsheet..."):
                     excel_bytes = convert_csv_to_excel(uploaded_file)
                     
                     if excel_bytes:
-                        st.success("Conversion completed")
+                        st.success("✓ Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.xlsx"
                         st.download_button(
-                            label="Download Excel",
+                            label="📥 Download Excel",
                             data=excel_bytes,
                             file_name=output_filename,
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.document",
                             use_container_width=True
                         )
+    
+    render_format_info("CSV", "Excel (XLSX)")
 
 def render_markdown_to_pdf():
     """Markdown to PDF conversion interface"""
     
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("""
-            <div class='tool-card'>
-                <h3>Markdown to PDF</h3>
-                <p>
-                    Convert Markdown files to professionally formatted 
-                    PDF documents.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-            <div class='info-box'>
-                <ul>
-                    <li>Styled output</li>
-                    <li>Professional look</li>
-                    <li>Ready to share</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-    
     uploaded_file = st.file_uploader(
-        "Upload Markdown File",
+        "📝 Select Markdown File",
         type=["md", "markdown"],
-        help="Supported: .md, .markdown"
+        help="Upload a .md file to convert to PDF"
     )
     
     if uploaded_file:
-        st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='success-msg'>✓ File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+        
+        with st.expander("⚙️ Conversion Options"):
+            st.info("Markdown to PDF conversion includes GitHub-style formatting with syntax highlighting.")
+        
         st.markdown("")
         
         col1, col2, col3 = st.columns([1, 2, 1])
-        
         with col2:
-            if st.button("Convert to PDF", use_container_width=True):
-                with st.spinner("Converting..."):
+            if st.button("🔄 Convert to PDF", use_container_width=True, type="primary"):
+                with st.spinner("Rendering markdown..."):
                     pdf_bytes = convert_markdown_to_pdf(uploaded_file)
                     
                     if pdf_bytes:
-                        st.success("Conversion completed")
+                        st.success("✓ Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
                         st.download_button(
-                            label="Download PDF",
+                            label="📥 Download PDF",
                             data=pdf_bytes,
                             file_name=output_filename,
                             mime="application/pdf",
                             use_container_width=True
                         )
+    
+    render_format_info("Markdown (MD)", "PDF")
 
 def render_html_to_pdf():
     """HTML/URL to PDF conversion interface"""
     
-    col1, col2 = st.columns([3, 1])
-    
-    with col1:
-        st.markdown("""
-            <div class='tool-card'>
-                <h3>HTML to PDF</h3>
-                <p>
-                    Convert HTML files or websites to PDF documents 
-                    with CSS and layout preservation.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-            <div class='info-box'>
-                <ul>
-                    <li>Layout preserved</li>
-                    <li>CSS supported</li>
-                    <li>Web to PDF</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    # Tab for URL or File upload
-    tab1, tab2 = st.tabs(["Upload HTML File", "Website URL"])
+    tab1, tab2 = st.tabs(["📄 Upload HTML File", "🌐 Website URL"])
     
     with tab1:
         uploaded_file = st.file_uploader(
-            "Upload HTML File",
+            "Select HTML File",
             type=["html", "htm"],
-            help="Supported: .html, .htm",
+            help="Upload an HTML file to convert to PDF",
             key="html_file"
         )
         
         if uploaded_file:
-            st.markdown(f"<div class='success-msg'>File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='success-msg'>✓ File ready: {uploaded_file.name}</div>", unsafe_allow_html=True)
+            
+            with st.expander("⚙️ Conversion Options"):
+                st.info("HTML to PDF conversion preserves CSS styling and layout.")
+            
             st.markdown("")
             
             col1, col2, col3 = st.columns([1, 2, 1])
-            
             with col2:
-                if st.button("Convert to PDF", use_container_width=True, key="convert_html"):
-                    with st.spinner("Converting..."):
+                if st.button("🔄 Convert to PDF", use_container_width=True, key="convert_html", type="primary"):
+                    with st.spinner("Converting HTML..."):
                         pdf_bytes = convert_html_to_pdf(uploaded_file)
                         
                         if pdf_bytes:
-                            st.success("Conversion completed")
+                            st.success("✓ Conversion completed successfully!")
                             
                             output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
                             st.download_button(
-                                label="Download PDF",
+                                label="📥 Download PDF",
                                 data=pdf_bytes,
                                 file_name=output_filename,
                                 mime="application/pdf",
@@ -384,45 +308,70 @@ def render_html_to_pdf():
     
     with tab2:
         url_input = st.text_input(
-            "Website URL",
-            placeholder="Example: https://ilovepdf.com",
-            help="Enter the website URL to convert to PDF"
+            "🌐 Website URL",
+            placeholder="https://example.com",
+            help="Enter a website URL to convert to PDF"
         )
         
         if url_input:
-            st.markdown(f"<div class='success-msg'>URL ready: {url_input}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='success-msg'>✓ URL ready: {url_input}</div>", unsafe_allow_html=True)
+            
+            with st.expander("⚙️ Conversion Options"):
+                st.info("Website to PDF conversion captures the full page with JavaScript rendering.")
+            
             st.markdown("")
             
             col1, col2, col3 = st.columns([1, 2, 1])
-            
             with col2:
-                if st.button("Convert to PDF", use_container_width=True, key="convert_url"):
-                    with st.spinner("Converting website to PDF..."):
+                if st.button("🔄 Convert to PDF", use_container_width=True, key="convert_url", type="primary"):
+                    with st.spinner("Capturing website..."):
                         pdf_bytes = convert_url_to_pdf(url_input)
                         
                         if pdf_bytes:
-                            st.success("Conversion completed")
+                            st.success("✓ Conversion completed successfully!")
                             
-                            # Extract domain name for filename
                             from urllib.parse import urlparse
                             domain = urlparse(url_input).netloc or "website"
                             output_filename = f"{domain}.pdf"
                             
                             st.download_button(
-                                label="Download PDF",
+                                label="📥 Download PDF",
                                 data=pdf_bytes,
                                 file_name=output_filename,
                                 mime="application/pdf",
                                 use_container_width=True
                             )
-
-def render_wip(tool_name):
-    """Render Work In Progress page"""
     
-    st.markdown(f"""
-        <div class='wip-container'>
-            <h2>{tool_name}</h2>
-            <h3>In Development</h3>
-            <p>This conversion tool is currently being developed.</p>
-        </div>
-    """, unsafe_allow_html=True)
+    render_format_info("HTML", "PDF")
+
+def render_format_info(from_format, to_format):
+    """Render format information cards"""
+    
+    st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2)
+    
+    format_descriptions = {
+        "Word (DOCX)": "Microsoft Word document format with rich formatting, images, and layout control.",
+        "PDF": "Portable Document Format - universal, read-only document format that preserves layout across all devices.",
+        "Excel (XLSX)": "Microsoft Excel spreadsheet format with support for formulas, charts, and multiple sheets.",
+        "CSV": "Comma-Separated Values - simple text format for tabular data, universally compatible.",
+        "Markdown (MD)": "Plain text format with simple syntax for formatting, widely used for documentation.",
+        "HTML": "HyperText Markup Language - standard web page format with styling and scripting."
+    }
+    
+    with col1:
+        st.markdown(f"""
+            <div class='format-info'>
+                <h4>📄 {from_format}</h4>
+                <p>{format_descriptions.get(from_format, "Document format")}</p>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown(f"""
+            <div class='format-info'>
+                <h4>📄 {to_format}</h4>
+                <p>{format_descriptions.get(to_format, "Document format")}</p>
+            </div>
+        """, unsafe_allow_html=True)
