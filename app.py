@@ -34,9 +34,15 @@ with st.sidebar:
     
     with col2:
         st.markdown("<div style='margin-top: 8px;'></div>", unsafe_allow_html=True)
-        if st.button("🌙" if not st.session_state.dark_mode else "☀️", key="mode_toggle"):
+        # Use on_click to preserve state
+        def toggle_mode():
             st.session_state.dark_mode = not st.session_state.dark_mode
-            st.rerun()
+        
+        st.button(
+            "🌙" if not st.session_state.dark_mode else "☀️", 
+            key="mode_toggle",
+            on_click=toggle_mode
+        )
     
     st.markdown("---")
     
@@ -59,7 +65,7 @@ else:
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center; color: #999; font-size: 13px;'>"
-    "UniBox © 2026 - Built by Evan William"
+    "UniBox © 2024 - Built by Evan William"
     "</div>",
     unsafe_allow_html=True
 )

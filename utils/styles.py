@@ -226,6 +226,16 @@ def apply_custom_styles(dark_mode=False):
             color: {main_text} !important;
         }}
 
+        /* File Uploader - File icon */
+        [data-testid="stFileUploader"] svg {{
+            color: {main_text} !important;
+            fill: {main_text} !important;
+        }}
+
+        [data-testid="stFileUploader"] svg path {{
+            fill: {main_text} !important;
+        }}
+
         /* Tooltip/Help icon - Question mark in circle */
         [data-testid="stTooltipIcon"] svg {{
             color: {main_text} !important;
