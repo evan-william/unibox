@@ -1,11 +1,10 @@
 import streamlit as st
 from pdf2docx import Converter
-from docx import Document
-from fpdf import FPDF
-import io
+import os
+import subprocess
 
 # HALAMAN CONFIGURE
-st.set_page_config(page_title="Universal Converter", page_icon="🔄", layout="wide")
+st.set_page_config(page_title="UniBox", page_icon="🔄", layout="wide")
 
 # --- STYLE CSS ---
 st.markdown("""
@@ -35,16 +34,23 @@ else:
 # --- LOGIC HANDLING ---
 
 def word_to_pdf(docx_file):
-    doc = Document(docx_file)
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    for para in doc.paragraphs:
-        pdf.multi_cell(0, 10, txt=para.text)
+    # Simpan file DOCX sementara
+    with open("temp_input.docx", "wb") as f:
+        f.write(docx_file.getbuffer())
     
-    # SAVE TO BUFFER, bisa didownlaod dari ram
-    pdf_output = pdf.output(dest='S').encode('latin-1')
-    return pdf_output
+    # Menggunakan LibreOffice untuk konversi (mendukung tabel, gambar, layout)
+    # Ini cara standar industri untuk konversi di server Linux
+    try:
+        subprocess.run([
+            'lowriter', '--headless', '--convert-to', 'pdf', 'temp_input.docx'
+        ], check=True)
+        
+        with open("temp_input.pdf", "rb") as f:
+            pdf_data = f.read()
+        return pdf_data
+    except Exception as e:
+        st.error(f"Error Konversi: {e}")
+        return None
 
 def pdf_to_word(pdf_file):
     # SAVE PDF KE DISK
@@ -69,7 +75,7 @@ if "WIP" in tool:
             <h2>🚧 Work In Progress</h2>
             <p>Fitur ini sedang dalam tahap pengembangan oleh Evan William.</p>
         </div>
-    """, unsafe_content_type=True)
+    """, unsafe_allow_html=True)
 
 elif tool == "Word to PDF":
     st.write("Convert your .docx files to PDF format instantly.")
@@ -77,15 +83,16 @@ elif tool == "Word to PDF":
     
     if uploaded_file:
         if st.button("Convert Now"):
-            with st.spinner("Converting..."):
+            with st.spinner("Converting with High Precision..."):
                 pdf_bytes = word_to_pdf(uploaded_file)
-                st.success("Conversion Successful!")
-                st.download_button(
-                    label="📥 Download PDF",
-                    data=pdf_bytes,
-                    file_name=f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf",
-                    mime="application/pdf"
-                )
+                if pdf_bytes:
+                    st.success("Conversion Successful!")
+                    st.download_button(
+                        label="📥 Download PDF",
+                        data=pdf_bytes,
+                        file_name=f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf",
+                        mime="application/pdf"
+                    )
 
 elif tool == "PDF to Word":
     st.write("Convert your PDF files back to editable Word documents.")
