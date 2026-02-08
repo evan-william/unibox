@@ -172,6 +172,7 @@ def apply_custom_styles():
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            text-align: center;  /* ADD THIS LINE */
         }
         
         .converter-selector {
