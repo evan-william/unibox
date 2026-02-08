@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 def render():
     """Render Media Tools page with modern professional UI"""
@@ -142,7 +141,7 @@ def get_media_conversions(media_type):
 def render_wip(tool_name, media_type):
     """Render Work In Progress page for media tools"""
     
-    # Icon mapping
+    # Icon mapping - ALL ON ONE LINE
     icon_map = {
         "Image": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
         "Video": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
@@ -151,19 +150,10 @@ def render_wip(tool_name, media_type):
     
     icon = icon_map.get(media_type, "")
     
-    wip_html = f"""
-        <div class='wip-container'>
-            <div class='wip-icon'>
-                {icon}
-            </div>
-            <h2>{tool_name}</h2>
-            <h3>Coming Soon</h3>
-            <p>This media conversion tool is currently under development and will be available soon. 
-            We're working hard to bring you the best media conversion experience.</p>
-        </div>
-    """
+    # Build HTML string with proper escaping - ALL ON ONE LINE
+    wip_html = f"<div class='wip-container'><div class='wip-icon'>{icon}</div><h2>{tool_name}</h2><h3>Coming Soon</h3><p>This media conversion tool is currently under development and will be available soon. We're working hard to bring you the best media conversion experience.</p></div>"
     
-    components.html(wip_html, height=400)
+    st.markdown(wip_html, unsafe_allow_html=True)
     
     # Planned features in expander
     with st.expander("Planned Features", expanded=False):

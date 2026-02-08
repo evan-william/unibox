@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 def render():
     """Render Developer Tools page with modern professional UI"""
@@ -140,7 +139,7 @@ def get_dev_tools(category):
 def render_wip(tool_name, category):
     """Render Work In Progress page for dev tools"""
     
-    # Icon mapping with SVG icons
+    # Icon mapping with SVG icons - ALL ON ONE LINE
     icon_map = {
         "Data Format": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>',
         "Code Tools": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
@@ -149,19 +148,10 @@ def render_wip(tool_name, category):
     
     icon = icon_map.get(category, "")
     
-    wip_html = f"""
-        <div class='wip-container'>
-            <div class='wip-icon'>
-                {icon}
-            </div>
-            <h2>{tool_name}</h2>
-            <h3>Coming Soon</h3>
-            <p>This developer tool is currently under development and will be available soon. 
-            We're building powerful features to enhance your development workflow.</p>
-        </div>
-    """
+    # Build HTML string with proper escaping
+    wip_html = f"<div class='wip-container'><div class='wip-icon'>{icon}</div><h2>{tool_name}</h2><h3>Coming Soon</h3><p>This developer tool is currently under development and will be available soon. We're building powerful features to enhance your development workflow.</p></div>"
     
-    components.html(wip_html, height=400)
+    st.markdown(wip_html, unsafe_allow_html=True)
     
     # Planned features in expander
     with st.expander("Planned Features", expanded=False):
