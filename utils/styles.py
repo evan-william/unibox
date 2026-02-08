@@ -147,6 +147,13 @@ def apply_custom_styles():
             background: radial-gradient(circle at 50% 50%, rgba(255, 71, 87, 0.05) 0%, transparent 70%);
             pointer-events: none;
         }
+                
+        /* ADD THIS - Force center ALL paragraphs in hero */
+        .hero-section p {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
         
         /* FIX STREAMLIT MARKDOWN CONTAINERS IN HERO */
         .hero-section [data-testid="stMarkdownContainer"] {
