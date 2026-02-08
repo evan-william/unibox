@@ -58,7 +58,7 @@ st.markdown("""
     <div class='hero-section'>
         <div class='hero-content'>
             <h1 class='hero-title'>File Converter</h1>
-            <p class='hero-subtitle'>
+            <p class='hero-subtitle' style='text-align: center;'>
                 UniBox is an online file converter. We support nearly all audio, video,
                 document, ebook, archive, image, spreadsheet, and presentation formats.
                 To get started, use the button below and select files to convert from your computer.
