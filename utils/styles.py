@@ -188,6 +188,7 @@ def apply_custom_styles():
             margin-bottom: 1.5rem;
             line-height: 1.2;
             letter-spacing: -1px;
+            text-align: center !important;
         }
         
         .hero-subtitle {
