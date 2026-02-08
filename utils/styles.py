@@ -212,6 +212,26 @@ def apply_custom_styles():
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         
+        /* Force center the heading container that Streamlit creates */
+        .hero-section [data-testid="stHeadingWithActionElements"] {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
+        }
+
+        .hero-section [data-testid="stHeadingWithActionElements"] h1 {
+            text-align: center !important;
+            display: inline-block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Hide the annoying link icon */
+        .hero-section [data-testid="stHeaderActionElements"] {
+            display: none !important;
+        }
+                        
         .selector-row {
             display: flex;
             align-items: center;
