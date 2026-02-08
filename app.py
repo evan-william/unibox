@@ -63,62 +63,22 @@ st.markdown("""
                 document, ebook, archive, image, spreadsheet, and presentation formats.
                 To get started, use the button below and select files to convert from your computer.
             </p>
+            <div class='converter-selector'>
+                <div class='selector-row'>
+                    <div style='flex: 1;'>
+                        <div class='selector-label'>Convert From</div>
+                        <div id='from-select-placeholder'></div>
+                    </div>
+                    <div class='arrow-icon'>→</div>
+                    <div style='flex: 1;'>
+                        <div class='selector-label'>Convert To</div>
+                        <div id='to-select-placeholder'></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 """, unsafe_allow_html=True)
-
-# CONVERTER SELECTOR (Moved outside hero for better layout)
-st.markdown("<div class='content-wrapper' style='padding-top: 0; margin-top: -2rem;'>", unsafe_allow_html=True)
-
-col_left, col_center, col_right = st.columns([1, 8, 1])
-
-with col_center:
-    st.markdown("""
-        <div class='converter-selector-main'>
-            <div class='selector-grid'>
-    """, unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns([5, 1, 5])
-    
-    with col1:
-        st.markdown("<div class='selector-label'>CONVERT FROM</div>", unsafe_allow_html=True)
-        from_format_hero = st.selectbox(
-            "From format",
-            ["Word (DOCX)", "PDF", "Excel (XLSX)", "CSV", "Markdown (MD)", "HTML", "Image", "Video", "Audio"],
-            key="from_format_hero",
-            label_visibility="collapsed"
-        )
-    
-    with col2:
-        st.markdown("<div class='arrow-divider'>→</div>", unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("<div class='selector-label'>CONVERT TO</div>", unsafe_allow_html=True)
-        to_format_hero = st.selectbox(
-            "To format",
-            ["PDF", "Word (DOCX)", "CSV", "Excel (XLSX)", "Image", "Video"],
-            key="to_format_hero",
-            label_visibility="collapsed"
-        )
-    
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Select Files Button
-    st.markdown("<div style='margin-top: 2rem; text-align: center;'>", unsafe_allow_html=True)
-    col_btn1, col_btn2, col_btn3 = st.columns([3, 4, 3])
-    with col_btn2:
-        st.markdown("""
-            <button class='select-file-button'>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="margin-right: 8px;">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                </svg>
-                Select Files
-            </button>
-        """, unsafe_allow_html=True)
-    st.markdown("</div></div>", unsafe_allow_html=True)
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 # SIDEBAR
 with st.sidebar:
