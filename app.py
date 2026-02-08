@@ -19,6 +19,20 @@ st.set_page_config(
 # APPLY CUSTOM STYLES
 apply_custom_styles()
 
+st.markdown("""
+    <style>
+        /* Force the sidebar toggle button to be visible and on top of custom nav */
+        [data-testid="stSidebarCollapseButton"] {
+            z-index: 9999 !important;
+            left: 10px !important;
+            top: 10px !important;
+            background-color: white !important; /* Makes it pop against dark navs */
+            border-radius: 50% !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Initialize session state for category
 if 'selected_category' not in st.session_state:
     st.session_state.selected_category = "Document Tools"
