@@ -126,6 +126,11 @@ def apply_custom_styles():
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
         }
+                
+        /* Force center alignment for Streamlit markdown in hero */
+        [data-testid="stMarkdownContainer"] p {
+            text-align: inherit !important;
+        }
         
         /* ===== HERO SECTION ===== */
         .hero-section {
