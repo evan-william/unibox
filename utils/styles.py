@@ -180,6 +180,22 @@ def apply_custom_styles():
             position: relative;
             z-index: 1;
         }
+                
+        /* Force everything in hero to center */
+        .hero-section,
+        .hero-section > div,
+        .hero-section .hero-content,
+        .hero-section [data-testid="stMarkdownContainer"] {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            max-width: 900px !important;
+        }
+
+        .hero-section {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
         
         .hero-title {
             font-size: 52px;
