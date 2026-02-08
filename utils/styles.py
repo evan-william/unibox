@@ -136,7 +136,19 @@ def apply_custom_styles():
             position: relative;
             overflow: hidden;
         }
-        
+                
+        .hero-section * {
+            text-align: center !important;
+        }
+
+        .hero-section [data-testid="stMarkdownContainer"] {
+            text-align: center !important;
+        }
+
+        .hero-section [data-testid="stMarkdownContainer"] * {
+            text-align: center !important;
+        }
+                
         .hero-section::before {
             content: '';
             position: absolute;
