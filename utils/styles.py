@@ -148,6 +148,13 @@ def apply_custom_styles():
             pointer-events: none;
         }
                 
+        /* ADD THESE - Force center ALL headings and paragraphs in hero */
+        .hero-section h1,
+        .hero-section h2,
+        .hero-section h3 {
+            text-align: center !important;
+        }
+   
         /* ADD THIS - Force center ALL paragraphs in hero */
         .hero-section p {
             text-align: center !important;
