@@ -62,25 +62,6 @@ st.markdown("""
                 Convert your files between 200+ formats with ease. Fast, secure, and completely free. 
                 Support for documents, images, videos, audio, and more.
             </p>
-            
-            <div class='conversion-selector'>
-                <div class='selector-label'>Select your conversion:</div>
-                <div class='selector-boxes'>
-                    <div class='format-box'>
-                        <span class='format-label'>from</span>
-                        <div class='format-value' id='from-format'>Choose format...</div>
-                    </div>
-                    <div class='arrow-box'>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9302c" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </div>
-                    <div class='format-box'>
-                        <span class='format-label'>to</span>
-                        <div class='format-value' id='to-format'>Choose format...</div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -89,7 +70,7 @@ st.markdown("""
 st.markdown("<div class='content-container'>", unsafe_allow_html=True)
 
 # Modern tab navigation
-st.markdown("<div class='category-tabs'>", unsafe_allow_html=True)
+st.markdown("<div style='margin: 2rem 0;'></div>", unsafe_allow_html=True)
 
 col1, col2, col3, col4, col5 = st.columns([1, 2, 2, 2, 1])
 
@@ -113,8 +94,6 @@ with col4:
                  key="tab_dev"):
         st.session_state.selected_category = "Developer Tools"
         st.rerun()
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<div style='margin: 3rem 0;'></div>", unsafe_allow_html=True)
 
@@ -275,8 +254,8 @@ st.markdown("""
             </div>
             
             <div class='footer-bottom'>
-                <p>© 2026 UniBox. Built with ❤️ by Evan William</p>
-                <p class='footer-location'>Made in Surabaya, Indonesia 🇮🇩</p>
+                <p>&copy; 2026 UniBox. Built by Evan William</p>
+                <p class='footer-location'>Made in Surabaya, Indonesia</p>
             </div>
         </div>
     </div>
@@ -288,10 +267,10 @@ with st.sidebar:
         <div class="sidebar-header">
             <div class="logo-container">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="6" fill="url(#gradient)"/>
+                    <rect width="32" height="32" rx="6" fill="url(#gradient2)"/>
                     <path d="M16 8L22 12V20L16 24L10 20V12L16 8Z" stroke="white" stroke-width="2.5" fill="none"/>
                     <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                        <linearGradient id="gradient2" x1="0" y1="0" x2="32" y2="32">
                             <stop offset="0%" stop-color="#c9302c"/>
                             <stop offset="100%" stop-color="#a02622"/>
                         </linearGradient>
