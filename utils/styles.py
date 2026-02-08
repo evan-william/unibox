@@ -126,11 +126,6 @@ def apply_custom_styles():
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
         }
-                
-        /* Force center alignment for Streamlit markdown in hero */
-        [data-testid="stMarkdownContainer"] p {
-            text-align: inherit !important;
-        }
         
         /* ===== HERO SECTION ===== */
         .hero-section {
@@ -141,19 +136,7 @@ def apply_custom_styles():
             position: relative;
             overflow: hidden;
         }
-                
-        .hero-section * {
-            text-align: center !important;
-        }
-
-        .hero-section [data-testid="stMarkdownContainer"] {
-            text-align: center !important;
-        }
-
-        .hero-section [data-testid="stMarkdownContainer"] * {
-            text-align: center !important;
-        }
-                
+        
         .hero-section::before {
             content: '';
             position: absolute;
@@ -163,6 +146,18 @@ def apply_custom_styles():
             bottom: 0;
             background: radial-gradient(circle at 50% 50%, rgba(255, 71, 87, 0.05) 0%, transparent 70%);
             pointer-events: none;
+        }
+        
+        /* FIX STREAMLIT MARKDOWN CONTAINERS IN HERO */
+        .hero-section [data-testid="stMarkdownContainer"] {
+            max-width: 900px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            text-align: center !important;
+        }
+
+        .hero-section [data-testid="stMarkdownContainer"] * {
+            text-align: center !important;
         }
         
         .hero-content {
@@ -189,7 +184,7 @@ def apply_custom_styles():
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            text-align: center;  /* ADD THIS LINE */
+            text-align: center;
         }
         
         .converter-selector {
@@ -229,6 +224,13 @@ def apply_custom_styles():
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 4rem 4rem 4rem;
+        }
+        
+        /* Fix for page description text */
+        .content-wrapper [data-testid="stMarkdownContainer"] p {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
         
         /* ===== CATEGORY TABS ===== */
