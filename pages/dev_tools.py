@@ -1,102 +1,49 @@
 import streamlit as st
 
 def render():
-    """Render Media Tools page with modern professional UI"""
+    """Render Developer Tools page with modern professional UI"""
     
     # Page header
-    st.markdown("<h2 style='margin-bottom: 1rem; text-align: center; font-size: 42px; font-weight: 800;'>Media Converter</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #888; font-size: 17px; margin-bottom: 3rem;'>Transform your media files between formats with professional quality</p>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom: 1rem; text-align: center; font-size: 42px; font-weight: 800;'>Developer Tools</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #888; font-size: 17px; margin-bottom: 3rem;'>Professional tools for developers to format, convert, and validate code</p>", unsafe_allow_html=True)
     
-    # Conversion selector
+    # Tool selector
     col_left, col_center, col_right = st.columns([1, 10, 1])
     
     with col_center:
         col1, col2, col3 = st.columns([5, 1, 5])
         
         with col1:
-            media_type = st.selectbox(
-                "Media Type",
-                ["Image", "Video", "Audio"],
-                key="media_type"
+            tool_category = st.selectbox(
+                "Tool Category",
+                ["Data Format", "Code Tools", "Utilities"],
+                key="tool_category"
             )
         
         with col2:
             st.markdown("<div style='text-align: center; padding-top: 32px; font-size: 28px; color: #ff4757; font-weight: bold;'>→</div>", unsafe_allow_html=True)
         
         with col3:
-            conversion_options = get_media_conversions(media_type)
-            conversion = st.selectbox(
-                "Conversion",
-                conversion_options,
-                key="conversion"
+            tools = get_dev_tools(tool_category)
+            tool = st.selectbox(
+                "Select Tool",
+                tools,
+                key="dev_tool"
             )
     
     st.markdown("<div style='margin: 3rem 0;'></div>", unsafe_allow_html=True)
     
-    # Render WIP for all media tools
-    render_wip(conversion, media_type)
+    # Render WIP for all dev tools
+    render_wip(tool, tool_category)
     
     # Features section
     st.markdown("""
         <div class='features-section'>
             <div class='features-header'>
-                <h2>Powerful Media Conversion</h2>
-                <p>Professional-grade tools for all your media conversion needs</p>
+                <h2>Essential Developer Tools</h2>
+                <p>Streamline your development workflow with powerful utilities</p>
             </div>
             <div class='feature-grid'>
-                <div class='feature-card'>
-                    <div class='feature-icon'>
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                            <circle cx="8.5" cy="8.5" r="1.5"/>
-                            <polyline points="21 15 16 10 5 21"/>
-                        </svg>
-                    </div>
-                    <h4>Image Processing</h4>
-                    <p>Convert between PNG, JPG, WEBP and other formats with quality control and batch processing</p>
-                </div>
-                <div class='feature-card'>
-                    <div class='feature-icon'>
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                            <polygon points="23 7 16 12 23 17 23 7"/>
-                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-                        </svg>
-                    </div>
-                    <h4>Video Conversion</h4>
-                    <p>Transform video formats with custom resolution, compression, and quality settings</p>
-                </div>
-                <div class='feature-card'>
-                    <div class='feature-icon'>
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                            <path d="M9 18V5l12-2v13"/>
-                            <circle cx="6" cy="18" r="3"/>
-                            <circle cx="18" cy="16" r="3"/>
-                        </svg>
-                    </div>
-                    <h4>Audio Tools</h4>
-                    <p>Convert audio files between formats with bitrate optimization and quality preservation</p>
-                </div>
-                <div class='feature-card'>
-                    <div class='feature-icon'>
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                    </div>
-                    <h4>Batch Operations</h4>
-                    <p>Process multiple media files simultaneously to save time and streamline your workflow</p>
-                </div>
-                <div class='feature-card'>
-                    <div class='feature-icon'>
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 1v6m0 6v6m5.2-14.2l-4.2 4.2m0 6l-4.2 4.2m14.2-5.2h-6m-6 0H1m14.2 5.2l-4.2-4.2m0-6l-4.2-4.2"/>
-                        </svg>
-                    </div>
-                    <h4>Quality Control</h4>
-                    <p>Fine-tune output quality, resolution, bitrate, and compression for perfect results</p>
-                </div>
                 <div class='feature-card'>
                     <div class='feature-icon'>
                         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
@@ -104,92 +51,157 @@ def render():
                             <polyline points="8 6 2 12 8 18"/>
                         </svg>
                     </div>
-                    <h4>Format Support</h4>
-                    <p>Support for all major media formats including modern codecs and legacy formats</p>
+                    <h4>Data Conversion</h4>
+                    <p>Convert between JSON, XML, YAML, CSV and other data formats seamlessly with validation</p>
+                </div>
+                <div class='feature-card'>
+                    <div class='feature-icon'>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h4>Code Formatting</h4>
+                    <p>Beautify and format your code with support for multiple programming languages and styles</p>
+                </div>
+                <div class='feature-card'>
+                    <div class='feature-icon'>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h4>Encoding Tools</h4>
+                    <p>Base64 encoding, hash generation, and other security utilities for modern development</p>
+                </div>
+                <div class='feature-card'>
+                    <div class='feature-icon'>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h4>Performance Tools</h4>
+                    <p>Minify JavaScript and CSS files to optimize load times and improve performance</p>
+                </div>
+                <div class='feature-card'>
+                    <div class='feature-icon'>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h4>Validation</h4>
+                    <p>Validate JSON, XML, and other data formats to ensure correctness and schema compliance</p>
+                </div>
+                <div class='feature-card'>
+                    <div class='feature-icon'>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h4>API Testing</h4>
+                    <p>Test REST APIs with custom headers, payloads, and authentication methods</p>
                 </div>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-def get_media_conversions(media_type):
-    """Get conversion options based on media type"""
-    conversions = {
-        "Image": [
-            "PNG to JPG",
-            "JPG to PNG",
-            "WEBP to PNG",
-            "WEBP to JPG",
-            "Image Resize",
-            "Image Compress"
+def get_dev_tools(category):
+    """Get tools based on category"""
+    tools = {
+        "Data Format": [
+            "JSON to CSV",
+            "CSV to JSON",
+            "XML to JSON",
+            "JSON to XML",
+            "YAML to JSON",
+            "JSON to YAML"
         ],
-        "Video": [
-            "MP4 to GIF",
-            "Video Compress",
-            "AVI to MP4",
-            "MOV to MP4",
-            "Video Resize"
+        "Code Tools": [
+            "Code Formatter",
+            "SQL Formatter",
+            "Minify JavaScript",
+            "Minify CSS",
+            "JSON Validator",
+            "XML Validator"
         ],
-        "Audio": [
-            "MP3 to WAV",
-            "WAV to MP3",
-            "M4A to MP3",
-            "Audio Compress"
+        "Utilities": [
+            "Base64 Encoder/Decoder",
+            "Hash Generator",
+            "API Tester",
+            "Regular Expression Tester",
+            "Diff Checker"
         ]
     }
-    return conversions.get(media_type, [])
+    return tools.get(category, [])
 
-def render_wip(tool_name, media_type):
-    """Render Work In Progress page for media tools"""
+def render_wip(tool_name, category):
+    """Render Work In Progress page for dev tools"""
     
-    # Icon mapping - NO newlines in SVG
-    icon_map = {
-        "Image": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
-        "Video": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
-        "Audio": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
-    }
+    # Determine icon based on category
+    if category == "Data Format":
+        icon_svg = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>'
+    elif category == "Code Tools":
+        icon_svg = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'
+    else:  # Utilities
+        icon_svg = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'
     
-    icon = icon_map.get(media_type, "")
-    
-    # Use .format() instead of f-string to avoid issues
-    wip_html = "<div class='wip-container'><div class='wip-icon'>{}</div><h2>{}</h2><h3>Coming Soon</h3><p>This media conversion tool is currently under development and will be available soon. We're working hard to bring you the best media conversion experience.</p></div>".format(icon, tool_name)
+    wip_html = f"""
+        <div class='wip-container'>
+            <div class='wip-icon'>
+                {icon_svg}
+            </div>
+            <h2>{tool_name}</h2>
+            <h3>Coming Soon</h3>
+            <p>This developer tool is currently under development and will be available soon. 
+            We're building powerful features to enhance your development workflow.</p>
+        </div>
+    """
     
     st.markdown(wip_html, unsafe_allow_html=True)
     
     # Planned features in expander
     with st.expander("Planned Features", expanded=False):
-        if "Image" in media_type:
+        if "Data Format" in category:
             st.markdown("""
-            **Advanced Image Processing:**
-            - Batch conversion for processing multiple images simultaneously
-            - Quality control with adjustable compression and quality settings
-            - Smart format recommendations based on use case
-            - Custom dimensions and aspect ratio control
-            - Metadata preservation including EXIF data
-            - Watermarking and overlay capabilities
-            - Image optimization for web and mobile
-            - Support for RAW image formats
+            **Advanced Data Conversion:**
+            - Lightning-fast processing of large data files
+            - Automatic validation of input and output formats
+            - Beautiful, readable output formatting with syntax highlighting
+            - Clear error messages with helpful suggestions
+            - Batch processing to convert multiple files at once
+            - Schema validation for JSON and XML formats
+            - Custom formatting rules and options
+            - Support for nested and complex data structures
+            - Export with custom delimiters and encoding
+            - Preview before download
             """)
-        elif "Video" in media_type:
+        elif "Code Tools" in category:
             st.markdown("""
-            **Professional Video Tools:**
-            - Support for MP4, AVI, MOV, MKV, WEBM and more
-            - Custom resolution and bitrate selection
-            - Compression without quality loss
-            - Video trimming and cutting tools
-            - Frame rate control for smooth playback
-            - Audio track management
-            - Subtitle embedding and extraction
-            - Thumbnail generation
+            **Professional Code Tools:**
+            - Multi-language support: JavaScript, Python, SQL, CSS, HTML, Java, C++, and more
+            - Custom formatting rules for indentation, spacing, and style preferences
+            - Syntax highlighting with color-coded output for improved readability
+            - Minify and beautify code with one click
+            - Syntax error detection with line numbers and descriptions
+            - Real-time preview as you type
+            - Code comparison and diff viewer
+            - Support for popular style guides (Airbnb, Google, Standard)
+            - Comment preservation and formatting
+            - Automatic code optimization suggestions
             """)
-        elif "Audio" in media_type:
+        elif "Utilities" in category:
             st.markdown("""
-            **High-Quality Audio Conversion:**
-            - Lossless and lossy format support
-            - Bitrate selection for quality control
-            - Support for MP3, WAV, FLAC, AAC, OGG and more
-            - Batch processing for multiple files
-            - Metadata editing (artist, album, track info)
-            - Audio normalization
-            - Fade in/out effects
-            - Audio trimming and splitting
+            **Essential Developer Utilities:**
+            - Multiple hash algorithms: MD5, SHA-1, SHA-256, SHA-512, and more
+            - Encode and decode support: Base64, URL encoding, HTML entities
+            - File hashing for checksum verification and integrity
+            - Secure client-side processing - no data sent to servers
+            - API testing with custom headers, body, and authentication
+            - Regular expression testing with pattern matching and groups
+            - Diff checker for comparing text, code, and files
+            - JSON and XML schema validation
+            - Batch operations for processing multiple inputs
+            - Export and download results
             """)

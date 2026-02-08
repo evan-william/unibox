@@ -141,17 +141,25 @@ def get_media_conversions(media_type):
 def render_wip(tool_name, media_type):
     """Render Work In Progress page for media tools"""
     
-    # Icon mapping - NO newlines in SVG
-    icon_map = {
-        "Image": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
-        "Video": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
-        "Audio": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
-    }
+    # Determine icon based on media type
+    if media_type == "Image":
+        icon_svg = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>'
+    elif media_type == "Video":
+        icon_svg = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>'
+    else:  # Audio
+        icon_svg = '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
     
-    icon = icon_map.get(media_type, "")
-    
-    # Use .format() instead of f-string to avoid issues
-    wip_html = "<div class='wip-container'><div class='wip-icon'>{}</div><h2>{}</h2><h3>Coming Soon</h3><p>This media conversion tool is currently under development and will be available soon. We're working hard to bring you the best media conversion experience.</p></div>".format(icon, tool_name)
+    wip_html = f"""
+        <div class='wip-container'>
+            <div class='wip-icon'>
+                {icon_svg}
+            </div>
+            <h2>{tool_name}</h2>
+            <h3>Coming Soon</h3>
+            <p>This media conversion tool is currently under development and will be available soon. 
+            We're working hard to bring you the best media conversion experience.</p>
+        </div>
+    """
     
     st.markdown(wip_html, unsafe_allow_html=True)
     
