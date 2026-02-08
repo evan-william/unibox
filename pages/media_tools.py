@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 def render():
     """Render Media Tools page with modern professional UI"""
@@ -143,31 +144,14 @@ def render_wip(tool_name, media_type):
     
     # Icon mapping
     icon_map = {
-        "Image": """
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-            </svg>
-        """,
-        "Video": """
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                <polygon points="23 7 16 12 23 17 23 7"/>
-                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-            </svg>
-        """,
-        "Audio": """
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                <path d="M9 18V5l12-2v13"/>
-                <circle cx="6" cy="18" r="3"/>
-                <circle cx="18" cy="16" r="3"/>
-            </svg>
-        """
+        "Image": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+        "Video": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
+        "Audio": '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
     }
     
     icon = icon_map.get(media_type, "")
     
-    st.markdown(f"""
+    wip_html = f"""
         <div class='wip-container'>
             <div class='wip-icon'>
                 {icon}
@@ -177,7 +161,9 @@ def render_wip(tool_name, media_type):
             <p>This media conversion tool is currently under development and will be available soon. 
             We're working hard to bring you the best media conversion experience.</p>
         </div>
-    """, unsafe_allow_html=True)
+    """
+    
+    components.html(wip_html, height=400)
     
     # Planned features in expander
     with st.expander("Planned Features", expanded=False):
