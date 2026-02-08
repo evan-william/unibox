@@ -8,7 +8,7 @@ sys.path.append(str(Path(__file__).parent))
 from utils.styles import apply_custom_styles
 from pages import document_tools, media_tools, dev_tools
 
-# PAGE CONFIG
+# 1. PAGE CONFIG
 st.set_page_config(
     page_title="UniBox - Universal File Converter",
     page_icon="📦",
@@ -16,19 +16,28 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# APPLY CUSTOM STYLES
+# 2. APPLY CUSTOM STYLES
 apply_custom_styles()
 
+# 3. FIX: FORCE SIDEBAR TOGGLE TO APPEAR
+# This CSS ensures the "collapsed" arrow is visible even with your custom nav
 st.markdown("""
     <style>
-        /* Force the sidebar toggle button to be visible and on top of custom nav */
+        /* Target the sidebar collapse/expand button */
         [data-testid="stSidebarCollapseButton"] {
-            z-index: 9999 !important;
-            left: 10px !important;
-            top: 10px !important;
-            background-color: white !important; /* Makes it pop against dark navs */
+            z-index: 999999 !important;
+            top: 15px !important;
+            left: 15px !important;
+            background-color: white !important;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1) !important;
             border-radius: 50% !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+            display: flex !important;
+            visibility: visible !important;
+        }
+        
+        /* Ensure the main content doesn't cover the button area */
+        .main .block-container {
+            padding-top: 2rem !important;
         }
     </style>
 """, unsafe_allow_html=True)
