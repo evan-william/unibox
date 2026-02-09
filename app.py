@@ -1,6 +1,7 @@
 import streamlit as st
 import sys
 from pathlib import Path
+import streamlit.components.v1 as components
 
 # Add converters directory to path
 sys.path.append(str(Path(__file__).parent))
@@ -16,8 +17,34 @@ st.set_page_config(
     initial_sidebar_state="expanded" 
 )
 
+# FORCE OPEN SIDEBAR JAVASCRIPT
+# Ini akan mendeteksi jika sidebar tertutup, lalu otomatis menekannya untuk terbuka
+components.html(
+    """
+    <script>
+    var container = window.parent.document.querySelector("[data-testid='stSidebar']");
+    var button = window.parent.document.querySelector('button[kind="headerNoPadding"]');
+    if (container && container.getAttribute('aria-expanded') === 'false') {
+        button.click();
+    }
+    </script>
+    """,
+    height=0,
+    width=0,
+)
+
 # APPLY CUSTOM STYLES
 apply_custom_styles()
+
+st.markdown("""
+    <style>
+        /* Memastikan area sidebar tidak memiliki display: none dari file styles.py */
+        section[data-testid="stSidebar"] {
+            display: flex !important;
+            visibility: visible !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 # Tambahan CSS sedikit agar tombol collapse asli benar-benar hilang 
 # supaya user tidak sengaja menutupnya lagi
