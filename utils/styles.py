@@ -258,7 +258,7 @@ def apply_custom_styles():
         .content-wrapper {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 4rem 4rem 4rem;
+            padding: 0 4rem 2rem 4rem;
         }
         
         /* Fix for page description text */
@@ -580,7 +580,7 @@ def apply_custom_styles():
         
         /* ===== FEATURE GRID ===== */
         .features-section {
-            margin: 5rem 0 3rem 0;
+            margin: 3rem 0 1.5rem 0;
             padding: 4rem 0;
             background: linear-gradient(135deg, #252525 0%, #1f1f1f 100%);
             border-radius: 16px;
@@ -779,10 +779,29 @@ def apply_custom_styles():
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
         
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            text-align: center;
+            padding: 1.5rem 0;
+            margin: 1.5rem 0 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .stats-text {
+            font-size: 15px;
+            color: #666;
+            margin: 0;
+        }
+        
+        .stats-number {
+            color: #ff4757;
+            font-weight: 700;
+        }
+        
         /* ===== FOOTER ===== */
         .main-footer {
-            margin-top: 5rem;
-            padding: 3rem 4rem;
+            margin-top: 0;
+            padding: 2rem 4rem;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             background: linear-gradient(135deg, #1f1f1f 0%, #1a1a1a 100%);
         }
@@ -811,25 +830,6 @@ def apply_custom_styles():
         
         .footer-right a:hover {
             color: #fff;
-        }
-        
-        /* ===== STATS SECTION ===== */
-        .stats-section {
-            text-align: center;
-            padding: 2rem 0;
-            margin: 3rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .stats-text {
-            font-size: 15px;
-            color: #666;
-        }
-        
-        .stats-number {
-            color: #ff4757;
-            font-weight: 700;
         }
         
         /* ===== TEXT COLORS ===== */
