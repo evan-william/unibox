@@ -216,17 +216,16 @@ st.markdown("</div>", unsafe_allow_html=True)
 try:
     stats = get_stats()
     total_files = stats['total_files_formatted']
-    total_mb = stats['total_mb_formatted']  # ✅ GANTI dari total_tb ke total_mb
+    total_size = stats['size_formatted']  # GANTI jadi size_formatted (auto KB or MB)
 except Exception as e:
-    # Fallback to default values if database not available
     total_files = "0"
-    total_mb = "0"  
+    total_size = "0 KB" 
 
 st.markdown(f"""
     <div class='stats-section'>
         <p class='stats-text'>
             We've already converted <span class='stats-number'>{total_files}</span> files 
-            with a total size of <span class='stats-number'>{total_mb} MB</span>.
+            with a total size of <span class='stats-number'>{total_size}</span>.
         </p>
     </div>
 """, unsafe_allow_html=True)

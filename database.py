@@ -297,15 +297,23 @@ class ConversionDatabase:
         # Format numbers with commas
         total_files_formatted = f"{stats['total_files']:,}"
         
-        # dari TB ke MB
-        total_mb = stats['total_size_bytes'] / (1024 ** 2)  # Convert to MB
-        total_mb_formatted = f"{total_mb:,.0f}"
+        # SMART SIZE FORMATTING - KB or MB
+        total_bytes = stats['total_size_bytes']
+        
+        if total_bytes < 1024 * 1024:  # Less than 1 MB
+            # Show in KB
+            total_kb = total_bytes / 1024
+            size_formatted = f"{total_kb:,.1f} KB"
+        else:
+            # Show in MB
+            total_mb = total_bytes / (1024 ** 2)
+            size_formatted = f"{total_mb:,.1f} MB"
         
         return {
             'total_files': stats['total_files'],
             'total_files_formatted': total_files_formatted,
-            'total_size_mb': total_mb,
-            'total_mb_formatted': total_mb_formatted,
+            'total_size_bytes': total_bytes,
+            'size_formatted': size_formatted,  
             'last_updated': stats['last_updated']
         }
 
