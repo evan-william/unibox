@@ -296,13 +296,16 @@ class ConversionDatabase:
         
         # Format numbers with commas
         total_files_formatted = f"{stats['total_files']:,}"
-        total_tb_formatted = f"{stats['total_size_tb']:,.0f}"
+        
+        # dari TB ke MB
+        total_mb = stats['total_size_bytes'] / (1024 ** 2)  # Convert to MB
+        total_mb_formatted = f"{total_mb:,.0f}"
         
         return {
             'total_files': stats['total_files'],
             'total_files_formatted': total_files_formatted,
-            'total_size_tb': stats['total_size_tb'],
-            'total_tb_formatted': total_tb_formatted,
+            'total_size_mb': total_mb,
+            'total_mb_formatted': total_mb_formatted,
             'last_updated': stats['last_updated']
         }
 

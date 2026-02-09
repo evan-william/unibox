@@ -212,21 +212,21 @@ else:
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# ✅ STATS SECTION - NOW WITH REAL DATABASE DATA
+# STATS SECTION - NOW WITH REAL DATABASE DATA
 try:
     stats = get_stats()
     total_files = stats['total_files_formatted']
-    total_tb = stats['total_tb_formatted']
+    total_mb = stats['total_mb_formatted']  # ✅ GANTI dari total_tb ke total_mb
 except Exception as e:
     # Fallback to default values if database not available
-    total_files = "2,858,071,094"
-    total_tb = "22,131"
+    total_files = "0"
+    total_mb = "0"  
 
 st.markdown(f"""
     <div class='stats-section'>
         <p class='stats-text'>
             We've already converted <span class='stats-number'>{total_files}</span> files 
-            with a total size of <span class='stats-number'>{total_tb} TB</span>.
+            with a total size of <span class='stats-number'>{total_mb} MB</span>.
         </p>
     </div>
 """, unsafe_allow_html=True)
