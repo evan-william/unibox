@@ -8,36 +8,24 @@ sys.path.append(str(Path(__file__).parent))
 from utils.styles import apply_custom_styles
 from pages import document_tools, media_tools, dev_tools
 
-# 1. PAGE CONFIG
+# PAGE CONFIG - Ini yang mengatur agar sidebar otomatis terbuka (Expanded)
 st.set_page_config(
     page_title="UniBox - Universal File Converter",
     page_icon="📦",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded" 
 )
 
-# 2. APPLY CUSTOM STYLES
+# APPLY CUSTOM STYLES
 apply_custom_styles()
 
-# 3. FIX: FORCE SIDEBAR TOGGLE TO APPEAR
-# This CSS ensures the "collapsed" arrow is visible even with your custom nav
+# Tambahan CSS sedikit agar tombol collapse asli benar-benar hilang 
+# supaya user tidak sengaja menutupnya lagi
 st.markdown("""
     <style>
-        /* Target the sidebar collapse/expand button */
-        [data-testid="stSidebarCollapseButton"] {
-            z-index: 999999 !important;
-            top: 15px !important;
-            left: 15px !important;
-            background-color: white !important;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.1) !important;
-            border-radius: 50% !important;
-            display: flex !important;
-            visibility: visible !important;
-        }
-        
-        /* Ensure the main content doesn't cover the button area */
-        .main .block-container {
-            padding-top: 2rem !important;
+        /* Menghilangkan tombol arrow (collapse) agar sidebar permanen terbuka */
+        [data-testid="collapsedControl"] {
+            display: none;
         }
     </style>
 """, unsafe_allow_html=True)
