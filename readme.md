@@ -110,18 +110,27 @@ streamlit run app.py
 ---
 
 ## 🏗️ Architecture
-
 ```
 unibox/
-├── app.py                    # Main application & routing
-├── document_tools.py         # Document conversion UI
-├── media_tools.py           # Media conversion UI
-├── dev_tools.py             # Developer tools UI
-├── converters/              # Conversion engines
-│   ├── pdf_to_word.py      # PDF → Word logic
-│   └── word_to_pdf.py      # Word → PDF logic
-└── utils/
-    └── styles.py           # Custom CSS styling
+├── app.py                      # Main application & routing
+├── config.toml                 # Streamlit configuration
+├── database.py                 # Database management
+├── assets/
+│   └── unibox-logo.jpg        # Application logo
+├── converters/                 # Conversion engines
+│   ├── __init__.py
+│   ├── excel_csv.py           # Excel ↔ CSV conversion
+│   ├── html_markdown_to_pdf.py # HTML/Markdown → PDF
+│   ├── pdf_to_word.py         # PDF → Word conversion
+│   └── word_to_pdf.py         # Word → PDF conversion
+├── pages/                      # Streamlit pages
+│   ├── __init__.py
+│   ├── dev_tools.py           # Developer tools UI
+│   ├── document_tools.py      # Document conversion UI
+│   └── media_tools.py         # Media conversion UI
+└── utils/                      # Utilities
+    ├── __init__.py
+    └── styles.py              # Custom CSS styling
 ```
 
 ---
