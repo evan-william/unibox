@@ -3,6 +3,7 @@ from converters.word_to_pdf import convert_word_to_pdf
 from converters.pdf_to_word import convert_pdf_to_word
 from converters.excel_csv import convert_excel_to_csv, convert_csv_to_excel
 from converters.html_markdown_to_pdf import convert_markdown_to_pdf, convert_html_to_pdf, convert_url_to_pdf
+from database import track_conversion, get_file_size
 
 def render():
     """Render Document Tools page with modern professional UI"""
@@ -178,10 +179,23 @@ def render_word_to_pdf():
         col1, col2, col3 = st.columns([2, 3, 2])
         with col2:
             if st.button("Convert to PDF", use_container_width=True, key="convert_word"):
+                # Get file size before conversion
+                file_size = get_file_size(uploaded_file)
+                
                 with st.spinner("Converting your document..."):
                     pdf_bytes = convert_word_to_pdf(uploaded_file)
                     
                     if pdf_bytes:
+                        # Track successful conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="DOCX",
+                            to_format="PDF",
+                            conversion_type="document",
+                            success=True
+                        )
+                        
                         st.success("Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
@@ -191,6 +205,16 @@ def render_word_to_pdf():
                             file_name=output_filename,
                             mime="application/pdf",
                             use_container_width=True
+                        )
+                    else:
+                        # Track failed conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="DOCX",
+                            to_format="PDF",
+                            conversion_type="document",
+                            success=False
                         )
 
 def render_pdf_to_word():
@@ -237,10 +261,23 @@ def render_pdf_to_word():
         col1, col2, col3 = st.columns([2, 3, 2])
         with col2:
             if st.button("Convert to Word", use_container_width=True, key="convert_pdf"):
+                # Get file size before conversion
+                file_size = get_file_size(uploaded_file)
+                
                 with st.spinner("Processing your PDF..."):
                     docx_bytes = convert_pdf_to_word(uploaded_file)
                     
                     if docx_bytes:
+                        # Track successful conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="PDF",
+                            to_format="DOCX",
+                            conversion_type="document",
+                            success=True
+                        )
+                        
                         st.success("Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.docx"
@@ -250,6 +287,16 @@ def render_pdf_to_word():
                             file_name=output_filename,
                             mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                             use_container_width=True
+                        )
+                    else:
+                        # Track failed conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="PDF",
+                            to_format="DOCX",
+                            conversion_type="document",
+                            success=False
                         )
 
 def render_excel_to_csv():
@@ -296,10 +343,23 @@ def render_excel_to_csv():
         col1, col2, col3 = st.columns([2, 3, 2])
         with col2:
             if st.button("Convert to CSV", use_container_width=True, key="convert_excel"):
+                # Get file size before conversion
+                file_size = get_file_size(uploaded_file)
+                
                 with st.spinner("Converting..."):
                     csv_bytes = convert_excel_to_csv(uploaded_file)
                     
                     if csv_bytes:
+                        # Track successful conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="XLSX",
+                            to_format="CSV",
+                            conversion_type="document",
+                            success=True
+                        )
+                        
                         st.success("Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.csv"
@@ -309,6 +369,16 @@ def render_excel_to_csv():
                             file_name=output_filename,
                             mime="text/csv",
                             use_container_width=True
+                        )
+                    else:
+                        # Track failed conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="XLSX",
+                            to_format="CSV",
+                            conversion_type="document",
+                            success=False
                         )
 
 def render_csv_to_excel():
@@ -355,10 +425,23 @@ def render_csv_to_excel():
         col1, col2, col3 = st.columns([2, 3, 2])
         with col2:
             if st.button("Convert to Excel", use_container_width=True, key="convert_csv"):
+                # Get file size before conversion
+                file_size = get_file_size(uploaded_file)
+                
                 with st.spinner("Converting..."):
                     excel_bytes = convert_csv_to_excel(uploaded_file)
                     
                     if excel_bytes:
+                        # Track successful conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="CSV",
+                            to_format="XLSX",
+                            conversion_type="document",
+                            success=True
+                        )
+                        
                         st.success("Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.xlsx"
@@ -368,6 +451,16 @@ def render_csv_to_excel():
                             file_name=output_filename,
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.document",
                             use_container_width=True
+                        )
+                    else:
+                        # Track failed conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="CSV",
+                            to_format="XLSX",
+                            conversion_type="document",
+                            success=False
                         )
 
 def render_markdown_to_pdf():
@@ -414,10 +507,23 @@ def render_markdown_to_pdf():
         col1, col2, col3 = st.columns([2, 3, 2])
         with col2:
             if st.button("Convert to PDF", use_container_width=True, key="convert_md"):
+                # Get file size before conversion
+                file_size = get_file_size(uploaded_file)
+                
                 with st.spinner("Converting..."):
                     pdf_bytes = convert_markdown_to_pdf(uploaded_file)
                     
                     if pdf_bytes:
+                        # Track successful conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="MD",
+                            to_format="PDF",
+                            conversion_type="document",
+                            success=True
+                        )
+                        
                         st.success("Conversion completed successfully!")
                         
                         output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
@@ -427,6 +533,16 @@ def render_markdown_to_pdf():
                             file_name=output_filename,
                             mime="application/pdf",
                             use_container_width=True
+                        )
+                    else:
+                        # Track failed conversion
+                        track_conversion(
+                            filename=uploaded_file.name,
+                            file_size=file_size,
+                            from_format="MD",
+                            to_format="PDF",
+                            conversion_type="document",
+                            success=False
                         )
 
 def render_html_to_pdf():
@@ -476,10 +592,23 @@ def render_html_to_pdf():
             col1, col2, col3 = st.columns([2, 3, 2])
             with col2:
                 if st.button("Convert to PDF", use_container_width=True, key="convert_html"):
+                    # Get file size before conversion
+                    file_size = get_file_size(uploaded_file)
+                    
                     with st.spinner("Converting..."):
                         pdf_bytes = convert_html_to_pdf(uploaded_file)
                         
                         if pdf_bytes:
+                            # Track successful conversion
+                            track_conversion(
+                                filename=uploaded_file.name,
+                                file_size=file_size,
+                                from_format="HTML",
+                                to_format="PDF",
+                                conversion_type="document",
+                                success=True
+                            )
+                            
                             st.success("Conversion completed successfully!")
                             
                             output_filename = f"{uploaded_file.name.rsplit('.', 1)[0]}.pdf"
@@ -489,6 +618,16 @@ def render_html_to_pdf():
                                 file_name=output_filename,
                                 mime="application/pdf",
                                 use_container_width=True
+                            )
+                        else:
+                            # Track failed conversion
+                            track_conversion(
+                                filename=uploaded_file.name,
+                                file_size=file_size,
+                                from_format="HTML",
+                                to_format="PDF",
+                                conversion_type="document",
+                                success=False
                             )
     
     with tab2:
@@ -509,6 +648,16 @@ def render_html_to_pdf():
                         pdf_bytes = convert_url_to_pdf(url_input)
                         
                         if pdf_bytes:
+                            # Track successful conversion (estimate 500KB for URL)
+                            track_conversion(
+                                filename=url_input,
+                                file_size=500000,  # Estimated size for URL
+                                from_format="HTML",
+                                to_format="PDF",
+                                conversion_type="document",
+                                success=True
+                            )
+                            
                             st.success("Conversion completed successfully!")
                             
                             from urllib.parse import urlparse
@@ -521,4 +670,14 @@ def render_html_to_pdf():
                                 file_name=output_filename,
                                 mime="application/pdf",
                                 use_container_width=True
+                            )
+                        else:
+                            # Track failed conversion
+                            track_conversion(
+                                filename=url_input,
+                                file_size=500000,
+                                from_format="HTML",
+                                to_format="PDF",
+                                conversion_type="document",
+                                success=False
                             )

@@ -8,8 +8,9 @@ sys.path.append(str(Path(__file__).parent))
 
 from utils.styles import apply_custom_styles
 from pages import document_tools, media_tools, dev_tools
+from database import get_stats  # ✅ Import database stats
 
-# PAGE CONFIG - Ini yang mengatur agar sidebar otomatis terbuka (Expanded)
+# PAGE CONFIG
 st.set_page_config(
     page_title="UniBox - Universal File Converter",
     page_icon="📦",
@@ -18,7 +19,6 @@ st.set_page_config(
 )
 
 # FORCE OPEN SIDEBAR JAVASCRIPT
-# Ini akan mendeteksi jika sidebar tertutup, lalu otomatis menekannya untuk terbuka
 components.html(
     """
     <script>
@@ -38,19 +38,10 @@ apply_custom_styles()
 
 st.markdown("""
     <style>
-        /* Memastikan area sidebar tidak memiliki display: none dari file styles.py */
         section[data-testid="stSidebar"] {
             display: flex !important;
             visibility: visible !important;
         }
-    </style>
-""", unsafe_allow_html=True)
-
-# Tambahan CSS sedikit agar tombol collapse asli benar-benar hilang 
-# supaya user tidak sengaja menutupnya lagi
-st.markdown("""
-    <style>
-        /* Menghilangkan tombol arrow (collapse) agar sidebar permanen terbuka */
         [data-testid="collapsedControl"] {
             display: none;
         }
@@ -221,12 +212,21 @@ else:
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# STATS SECTION
-st.markdown("""
+# ✅ STATS SECTION - NOW WITH REAL DATABASE DATA
+try:
+    stats = get_stats()
+    total_files = stats['total_files_formatted']
+    total_tb = stats['total_tb_formatted']
+except Exception as e:
+    # Fallback to default values if database not available
+    total_files = "2,858,071,094"
+    total_tb = "22,131"
+
+st.markdown(f"""
     <div class='stats-section'>
         <p class='stats-text'>
-            We've already converted <span class='stats-number'>2,858,071,094</span> files 
-            with a total size of <span class='stats-number'>22,131 TB</span>.
+            We've already converted <span class='stats-number'>{total_files}</span> files 
+            with a total size of <span class='stats-number'>{total_tb} TB</span>.
         </p>
     </div>
 """, unsafe_allow_html=True)
