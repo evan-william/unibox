@@ -20,7 +20,7 @@ def render():
 
     # SUBTITLE
     st.markdown("""
-        <div style='margin-bottom: 2rem; padding-left: 5px;'> 
+        <div style='margin-bottom: 2rem; padding-left: 5px; margin-top: 2rem; '> 
             <h2 style='font-size: 26px; margin-bottom: 0.5rem; color: #fff; font-weight: 700;'>Send Us a Message</h2>
             <p style='color: #888; font-size: 15px;'>
                 Fill out the form below and we'll get back to you within 48 hours.
@@ -60,7 +60,7 @@ def render():
             padding: 12px 16px !important;
         }
         
-        /* Submit Button Enhancement dengan MARGIN TOP */
+        /* Submit Button ADDED margin top... jelek kalau gak */
         .stButton {
             margin-top: 2rem !important;
             text-align: center;
