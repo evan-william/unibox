@@ -15,82 +15,86 @@ def render():
         </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("<div class='content-wrapper' style='max-width: 800px;'>", unsafe_allow_html=True)
+    # Wrapper dengan padding tambahan
+    st.markdown("<div class='content-wrapper' style='max-width: 850px; padding: 0 1rem;'>", unsafe_allow_html=True)
     
     # 2. Contact Form Header
     st.markdown("""
-        <div style='margin-bottom: 2rem;'>
-            <h2 style='font-size: 24px; margin-bottom: 0.75rem; color: #fff; font-weight: 700;'>Send Us a Message</h2>
-            <p style='color: #888; font-size: 15px; line-height: 1.6; margin-bottom: 2rem;'>
+        <div style='margin-top: 2rem; margin-bottom: 2.5rem;'>
+            <h2 style='font-size: 28px; margin-bottom: 0.75rem; color: #fff; font-weight: 700;'>Send Us a Message</h2>
+            <p style='color: #a0a0a0; font-size: 16px; line-height: 1.6;'>
                 Fill out the form below and we'll get back to you within 48 hours.
             </p>
         </div>
     """, unsafe_allow_html=True)
     
-    # 3. Custom CSS for premium form & expander styling
+    # 3. Custom CSS (Ditingkatkan)
     st.markdown("""
         <style>
+        /* Spacing antar elemen form global */
+        [data-testid="stForm"] {
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            padding: 2rem !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-radius: 15px !important;
+        }
+
+        /* Memberikan jarak antar field (Input & Textarea) */
+        .stTextInput, .stTextArea, .stSelectbox {
+            margin-bottom: 1.2rem !important;
+        }
+
+        /* Label styling */
+        .stMarkdown p {
+            margin-bottom: 0.5rem !important;
+        }
+
         /* Premium Form Input Styling */
         .stTextInput > div > div > input,
         .stTextArea > div > div > textarea,
-        .stSelectbox > div > div > select {
-            background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%) !important;
+        .stSelectbox > div > div > div {
+            background: #1e1e1e !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             border-radius: 10px !important;
             color: #ffffff !important;
-            font-size: 15px !important;
-            padding: 14px 18px !important;
-            transition: all 0.3s ease !important;
+            padding: 12px 16px !important;
         }
         
-        .stTextInput > div > div > input:focus,
-        .stTextArea > div > div > textarea:focus,
-        .stSelectbox > div > div > select:focus {
-            border-color: #ff4757 !important;
-            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1) !important;
-            background: #2a2a2a !important;
+        /* Submit Button Enhancement dengan MARGIN TOP */
+        .stButton {
+            margin-top: 2rem !important;
+            text-align: center;
         }
-        
-        /* Submit Button Enhancement */
+
         .stButton > button {
             background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%) !important;
             color: white !important;
             border: none !important;
             border-radius: 10px !important;
-            padding: 16px 48px !important;
+            padding: 0.75rem 3rem !important;
             font-weight: 700 !important;
             font-size: 16px !important;
-            letter-spacing: 0.5px !important;
             transition: all 0.3s ease !important;
             box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3) !important;
+            width: 100%;
         }
         
         .stButton > button:hover {
             transform: translateY(-2px) !important;
             box-shadow: 0 8px 25px rgba(255, 71, 87, 0.5) !important;
+            border: none !important;
         }
 
-        /* Premium Expander Styling */
+        /* Spacing for FAQ */
         .streamlit-expanderHeader {
-            background: linear-gradient(135deg, #2a2a2a 0%, #252525 100%) !important;
-            border-radius: 12px !important;
-            font-weight: 600 !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            font-size: 16px !important;
-            padding: 1.25rem 1.5rem !important;
-            transition: all 0.3s ease !important;
-            margin-bottom: 12px !important;
-        }
-        
-        .streamlit-expanderHeader:hover {
-            border-color: rgba(255, 71, 87, 0.4) !important;
-            transform: translateY(-2px);
+            margin-bottom: 10px !important;
+            background: #1e1e1e !important;
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
         }
         </style>
     """, unsafe_allow_html=True)
     
-    # 4. Contact Form (Hanya Satu Kali)
+    # 4. Contact Form
     with st.form("contact_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
         with col1:
@@ -105,9 +109,8 @@ def render():
         
         message = st.text_area("Your Message *", placeholder="Tell us how we can help you...", height=180)
         
-        col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
-        with col_btn2:
-            submitted = st.form_submit_button("Send Message", use_container_width=True)
+        # Menggunakan kolom untuk memposisikan button di tengah (opsional) atau full width
+        submitted = st.form_submit_button("Send Message")
         
         if submitted:
             if name and email and message:
@@ -118,8 +121,8 @@ def render():
     
     # 5. FAQ Section
     st.markdown("""
-        <div style='margin-top: 4rem; margin-bottom: 2rem;'>
-            <h2 style='font-size: 28px; margin-bottom: 1rem; color: #fff; text-align: center; font-weight: 800;'>
+        <div style='margin-top: 5rem; margin-bottom: 2rem;'>
+            <h2 style='font-size: 32px; margin-bottom: 1.5rem; color: #fff; text-align: center; font-weight: 800;'>
                 Frequently Asked Questions
             </h2>
         </div>
@@ -135,6 +138,6 @@ def render():
 
     for question, answer in faqs:
         with st.expander(question):
-            st.write(answer)
+            st.markdown(f"<div style='padding: 10px; color: #ccc;'>{answer}</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
