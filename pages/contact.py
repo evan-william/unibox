@@ -15,20 +15,20 @@ def render():
         </div>
     """, unsafe_allow_html=True)
     
-    # Wrapper dengan padding tambahan
-    st.markdown("<div class='content-wrapper' style='max-width: 850px; padding: 0 1rem;'>", unsafe_allow_html=True)
-    
-    # 2. Contact Form Header
+    # TITLE SECTION 
+    st.markdown("<div class='content-wrapper' style='max-width: 800px; margin: 0 auto; padding: 0 1rem;'>", unsafe_allow_html=True)
+
+    # SUBTITLE
     st.markdown("""
-        <div style='margin-top: 2rem; margin-bottom: 2.5rem;'>
-            <h2 style='font-size: 28px; margin-bottom: 0.75rem; color: #fff; font-weight: 700;'>Send Us a Message</h2>
-            <p style='color: #a0a0a0; font-size: 16px; line-height: 1.6;'>
+        <div style='margin-bottom: 2rem; padding-left: 5px;'> 
+            <h2 style='font-size: 26px; margin-bottom: 0.5rem; color: #fff; font-weight: 700;'>Send Us a Message</h2>
+            <p style='color: #888; font-size: 15px;'>
                 Fill out the form below and we'll get back to you within 48 hours.
             </p>
         </div>
     """, unsafe_allow_html=True)
     
-    # 3. Custom CSS (Ditingkatkan)
+    # CSS FOR FORM
     st.markdown("""
         <style>
         /* Spacing antar elemen form global */
@@ -94,7 +94,7 @@ def render():
         </style>
     """, unsafe_allow_html=True)
     
-    # 4. Contact Form
+    # Contact Form
     with st.form("contact_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
         with col1:
@@ -119,7 +119,7 @@ def render():
             else:
                 st.error("❌ Please fill in all required fields.")
     
-    # 5. FAQ Section
+    #  FAQ Section
     st.markdown("""
         <div style='margin-top: 5rem; margin-bottom: 2rem;'>
             <h2 style='font-size: 32px; margin-bottom: 1.5rem; color: #fff; text-align: center; font-weight: 800;'>

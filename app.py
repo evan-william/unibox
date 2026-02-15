@@ -370,18 +370,44 @@ else:
     """, unsafe_allow_html=True)
 
 # FOOTER (shown on all pages FOR CONSISTENCY)
-st.markdown("""
-    <div class='main-footer'>
-        <div class='footer-content'>
-            <div class='footer-left'>
-                <p>© 2026 UniBox - Built by Evan William</p>
-            </div>
-            <div class='footer-right'>
-                <a href='?page=about'>About Us</a>
-                <a href='?page=privacy'>Privacy</a>
-                <a href='?page=terms'>Terms</a>
-                <a href='?page=contact'>Contact</a>
-            </div>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
+st.markdown("---") 
+
+# LAYOUT LINK FOOTER
+foot_col1, foot_col2 = st.columns([2, 1])
+
+with foot_col1:
+    st.markdown(f"<p style='color: #888; font-size: 14px;'>© 2026 UniBox - Built by Evan William</p>", unsafe_allow_html=True)
+
+with foot_col2:
+    # BUTTON LINK STYLING
+    st.markdown("""
+        <style>
+        div[data-testid="stHorizontalBlock"] button {
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+            color: #888 !important;
+            text-decoration: none !important;
+            font-size: 14px !important;
+            font-weight: normal !important;
+        }
+        div[data-testid="stHorizontalBlock"] button:hover {
+            color: #ff4757 !important;
+            text-decoration: underline !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    c1, c2, c3, c4 = st.columns(4)
+    if c1.button("About", key="f_about"):
+        st.session_state.current_page = "about"
+        st.rerun()
+    if c2.button("Privacy", key="f_priv"):
+        st.session_state.current_page = "privacy"
+        st.rerun()
+    if c3.button("Terms", key="f_terms"):
+        st.session_state.current_page = "terms"
+        st.rerun()
+    if c4.button("Contact", key="f_cont"):
+        st.session_state.current_page = "contact"
+        st.rerun()
