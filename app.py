@@ -96,11 +96,64 @@ st.markdown("""
 
 # Check if we're on a footer page
 if st.session_state.current_page != "home":
-    # HIDE SIDEBAR FOR FOOTER PAGES - (IT Looks ugly with it)
+    # HIDE SIDEBAR FOR FOOTER PAGES - FULLY HIDDEN WITH ALL ELEMENTS
     st.markdown("""
         <style>
-        /* Hide sidebar completely */
-        [data-testid="stSidebar"] {
+        /* NUCLEAR OPTION - Hide ALL sidebar elements completely */
+        [data-testid="stSidebar"],
+        section[data-testid="stSidebar"],
+        .st-emotion-cache-1ob5c3r,
+        .e9ic3ti0,
+        [data-testid="stSidebarContent"],
+        .st-emotion-cache-155jwzh,
+        .e9ic3ti2,
+        [data-testid="stSidebarNav"],
+        .st-emotion-cache-fsmas1,
+        .e1pqlk430,
+        [data-testid="stSidebarNavItems"],
+        .st-emotion-cache-1gczx66,
+        .e1pqlk431,
+        [data-testid="stSidebarNavLink"],
+        [data-testid="stSidebarNavLinkContainer"],
+        .st-emotion-cache-1gb1rig,
+        .e1pqlk432,
+        .st-emotion-cache-hqtgao,
+        .st-emotion-cache-1erimsn,
+        .e1pqlk435,
+        [data-testid="stSidebarHeader"],
+        .st-emotion-cache-10p9htt,
+        .e9ic3ti4,
+        [data-testid="stSidebarUserContent"],
+        .st-emotion-cache-1echtaq,
+        .e9ic3ti1,
+        [data-testid="stSidebarCollapseButton"],
+        .st-emotion-cache-13veyas,
+        .e9ic3ti10,
+        [data-testid="stLogoSpacer"],
+        .st-emotion-cache-11ukie,
+        .e9ic3ti9,
+        section.st-emotion-cache-1ob5c3r.e9ic3ti0,
+        .st-emotion-cache-1sv6ehc,
+        .e9ic3ti3 {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            min-width: 0 !important;
+            max-width: 0 !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            max-height: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            position: absolute !important;
+            left: -9999px !important;
+            overflow: hidden !important;
+        }
+        
+        /* Force hide sidebar navigation links */
+        a[data-testid="stSidebarNavLink"],
+        li.st-emotion-cache-1ag8dug.e1pqlk434,
+        div.st-emotion-cache-1gb1rig.e1pqlk432 {
             display: none !important;
             visibility: hidden !important;
         }
@@ -110,10 +163,40 @@ if st.session_state.current_page != "home":
             max-width: 100% !important;
             padding-left: 2rem !important;
             padding-right: 2rem !important;
+            margin-left: 0 !important;
         }
         
-        /* Remove sidebar toggle button */
-        [data-testid="collapsedControl"] {
+        .main {
+            margin-left: 0 !important;
+        }
+        
+        /* Remove sidebar toggle button completely */
+        [data-testid="collapsedControl"],
+        button[kind="headerNoPadding"],
+        button.st-emotion-cache-pkm19r.e1mwqyj915,
+        .st-emotion-cache-13veyas.e9ic3ti10 button {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        /* Force main container to full width without sidebar space */
+        [data-testid="stAppViewContainer"] > section:first-child {
+            width: 0 !important;
+            flex-shrink: 1 !important;
+            display: none !important;
+        }
+        
+        /* Ensure no sidebar space is reserved */
+        .st-emotion-cache-1ob5c3r.e9ic3ti0 {
+            width: 0 !important;
+            flex-shrink: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+        
+        /* Hide resize handle */
+        div[style*="cursor: col-resize"] {
             display: none !important;
         }
         </style>
@@ -127,7 +210,6 @@ if st.session_state.current_page != "home":
     elif st.session_state.current_page == "terms":
         terms.render()
     elif st.session_state.current_page == "contact":
-        contact.render()
         contact.render()
     
     # Back to home button
