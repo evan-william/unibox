@@ -61,12 +61,7 @@ def render():
         }
         
         /* Submit Button ADDED margin top... jelek kalau gak */
-        .stButton {
-            margin-top: 2rem !important;
-            text-align: center;
-        }
-
-        .stButton > button {
+        [data-testid="stForm"] .stButton > button {
             background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%) !important;
             color: white !important;
             border: none !important;
@@ -77,9 +72,10 @@ def render():
             transition: all 0.3s ease !important;
             box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3) !important;
             width: 100%;
+            margin-top: 2 rem;
         }
-        
-        .stButton > button:hover {
+
+        [data-testid="stForm"] .stButton > button:hover {
             transform: translateY(-2px) !important;
             box-shadow: 0 8px 25px rgba(255, 71, 87, 0.5) !important;
             border: none !important;
