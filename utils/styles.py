@@ -532,6 +532,7 @@ def apply_custom_styles():
             border-left: 3px solid #ff4757;
             border-radius: 8px;
             padding: 1.5rem;
+            margin-bottom: 2rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
