@@ -96,16 +96,30 @@ st.markdown("""
 
 # Check if we're on a footer page
 if st.session_state.current_page != "home":
-    # HIDE SIDEBAR FOR FOOTER PAGES ! (it looks ugly)
+    # HIDE SIDEBAR FOR FOOTER PAGES - (IT Looks ugly with it)
     st.markdown("""
         <style>
+        /* Hide sidebar completely */
         [data-testid="stSidebar"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        
+        /* Expand main content to full width */
+        .main .block-container {
+            max-width: 100% !important;
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
+        }
+        
+        /* Remove sidebar toggle button */
+        [data-testid="collapsedControl"] {
             display: none !important;
         }
         </style>
     """, unsafe_allow_html=True)
     
-    # Render footer pages
+    # Render footer pages !
     if st.session_state.current_page == "about":
         about.render()
     elif st.session_state.current_page == "privacy":
@@ -113,6 +127,7 @@ if st.session_state.current_page != "home":
     elif st.session_state.current_page == "terms":
         terms.render()
     elif st.session_state.current_page == "contact":
+        contact.render()
         contact.render()
     
     # Back to home button
