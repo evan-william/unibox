@@ -73,12 +73,13 @@ def render():
                     st.error("❌ Please fill in all required fields.")
     
     with col2:
-        st.markdown("""
+        # Contact Information - TURNED TO ST.HTML FOR THIS ONE ONLY !! <- prevent leak :)
+        st.html("""
             <div class='tool-card'>
                 <h2 style='font-size: 28px; margin-bottom: 1.5rem; color: #ff4757;'>Contact Information</h2>
                 
                 <div style='margin: 1.5rem 0;'>
-                    <h4 style='color: #fff; font-size: 16px; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;'>
+                    <h4 style='color: #fff; font-size: 16px; margin-bottom: 0.5rem;'>
                         📧 Email
                     </h4>
                     <p style='color: #b0b0b0; font-size: 15px; margin-left: 2rem;'>
@@ -88,7 +89,7 @@ def render():
                 </div>
                 
                 <div style='margin: 1.5rem 0;'>
-                    <h4 style='color: #fff; font-size: 16px; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;'>
+                    <h4 style='color: #fff; font-size: 16px; margin-bottom: 0.5rem;'>
                         📱 Phone
                     </h4>
                     <p style='color: #b0b0b0; font-size: 15px; margin-left: 2rem;'>
@@ -98,7 +99,7 @@ def render():
                 </div>
                 
                 <div style='margin: 1.5rem 0;'>
-                    <h4 style='color: #fff; font-size: 16px; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;'>
+                    <h4 style='color: #fff; font-size: 16px; margin-bottom: 0.5rem;'>
                         📍 Location
                     </h4>
                     <p style='color: #b0b0b0; font-size: 15px; margin-left: 2rem;'>
@@ -116,7 +117,7 @@ def render():
                     </p>
                 </div>
             </div>
-        """, unsafe_allow_html=True)
+        """)
     
     # FAQ Section
     st.markdown("""

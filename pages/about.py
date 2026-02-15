@@ -83,8 +83,8 @@ def render():
             </div>
         """, unsafe_allow_html=True)
     
-    # What Sets Us Apart
-    st.markdown("""
+    # What Sets Us Apart - Turned to st.html <- fix leakage okay :)
+    st.html("""
         <div class='tool-card' style='margin-top: 3rem;'>
             <h2 style='font-size: 32px; margin-bottom: 1.5rem;'>What Sets Us Apart</h2>
             
@@ -128,8 +128,8 @@ def render():
                 </p>
             </div>
         </div>
-    """, unsafe_allow_html=True)
-    
+    """)
+        
     # Team Section
     st.markdown("""
         <div style='text-align: center; margin: 4rem 0 2rem 0;'>
