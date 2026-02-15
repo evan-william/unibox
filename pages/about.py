@@ -24,7 +24,7 @@ def render():
             <h2 style='font-size: 32px; margin-bottom: 1rem;'>Our Story</h2>
             <p style='font-size: 16px; line-height: 1.8; color: #b0b0b0;'>
                 UniBox was born from a simple frustration: converting files shouldn't be complicated. 
-                We've all been there—needing to convert a document for work, struggling with clunky software, 
+                We've all been there, needing to convert a document for work, struggling with clunky software, 
                 or paying for features we don't need. That's why we created UniBox.
             </p>
             <p style='font-size: 16px; line-height: 1.8; color: #b0b0b0; margin-top: 1rem;'>
