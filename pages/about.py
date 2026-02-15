@@ -46,17 +46,17 @@ def render():
     
     with col1:
         st.html("""
-            <div class='tool-card' style='text-align: center; height: 100%;'>
+            <div class='tool-card' style='text-align: center; height: 100%; padding: 2rem 1.5rem;'>
                 <div style='width: 80px; height: 80px; margin: 0 auto 1.5rem auto; 
                             background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%); 
                             border-radius: 16px; display: flex; align-items: center; 
                             justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);'>
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
                 </div>
-                <h3 style='font-size: 20px; margin-bottom: 0.5rem;'>Speed & Efficiency</h3>
+                <h3 style='font-size: 20px; margin-bottom: 0.5rem; color: #fff; font-weight: 700;'>Speed & Efficiency</h3>
                 <p style='color: #888; font-size: 14px; line-height: 1.6;'>
                     We believe your time is valuable. That's why we've optimized 
                     our conversion engine to deliver lightning-fast results without 
@@ -67,16 +67,16 @@ def render():
     
     with col2:
         st.html("""
-            <div class='tool-card' style='text-align: center; height: 100%;'>
+            <div class='tool-card' style='text-align: center; height: 100%; padding: 2rem 1.5rem;'>
                 <div style='width: 80px; height: 80px; margin: 0 auto 1.5rem auto; 
                             background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%); 
                             border-radius: 16px; display: flex; align-items: center; 
                             justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);'>
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
                 </div>
-                <h3 style='font-size: 20px; margin-bottom: 0.5rem;'>Privacy First</h3>
+                <h3 style='font-size: 20px; margin-bottom: 0.5rem; color: #fff; font-weight: 700;'>Privacy First</h3>
                 <p style='color: #888; font-size: 14px; line-height: 1.6;'>
                     Your files are yours alone. We process everything securely 
                     and never store your documents. What happens in UniBox, 
@@ -87,16 +87,16 @@ def render():
     
     with col3:
         st.html("""
-            <div class='tool-card' style='text-align: center; height: 100%;'>
+            <div class='tool-card' style='text-align: center; height: 100%; padding: 2rem 1.5rem;'>
                 <div style='width: 80px; height: 80px; margin: 0 auto 1.5rem auto; 
                             background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%); 
                             border-radius: 16px; display: flex; align-items: center; 
                             justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);'>
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                     </svg>
                 </div>
-                <h3 style='font-size: 20px; margin-bottom: 0.5rem;'>Quality Output</h3>
+                <h3 style='font-size: 20px; margin-bottom: 0.5rem; color: #fff; font-weight: 700;'>Quality Output</h3>
                 <p style='color: #888; font-size: 14px; line-height: 1.6;'>
                     We use industry-leading conversion algorithms to ensure 
                     your files maintain their formatting, quality, and integrity 
