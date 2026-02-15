@@ -859,7 +859,21 @@ def apply_custom_styles():
         .main h1, .main h2, .main h3 {
             color: #ffffff !important;
         }
-        
+        /* ===== FIX BLACK SPACE ABOVE TOP-NAV ===== */
+        .main > .block-container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .stVerticalBlock:first-child {
+            padding-top: 0 !important;
+            gap: 0 !important;
+        }
+
+        div[data-testid="stVerticalBlock"] > div:first-child {
+            margin-top: 0 !important;
+        }
+                        
         /* ===== RESPONSIVE ===== */
         @media (min-width: 768px) {
             .nav-links {
