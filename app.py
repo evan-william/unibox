@@ -94,9 +94,18 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Check if we're on a footer page ?
+# Check if we're on a footer page
 if st.session_state.current_page != "home":
-    # Render footer pages without sidebar
+    # HIDE SIDEBAR FOR FOOTER PAGES ! (it looks ugly)
+    st.markdown("""
+        <style>
+        [data-testid="stSidebar"] {
+            display: none !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    # Render footer pages
     if st.session_state.current_page == "about":
         about.render()
     elif st.session_state.current_page == "privacy":
