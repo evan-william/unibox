@@ -1,7 +1,7 @@
 import streamlit as st
 
 def render():
-    """Render About Us page !!"""
+    """Render About Us page with professional design"""
     
     # Hero Section
     st.markdown("""
@@ -18,7 +18,7 @@ def render():
     
     st.markdown("<div class='content-wrapper'>", unsafe_allow_html=True)
     
-    # Our Story..?
+    # Our Story
     st.markdown("""
         <div class='tool-card'>
             <h2 style='font-size: 32px; margin-bottom: 1rem;'>Our Story</h2>
@@ -35,7 +35,7 @@ def render():
         </div>
     """, unsafe_allow_html=True)
     
-    # Our Values
+    # Our Values - USE ST.HTML TO PREVENT CSS LEAK
     st.markdown("""
         <div style='margin: 3rem 0;'>
             <h2 style='text-align: center; font-size: 32px; font-weight: 800; margin-bottom: 2rem;'>Our Values</h2>
@@ -45,9 +45,17 @@ def render():
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.markdown("""
+        st.html("""
             <div class='tool-card' style='text-align: center; height: 100%;'>
-                <div style='font-size: 48px; margin-bottom: 1rem;'>🚀</div>
+                <div style='width: 80px; height: 80px; margin: 0 auto 1.5rem auto; 
+                            background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%); 
+                            border-radius: 16px; display: flex; align-items: center; 
+                            justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);'>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
                 <h3 style='font-size: 20px; margin-bottom: 0.5rem;'>Speed & Efficiency</h3>
                 <p style='color: #888; font-size: 14px; line-height: 1.6;'>
                     We believe your time is valuable. That's why we've optimized 
@@ -55,12 +63,19 @@ def render():
                     compromising quality.
                 </p>
             </div>
-        """, unsafe_allow_html=True)
+        """)
     
     with col2:
-        st.markdown("""
+        st.html("""
             <div class='tool-card' style='text-align: center; height: 100%;'>
-                <div style='font-size: 48px; margin-bottom: 1rem;'>🔒</div>
+                <div style='width: 80px; height: 80px; margin: 0 auto 1.5rem auto; 
+                            background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%); 
+                            border-radius: 16px; display: flex; align-items: center; 
+                            justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);'>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
                 <h3 style='font-size: 20px; margin-bottom: 0.5rem;'>Privacy First</h3>
                 <p style='color: #888; font-size: 14px; line-height: 1.6;'>
                     Your files are yours alone. We process everything securely 
@@ -68,12 +83,19 @@ def render():
                     stays in UniBox.
                 </p>
             </div>
-        """, unsafe_allow_html=True)
+        """)
     
     with col3:
-        st.markdown("""
+        st.html("""
             <div class='tool-card' style='text-align: center; height: 100%;'>
-                <div style='font-size: 48px; margin-bottom: 1rem;'>💎</div>
+                <div style='width: 80px; height: 80px; margin: 0 auto 1.5rem auto; 
+                            background: linear-gradient(135deg, #2d2d2d 0%, #262626 100%); 
+                            border-radius: 16px; display: flex; align-items: center; 
+                            justify-content: center; border: 1px solid rgba(255, 255, 255, 0.1);'>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
                 <h3 style='font-size: 20px; margin-bottom: 0.5rem;'>Quality Output</h3>
                 <p style='color: #888; font-size: 14px; line-height: 1.6;'>
                     We use industry-leading conversion algorithms to ensure 
@@ -81,9 +103,9 @@ def render():
                     through every transformation.
                 </p>
             </div>
-        """, unsafe_allow_html=True)
+        """)
     
-    # What Sets Us Apart - Turned to st.html <- fix leakage okay :)
+    # What Sets Us Apart - USE ST.HTML TO PREVENT CSS LEAK
     st.html("""
         <div class='tool-card' style='margin-top: 3rem;'>
             <h2 style='font-size: 32px; margin-bottom: 1.5rem;'>What Sets Us Apart</h2>
