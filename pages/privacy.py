@@ -3,6 +3,40 @@ import streamlit as st
 def render():
     """Render Privacy Policy page !!"""
     
+    # BACK TO HOME 
+    st.markdown("""
+        <style>
+        /* 1. Styling Tombol Utama (Gradien Merah UniBox) */
+        .stButton > button {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 10px !important;
+            padding: 0.6rem 2.5rem !important;
+            font-weight: 700 !important;
+            font-size: 16px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3) !important;
+            display: block;
+            margin-top: 2rem !important;
+            margin-bottom: 2rem !important;
+        }
+        
+        /* 2. Efek Hover agar Interaktif */
+        .stButton > button:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.5) !important;
+            border: none !important;
+            color: white !important;
+        }
+
+        /* 3. Efek Klik (Active) */
+        .stButton > button:active {
+            transform: translateY(0px) !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     # Hero Section
     st.markdown("""
         <div class='hero-section'>
