@@ -7,3 +7,4 @@ markdown2
 weasyprint
 selenium
 lxml
+pdfkit
