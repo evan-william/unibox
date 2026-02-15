@@ -28,6 +28,28 @@ def apply_custom_styles():
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
+        /* ===== REMOVE TOP SPACE ===== */
+        .main .block-container {
+            padding-top: 0 !important;
+        }
+
+        [data-testid="stAppViewContainer"] {
+            padding-top: 0 !important;
+        }
+
+        section.main > div {
+            padding-top: 0 !important;
+        }
+
+        /* Remove Streamlit header space */
+        [data-testid="stHeader"] {
+            display: none !important;
+        }
+
+        .stApp {
+            margin-top: -80px !important;
+        }
+                        
         /* ===== MAIN LAYOUT ===== */
         .main, .block-container,
         [data-testid="stAppViewContainer"],
