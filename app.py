@@ -36,6 +36,34 @@ components.html(
 # APPLY CUSTOM STYLES
 apply_custom_styles()
 
+# TAMBAH INI - Remove space above top-nav
+st.markdown("""
+    <style>
+    /* Target parent container dari top-nav */
+    div[data-testid="stVerticalBlock"]:has(> div > div > div > .top-nav) {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Target semua parent sampai ke root */
+    .main > div:first-child {
+        padding-top: 0 !important;
+    }
+    
+    /* Remove default Streamlit spacing */
+    .block-container {
+        padding-top: 0rem !important;
+    }
+    
+    /* Make top-nav stick to very top */
+    .top-nav {
+        margin-top: 0 !important;
+        position: sticky;
+        top: 0;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.markdown("""
     <style>
         section[data-testid="stSidebar"] {
