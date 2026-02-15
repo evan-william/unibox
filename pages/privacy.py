@@ -32,8 +32,8 @@ def render():
         </div>
     """, unsafe_allow_html=True)
     
-    # Information We Collect
-    st.markdown("""
+    # Information We Collect - GANTI JADI st.html()
+    st.html("""
         <div class='tool-card'>
             <h2 style='font-size: 28px; margin-bottom: 1rem; color: #ff4757;'>1. Information We Collect</h2>
             
@@ -77,7 +77,7 @@ def render():
                 <li>Prevent fraud and enhance security</li>
             </ul>
         </div>
-    """, unsafe_allow_html=True)
+    """)
     
     # How We Use Your Information
     st.markdown("""
