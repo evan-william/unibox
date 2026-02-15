@@ -49,15 +49,23 @@ def render():
             margin-bottom: 0.5rem !important;
         }
 
-        /* Premium Form Input Styling */
+        /* Styling FOR TEXT INPUT and TEXT AREA */
         .stTextInput > div > div > input,
-        .stTextArea > div > div > textarea,
-        .stSelectbox > div > div > div {
+        .stTextArea > div > div > textarea {
             background: #1e1e1e !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             border-radius: 10px !important;
             color: #ffffff !important;
             padding: 12px 16px !important;
+        }
+
+        /* Styling Khusus Selectbox -> MADE PADDING SMALLER */
+        .stSelectbox > div > div > div {
+            background: #1e1e1e !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 10px !important;
+            color: #ffffff !important;
+            padding: 2px 10px !important; /* SELEXTBOX ONLY */
         }
         
         /* Submit Button ADDED margin top... jelek kalau gak */
