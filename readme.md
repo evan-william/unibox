@@ -95,7 +95,7 @@ streamlit run app.py
 
 ---
 
-## 📖 Usage
+## ◎ Usage
 
 1. **Visit** [unibox.streamlit.app](https://unibox.streamlit.app/)
 2. **Select** a conversion category from the sidebar
@@ -146,7 +146,7 @@ unibox/
 
 ---
 
-## 🗺️ Roadmap
+## ◒ Roadmap
 
 - [x] Word ↔ PDF conversion
 - [x] Professional UI/UX design
@@ -160,7 +160,7 @@ unibox/
 
 ---
 
-## 🤝 Contributing
+## ❖ Contributing
 
 Contributions are welcome! Please follow these steps:
 
