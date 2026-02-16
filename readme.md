@@ -18,7 +18,7 @@
 
 ---
 
-## 🎯 What is UniBox?
+## ● What is UniBox?
 
 **UniBox** is a professional file conversion platform that handles documents, media, and data formats in one unified interface. Built with Streamlit for speed and simplicity.
 
@@ -32,7 +32,7 @@
 
 ---
 
-## 🛠️ Features
+## ⚙️ Features
 
 ### Document Tools ✅
 | Feature | Status | Description |
@@ -67,7 +67,7 @@
 
 ---
 
-## 🚀 Quick Start
+## ▶ Quick Start
 
 ### Try Online (Recommended)
 
@@ -109,7 +109,7 @@ streamlit run app.py
 
 ---
 
-## 🏗️ Architecture
+## 📂 Architecture
 ```
 unibox/
 ├── app.py                      # Main application & routing
@@ -178,7 +178,7 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 ---
 
-## 👤 Author
+## ID Author
 
 **Evan William**
 
