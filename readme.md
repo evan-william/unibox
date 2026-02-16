@@ -18,7 +18,7 @@
 
 ---
 
-## What is UniBox?
+## 🎯 What is UniBox?
 
 **UniBox** is a professional file conversion platform that handles documents, media, and data formats in one unified interface. Built with Streamlit for speed and simplicity.
 
@@ -32,7 +32,7 @@
 
 ---
 
-## Features
+## 🛠️ Features
 
 ### Document Tools ✅
 | Feature | Status | Description |
@@ -67,7 +67,7 @@
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Try Online (Recommended)
 
@@ -95,7 +95,7 @@ streamlit run app.py
 
 ---
 
-## Usage
+## 📖 Usage
 
 1. **Visit** [unibox.streamlit.app](https://unibox.streamlit.app/)
 2. **Select** a conversion category from the sidebar
@@ -109,7 +109,7 @@ streamlit run app.py
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 ```
 unibox/
 ├── app.py                      # Main application & routing
@@ -135,7 +135,7 @@ unibox/
 
 ---
 
-## Technical Stack
+## 🔧 Technical Stack
 
 | Category | Technologies |
 |----------|-------------|
@@ -146,7 +146,7 @@ unibox/
 
 ---
 
-## Roadmap
+## 🗺️ Roadmap
 
 - [x] Word ↔ PDF conversion
 - [x] Professional UI/UX design
@@ -160,7 +160,7 @@ unibox/
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -172,13 +172,13 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## License
+## 📄 License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
 ---
 
-## Author
+## 👤 Author
 
 **Evan William**
 
@@ -187,7 +187,7 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 ---
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - [Streamlit](https://streamlit.io/) - Amazing web framework
 - [pdf2docx](https://github.com/dothinking/pdf2docx) - PDF conversion library
