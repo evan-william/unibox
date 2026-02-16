@@ -172,7 +172,7 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📄 License
+## ⌗ License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
 
@@ -187,7 +187,7 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 
 ---
 
-## 🙏 Acknowledgments
+## ✦ Acknowledgments
 
 - [Streamlit](https://streamlit.io/) - Amazing web framework
 - [pdf2docx](https://github.com/dothinking/pdf2docx) - PDF conversion library
